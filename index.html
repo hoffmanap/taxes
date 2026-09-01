@@ -96,18 +96,27 @@
   </header>
 
   <h2><span class="num">01</span>Headline Result</h2>
+  <p class="note"><b>A framing note before the findings:</b> throughout this analysis, per-capita spending is
+    treated as a proxy for the level of municipal service a resident actually receives — not simply a "cost."
+    A city spending twice as much per resident is, functionally, providing something closer to twice the police
+    staffing, parks upkeep, library hours, and administrative capacity per resident (setting aside pure efficiency
+    differences, which §04 dissects service-by-service). Read that way, the findings below are less about which
+    cities are "expensive" and more about which cities deliver <i>more</i> government per resident — and which
+    deliver less.</p>
   <div class="findings">
     The relationship runs <span class="hl">the opposite direction from the density-efficiency hypothesis</span> —
-    but only in aggregate. Across the 50 largest cities, higher density is associated with <span class="hl-coral">higher</span> per-capita
-    municipal spending and <span class="hl-coral">higher</span> per-capita property tax collection, not lower. But pooling every service together hides real
-    differentiation: some services show no density penalty at all (§04), the tax relationship turns out to be
-    almost entirely explained by the spending relationship rather than an independent effect of density itself
-    (§05), and a city's housing mix — not density itself — turns out to be the sharper explanation for spending
-    differences (§03). Separately, <span class="hl">home value, not density</span>, is what drives the effective property tax
-    rate homeowners actually feel — and that's where El Paso stands out (§06).
+    but only in aggregate. Across the 50 largest cities, higher density is associated with cities that
+    <span class="hl-coral">deliver more service per resident</span>, not less, and collect <span class="hl-coral">more</span> property tax per resident to fund it.
+    But pooling every service together hides real differentiation: some services show no density penalty at all
+    (§04), the tax relationship turns out to be almost entirely explained by the spending relationship rather than
+    an independent effect of density itself (§05), and a city's housing mix — not density itself — turns out to be
+    the sharper explanation for how much service a city delivers (§03). Separately, §06 shows the fullest picture:
+    low home values and a heavy single-family housing mix combine to push the effective property tax
+    <span class="hl">rate</span> up in less-dense cities, even though those same cities are delivering
+    <span class="hl">below-average service</span> for the money — which is exactly El Paso's situation.
   </div>
 
-  <h2><span class="num">02</span>Density vs. Total Per-Capita Cost</h2>
+  <h2><span class="num">02</span>Density vs. Total Per-Capita Service Provision</h2>
   <div class="chart-panel">
     <canvas id="scatterExp" height="105"></canvas>
     <div class="cap">Each marker is one of the 50 largest U.S. cities, log-scaled on both axes. Diamond markers are
@@ -141,10 +150,11 @@
 
   <div class="findings slate">
     The direction is the same as before, just sharper: cities with a higher share of single-family homes
-    spend <span class="hl-teal">less</span> per person, not more. Cities built more around apartments and multifamily housing spend
-    more. That's consistent with everything in §02–§04 — it doesn't reverse the earlier finding, it explains it
-    better. This is also the opposite of the common "sprawl costs more" intuition — in this data, the single-family,
-    lower-density cities are the cheaper ones to run per resident, at least at the level of the whole city budget.
+    spend <span class="hl-teal">less</span> per person — meaning residents there get less city service per capita, not more.
+    Cities built more around apartments and multifamily housing spend, and deliver, more. That's consistent with
+    everything in §02–§04 — it doesn't reverse the earlier finding, it explains it better. This is also the
+    opposite of the common "sprawl costs more" intuition — in this data, the single-family, lower-density cities
+    are the ones delivering less government per resident, at least at the level of the whole city budget.
   </div>
 
   <div class="chart-panel">
@@ -216,10 +226,11 @@
   <div class="findings">
     <b>Bottom line:</b> the original idea — pack people in tighter and each person's share of the water main or the
     road gets cheaper — doesn't show up as <i>savings</i> anywhere in this data. At best (sewers, parks, roads,
-    trash, health) density is a wash: no penalty, no discount. Everywhere else — and especially in jails, parking,
-    libraries, housing programs, and general administration — being denser costs more per person, not less. That's
-    why the citywide total in §02 goes up with density: it's pulled up by the administrative and social-service side
-    of the budget, not by physical infrastructure.
+    trash, health) density is a wash: no more service, no less. Everywhere else — and especially in jails, parking,
+    libraries, housing programs, and general administration — being denser means delivering <i>more</i> service per
+    person, not less. That's why total service provision in §02 rises with density: residents of denser cities are
+    getting more government capacity per person, concentrated in the administrative and social-service side of the
+    budget rather than physical infrastructure.
   </div>
 
   <p class="note" style="margin-top:24px;"><b>Explore it yourself:</b> pick any combination of the 16 categories
@@ -257,74 +268,100 @@
       below zero — there's no category that gets cheaper.</div>
   </div>
 
-  <h2><span class="num">05</span>Density, Cost, and Tax — Together</h2>
+  <h2><span class="num">05</span>Density, Service Provision, and Tax — Together</h2>
   <p class="note"><b>The question here:</b> is the tax-bill pattern in §02 really about density — or is it just
-    riding along with the spending pattern? We already know three things move together: denser cities spend more
-    per person (§02), and cities that spend more also collect more property tax per person — no surprise there,
-    since taxes are largely how spending gets funded. The question is whether density is doing anything <i>on its
-    own</i> to push tax bills up, separate from spending, or whether it's only showing up in the tax numbers because
-    it's already showing up in the spending numbers.</p>
+    riding along with how much service a city provides? We already know three things move together: denser cities
+    deliver more service per person (§02), and cities that deliver more service also collect more property tax per
+    person — no surprise there, since taxes are largely how that service gets funded. The question is whether
+    density is doing anything <i>on its own</i> to push tax bills up, separate from service level, or whether it's
+    only showing up in the tax numbers because it's already showing up in the service numbers.</p>
 
-  <p class="note">To test that, we hold spending constant and ask: once two cities spend the same amount per
-    person, does the denser one still collect more tax? The answer is no.</p>
+  <p class="note">To test that, we hold service level (spending) constant and ask: once two cities provide the
+    same amount of service per person, does the denser one still collect more tax? The answer is no.</p>
 
   <div class="findings">
-    <b>In plain terms: density does not directly drive tax bills. It drives spending, and spending drives tax
-    bills.</b> Once you compare cities that spend about the same per person, density stops predicting property tax
-    per person almost entirely — the connection all but disappears. But spending itself still strongly predicts
-    tax bills even after accounting for density. So the real chain is:
-    <b>denser city → spends more per person → collects more property tax per person.</b> Density doesn't have its
-    own separate effect on your tax bill — it only matters because of what it does to spending. If you found two
-    cities that spent the same amount per resident, you would <i>not</i> expect the denser one to have a higher tax
-    bill just because it's denser.
+    <b>In plain terms: density does not directly drive tax bills. It drives service provision, and service
+    provision drives tax bills.</b> Once you compare cities delivering about the same amount of service per person,
+    density stops predicting property tax per person almost entirely — the connection all but disappears. But
+    service level itself still strongly predicts tax bills even after accounting for density. So the real chain is:
+    <b>denser city → delivers more service per person → collects more property tax per person.</b> Density doesn't
+    have its own separate effect on your tax bill — it only matters because of what it does to service level. If
+    you found two cities delivering the same amount of service per resident, you would <i>not</i> expect the
+    denser one to have a higher tax bill just because it's denser.
   </div>
   <p class="note">(For the statistically inclined: this was tested with partial correlations. Density vs. spending,
     controlling for tax, stays strong and significant. Density vs. tax, controlling for spending, drops to
     essentially zero and stops being statistically significant. Spending vs. tax, controlling for density, stays
-    strong. That pattern — one link survives, the other one vanishes — is what "spending explains it, density
+    strong. That pattern — one link survives, the other one vanishes — is what "service level explains it, density
     doesn't" looks like in the numbers.)</p>
 
   <div class="chart-panel">
     <canvas id="bubbleThree"></canvas>
-    <div class="cap">All three variables at once: x = density (log), y = total cost per capita (log), bubble size =
-      property tax per capita. If density and tax moved together independent of cost, you'd expect the biggest
-      bubbles to cluster at the right regardless of height. Instead bubble size tracks the y-axis (cost) far more
-      than the x-axis (density) — visual confirmation of the mediation result above.</div>
+    <div class="cap">
+      <b>How to read this:</b> each bubble is one city. Left-to-right (x-axis) is density; bottom-to-top (y-axis)
+      is total service spending per capita — both log-scaled, so equal distances mean equal percentage
+      differences, not equal dollar differences. Bubble <i>size</i> is property tax collected per capita — the
+      variable this chart is testing. Color separates ordinary city governments (rust) from the seven consolidated
+      city-county governments (teal), which run larger budgets for structural reasons (§09) and would otherwise
+      skew the pattern.<br><br>
+      <b>What to look for:</b> if density itself drove tax bills, the biggest bubbles would cluster on the
+      <i>right</i> side of the chart regardless of height. They don't — bubble size tracks the <i>vertical</i>
+      position (service spending) far more consistently than the horizontal one (density). A low-density city
+      near the bottom (low service spending) reliably has a small bubble (low tax); a low-density city that
+      happens to sit higher up the y-axis has a bigger bubble to match — density alone doesn't predict bubble
+      size, height does. That's the visual version of the mediation finding above.
+    </div>
   </div>
 
-  <h2><span class="num">06</span>Home Values, Income, and the Real Tax Burden</h2>
+  <h2><span class="num">06</span>What Actually Drives the Tax Burden: A Combined Story</h2>
   <p class="note"><b>The question behind this section:</b> a city's property tax <i>bill</i> and its property tax
     <i>rate</i> are two different things. The bill is dollars collected per person. The rate is the bill divided by
-    what the home is actually worth — and that's what determines whether a homeowner feels squeezed, because two
-    cities can collect the same number of dollars per person while taxing very different fractions of a
-    homeowner's actual property value, depending on how expensive homes are locally.</p>
+    what the home is actually worth. By definition, if a city needs to raise a given amount of tax revenue per
+    resident and its housing stock isn't worth very much, the rate has to be higher to get there — that part is
+    just arithmetic, not a statistical finding. The real question is what makes a city's housing stock worth less
+    in the first place, and whether density and housing type play a genuine role in that or are beside the point.
+    They do play a role — a real, measurable, secondary one.</p>
 
   <div class="findings">
-    <b>Home value, not density, is what actually explains the effective tax rate — and it explains it strongly.</b>
-    Cities with cheaper homes charge a much higher tax <i>rate</i> to raise the same money (r = −0.52,
-    statistically strong). Density on its own barely correlates with the rate at all (r = −0.21, not statistically
-    significant) — density only shows up here because denser cities tend to also have pricier homes, and it's the
-    home value doing the work, not the density itself.
+    <b>Three things determine the rate, in order of how much they matter:</b> a city's income level dominates home
+    values (r = 0.90 — by far the strongest relationship in this entire analysis), single-family housing share
+    matters independently on top of income (still significant even after accounting for income, p = 0.001 — this
+    is the density/housing-type channel), and home value in turn is what mechanically sets the effective rate
+    (r = −0.52). Put together: <b>income sets the baseline, housing type pulls it down further, and the
+    combination determines how hard the rate has to work.</b> Housing type and density don't show a strong <i>direct</i>
+    relationship with the tax rate on their own (r = 0.21, not significant) — because their entire effect runs
+    <i>through</i> home value. That's not a small caveat, it's the mechanism: density and housing type matter for
+    the tax rate precisely <i>because</i> of what they do to home value, not as some separate force.
   </div>
 
   <div class="findings slate">
-    El Paso is close to <span class="hl-teal">the textbook example of this pattern</span>. Among the 47 cities with complete data, El
-    Paso has below-average density (38th densest of 47) and the 4th-cheapest homes (median value $159,300) — yet
-    the <span class="hl-teal">2nd-highest effective property tax rate</span> in the entire list, at 2.17%. Its actual dollar tax bill per
-    resident is unremarkable — 19th of 47, squarely in the middle of the pack. It's not that El Paso collects an
-    unusual amount of tax money per person; it's that the same, fairly ordinary amount of tax money is being
-    divided by an unusually low home value, which pushes the rate way up. Compare Seattle and San José: both far
-    denser than El Paso, both with home values 5–7× higher, and both collect <i>more</i> tax dollars per person
-    ($990 and $705 vs. El Paso's $506) — while charging a rate roughly a third as high (0.77% and 0.75% vs. 2.17%).
-    <span class="hl-teal">Cheap homes, not low density, are why El Paso's rate is high.</span>
+    <b>El Paso is close to the worst-case combination this data can produce.</b> Its income is low
+    (<span class="hl-teal">42nd of 47</span>, near the bottom) — which alone would predict a fairly low home value.
+    But its housing stock is also <span class="hl-teal">2nd-most single-family-dominated</span> in the sample
+    (66.9%, behind only Oklahoma City) — and single-family share keeps pulling value down even after income is
+    accounted for. The result: El Paso's actual median home value ($159,300) is
+    <span class="hl-teal">18% below what its income alone would predict</span>. Less taxable value per resident,
+    for two compounding reasons instead of one, means El Paso needs an unusually high rate just to raise an
+    ordinary amount of money — <span class="hl-teal">2nd-highest effective tax rate</span> in the sample, 2.17%,
+    even though its actual dollar tax bill per resident is unremarkable (19th of 47).<br><br>
+    And per §02–§04's reframing, that same housing pattern means El Paso is <i>also</i> on the low end of service
+    delivery: direct spending per resident is <span class="hl-teal">4th-lowest of 47</span> — just 49% of the
+    citywide median, well under half. So the full picture isn't just "El Paso's rate is high." It's
+    <span class="hl-teal">El Paso residents pay a higher rate to fund below-average service</span>, and the same
+    underlying housing pattern — low-value, low-density, heavily single-family — is doing double duty: it's why
+    the city delivers less (§02–§04), and it's part of why raising even that reduced amount of money requires a
+    higher rate (this section). Denser cities with a larger multifamily share don't just deliver more service —
+    they raise their bigger budgets at a <i>lower</i> rate, because their housing stock carries more taxable value
+    per acre to spread it across.
   </div>
 
   <div class="chart-panel">
     <canvas id="scatterHomeTax" height="105"></canvas>
     <div class="cap">Each city plotted by median home value (x, log scale) against effective property tax rate (y —
       median real estate taxes paid ÷ median home value). Bubble size = population density. El Paso is marked in
-      rust with a bold outline. The downward slope is the story: cheaper homes on the left run higher rates,
-      regardless of how big or small the bubble (density) is.</div>
+      dark rust with a bold outline. The downward slope is the direct, mechanical relationship: cheaper homes on
+      the left run higher rates. Density's role is upstream of this chart — it's part of why some cities land on
+      the cheap-home left side in the first place (see the findings above), not a separate force visible here.</div>
   </div>
 
   <table id="taxRateTable">
@@ -345,10 +382,22 @@
     Louisville, Honolulu, and Nashville are missing home-value and tax-rate data — see §09.</p>
 
   <h2><span class="num">07</span>What Survives the Controls</h2>
+  <p class="note">This is the robustness summary for the whole analysis — every regression model referenced in
+    §02 through §06, side by side, so the density/service/tax/housing-type/income relationships can be checked
+    against each other in one place rather than taken on faith from the prose above. Each row is one OLS
+    regression on log-transformed variables (except the effective-tax-rate models, which are already a ratio).
+    "Key coefficient" is the variable each row is specifically testing; "p-value" is that variable's significance
+    once everything else in the same row's specification is controlled for.</p>
   <table id="modelTable">
-    <thead><tr><th>Specification</th><th class="num">n</th><th class="num">Density coef.</th><th class="num">p-value</th><th class="num">R²</th></tr></thead>
+    <thead><tr><th>Specification</th><th class="num">n</th><th>Key coefficient</th><th class="num">p-value</th><th class="num">R²</th></tr></thead>
     <tbody></tbody>
   </table>
+  <p class="note" style="margin-top:8px;">Rows 1–6 test whether density's relationship with spending and tax
+    survives adding controls (§02, §05). Row 7 tests housing type against density head-to-head for spending (§03).
+    Row 8 tests whether housing type adds anything to home value's explanation of the tax rate, on top of home
+    value itself (§06) — it doesn't. Row 9 is the key mediation result behind §06's causal chain: housing type
+    still predicts home value even after controlling for income, which is what makes "housing type → home value →
+    tax rate" a real, if secondary, channel rather than a coincidence.</p>
 
   <h2><span class="num">08</span>Full City Table</h2>
 
@@ -687,24 +736,27 @@ new Chart(document.getElementById('barElastic'), {
 (function(){
   const rows = CITY_DATA.map(d=>({name:d.name, density:d.density, total:Object.values(d.svc).reduce((a,b)=>a+b,0), tax:d.tax_pc, consolidated:d.consolidated}));
   const maxTax = Math.max(...rows.map(r=>r.tax));
+  const toPoint = r => ({x:r.density, y:r.total, r: 4 + 22*(r.tax/maxTax), name:r.name, tax:r.tax});
+  const ordinary = rows.filter(r=>!r.consolidated).map(toPoint);
+  const consol = rows.filter(r=>r.consolidated).map(toPoint);
   new Chart(document.getElementById('bubbleThree'), {
     type:'bubble',
     data:{datasets:[
-      {label:'City (bubble size = property tax/capita)',
-       data: rows.map(r=>({x:r.density, y:r.total, r: 4 + 22*(r.tax/maxTax), name:r.name, tax:r.tax})),
-       backgroundColor: rows.map(r=> r.consolidated ? 'rgba(15,118,110,0.55)' : 'rgba(184,39,44,0.55)'),
-       borderColor: ink, borderWidth:1}
+      {label:'City (bubble size = property tax/capita)', data: ordinary,
+       backgroundColor: 'rgba(184,39,44,0.55)', borderColor: ink, borderWidth:1},
+      {label:'Consolidated city-county government', data: consol,
+       backgroundColor: 'rgba(15,118,110,0.55)', borderColor: ink, borderWidth:1}
     ]},
     options:{
       responsive:true,
       plugins:{
         legend:{position:'bottom', labels:{boxWidth:12,padding:14}},
-        title:{display:true, text:'Density × Cost × Property Tax, All Three At Once', color:ink, font:{family:"'Archivo Black', sans-serif", size:15}},
-        tooltip:{callbacks:{label:(ctx)=> ctx.raw.name + ': density ' + ctx.raw.x.toLocaleString(undefined,{maximumFractionDigits:0}) + '/sqmi, cost $' + ctx.raw.y.toLocaleString(undefined,{maximumFractionDigits:0}) + '/capita, tax $' + ctx.raw.tax.toLocaleString(undefined,{maximumFractionDigits:0}) + '/capita'}}
+        title:{display:true, text:'Density × Service Spending × Property Tax, All Three At Once', color:ink, font:{family:"'Archivo Black', sans-serif", size:15}},
+        tooltip:{callbacks:{label:(ctx)=> ctx.raw.name + ': density ' + ctx.raw.x.toLocaleString(undefined,{maximumFractionDigits:0}) + '/sqmi, spending $' + ctx.raw.y.toLocaleString(undefined,{maximumFractionDigits:0}) + '/capita, tax $' + ctx.raw.tax.toLocaleString(undefined,{maximumFractionDigits:0}) + '/capita'}}
       },
       scales:{
         x:{type:'logarithmic', title:{display:true,text:'Population density (log scale)'}, grid:{color:'#c9bfa2'}},
-        y:{type:'logarithmic', title:{display:true,text:'Total service cost per capita (log scale)'}, grid:{color:'#c9bfa2'}}
+        y:{type:'logarithmic', title:{display:true,text:'Total service spending per capita (log scale)'}, grid:{color:'#c9bfa2'}}
       }
     }
   });
@@ -776,17 +828,21 @@ renderTaxTable();
 
 // ---------- model table (§07, static results from server-side regressions) ----------
 const models = [
-  {spec:'Pooled: log(cost/capita) ~ log(density)', n:50, coef:0.539, p:'<0.001', r2:0.346},
-  {spec:'log(cost/capita) ~ log(density) + consolidated dummy', n:50, coef:0.466, p:'<0.001', r2:0.572},
-  {spec:'log(cost/capita) ~ log(density), consolidated excluded', n:43, coef:0.364, p:'0.001', r2:0.235},
-  {spec:'log(tax/capita) ~ log(density) + consolidated dummy', n:50, coef:0.534, p:'0.001', r2:0.345},
-  {spec:'log(cost/capita) ~ log(density) + log(tax/capita)', n:50, coef:0.280, p:'0.003', r2:0.636},
-  {spec:'log(tax/capita) ~ log(density) + log(cost/capita)', n:50, coef:0.047, p:'0.768 (n.s.)', r2:0.563},
+  {spec:'Pooled: log(spending/capita) ~ log(density)', n:50, coefLabel:'density', coef:0.539, p:'<0.001', r2:0.346},
+  {spec:'log(spending/capita) ~ log(density) + consolidated dummy', n:50, coefLabel:'density', coef:0.466, p:'<0.001', r2:0.572},
+  {spec:'log(spending/capita) ~ log(density), consolidated excluded', n:43, coefLabel:'density', coef:0.364, p:'0.001', r2:0.235},
+  {spec:'log(tax/capita) ~ log(density) + consolidated dummy', n:50, coefLabel:'density', coef:0.534, p:'0.001', r2:0.345},
+  {spec:'log(spending/capita) ~ log(density) + log(tax/capita)', n:50, coefLabel:'density', coef:0.280, p:'0.003', r2:0.636},
+  {spec:'log(tax/capita) ~ log(density) + log(spending/capita)', n:50, coefLabel:'density', coef:0.047, p:'0.768 (n.s.)', r2:0.563},
+  {spec:'log(spending/capita) ~ log(density) + pct_single_family', n:47, coefLabel:'density', coef:0.007, p:'0.963 (n.s.)', r2:0.599},
+  {spec:'effective_tax_rate ~ log(home_value) + pct_single_family', n:47, coefLabel:'pct_SF', coef:-0.003, p:'0.386 (n.s.)', r2:0.410},
+  {spec:'log(home_value) ~ log(income) + pct_single_family', n:47, coefLabel:'pct_SF', coef:-0.008, p:'0.001', r2:0.846},
 ];
 const modelBody = document.querySelector('#modelTable tbody');
 models.forEach(m=>{
   const tr = document.createElement('tr');
-  tr.innerHTML = `<td>${m.spec}</td><td class="num">${m.n}</td><td class="num">${m.coef>=0?'+':''}${m.coef.toFixed(3)}</td><td class="num">${m.p}</td><td class="num">${m.r2.toFixed(3)}</td>`;
+  const coefStr = `${m.coefLabel}: ${m.coef>=0?'+':''}${m.coef.toFixed(3)}`;
+  tr.innerHTML = `<td>${m.spec}</td><td class="num">${m.n}</td><td>${coefStr}</td><td class="num">${m.p}</td><td class="num">${m.r2.toFixed(3)}</td>`;
   modelBody.appendChild(tr);
 });
 
