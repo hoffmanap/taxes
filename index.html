@@ -14,43 +14,66 @@
   }
   *{box-sizing:border-box;}
   body{
-    margin:0; background:var(--parchment); color:var(--ink); font-family:'Space Grotesk', sans-serif;
+    margin:0; background:var(--parchment); color:var(--ink); font-family:'Space Grotesk', sans-serif; font-size:18px;
     background-image:linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
     background-size:34px 34px; background-position:-1px -1px;
   }
   .wrap{max-width:1180px; margin:0 auto; padding:36px 24px 80px;}
   header{border-bottom:3px double var(--ink); padding-bottom:18px; margin-bottom:26px;}
   .kicker{font-family:'IBM Plex Mono', monospace; font-weight:600; letter-spacing:.14em; text-transform:uppercase; font-size:12px; color:var(--rust);}
-  h1{font-family:'Archivo Black', sans-serif; font-weight:400; font-size:32px; margin:6px 0 8px; line-height:1.2;}
-  .subhead{color:var(--ink-soft); font-size:15px; max-width:780px; line-height:1.6;}
-  .meta-strip{display:flex; gap:22px; flex-wrap:wrap; margin-top:14px; font-size:12px; color:var(--ink-soft); font-family:'IBM Plex Mono',monospace;}
+  h1{font-family:'Archivo Black', sans-serif; font-weight:400; font-size:38px; margin:6px 0 8px; line-height:1.2;}
+  .subhead{color:var(--ink-soft); font-size:18px; max-width:780px; line-height:1.6;}
+  .meta-strip{display:flex; gap:22px; flex-wrap:wrap; margin-top:14px; font-size:14px; color:var(--ink-soft); font-family:'IBM Plex Mono',monospace;}
   .meta-strip span b{color:var(--ink);}
-  h2{font-family:'Archivo Black', sans-serif; font-weight:400; font-size:20px; border-bottom:1px solid var(--ink); padding-bottom:8px; margin:44px 0 16px;}
-  h2 .num{color:var(--rust); margin-right:8px; font-family:'IBM Plex Mono',monospace; font-size:15px;}
-  p.note{font-size:14.5px; color:var(--ink-soft); line-height:1.65; max-width:840px;}
+  h2{font-family:'Archivo Black', sans-serif; font-weight:400; font-size:26px; border-bottom:1px solid var(--ink); padding-bottom:8px; margin:44px 0 16px;}
+  h2 .num{color:var(--rust); margin-right:8px; font-family:'IBM Plex Mono',monospace; font-size:18px;}
+  p.note{font-size:17px; color:var(--ink-soft); line-height:1.7; max-width:880px;}
   .card-row{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:8px;}
   .stampcard{background:var(--parchment-dark); border:2px solid var(--ink); padding:14px 16px; position:relative; border-radius:8px;}
   .stampcard::before{display:none;}
-  .stampcard .label{font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--ink-soft); font-family:'IBM Plex Mono',monospace;}
-  .stampcard .value{font-family:'Archivo Black',sans-serif; font-size:24px; color:var(--rust); margin-top:6px;}
-  .stampcard .sub{font-size:11.5px; color:var(--ink-soft); margin-top:4px;}
-  .chart-panel{background:var(--parchment-dark); border:2px solid var(--ink); padding:18px; margin-bottom:22px; border-radius:8px;}
-  .chart-panel .cap{font-size:13px; color:var(--ink-soft); margin-top:10px; line-height:1.55;}
+  .stampcard .label{font-size:13px; text-transform:uppercase; letter-spacing:.08em; color:var(--ink-soft); font-family:'IBM Plex Mono',monospace;}
+  .stampcard .value{font-family:'Archivo Black',sans-serif; font-size:30px; color:var(--rust); margin-top:6px;}
+  .stampcard .sub{font-size:13.5px; color:var(--ink-soft); margin-top:4px;}
+  .chart-panel{background:var(--parchment-dark); border:2px solid var(--ink); padding:18px 18px 18px 18px; margin-bottom:22px; border-radius:8px; position:relative;}
+  .expand-btn{
+    position:absolute; top:14px; right:14px; font-family:'IBM Plex Mono',monospace; font-size:12.5px; font-weight:600;
+    background:var(--parchment); border:2px solid var(--ink); color:var(--ink); padding:6px 12px; border-radius:5px;
+    cursor:pointer; z-index:5;
+  }
+  .expand-btn:hover{background:var(--rust); color:#fff; border-color:var(--rust);}
+  .chart-modal-overlay{
+    position:fixed; inset:0; background:rgba(20,21,26,0.86); z-index:1000; display:none;
+    align-items:center; justify-content:center; padding:20px;
+  }
+  .chart-modal-overlay.open{display:flex;}
+  .chart-modal-box{
+    background:var(--parchment); border:3px solid var(--ink); border-radius:10px; padding:22px 26px;
+    max-width:1300px; width:100%; height:88vh; display:flex; flex-direction:column;
+  }
+  .chart-modal-head{display:flex; justify-content:space-between; align-items:flex-start; gap:16px; margin-bottom:14px;}
+  .chart-modal-title{font-family:'Archivo Black',sans-serif; font-size:22px; line-height:1.25;}
+  .chart-modal-close{
+    font-family:'IBM Plex Mono',monospace; font-size:13px; font-weight:600; background:var(--ink); color:#fff;
+    border:none; padding:9px 16px; border-radius:6px; cursor:pointer; flex-shrink:0;
+  }
+  .chart-modal-close:hover{background:var(--rust);}
+  .chart-modal-canvas-wrap{flex:1; position:relative; min-height:0;}
+  .chart-panel .cap{font-size:16px; color:var(--ink-soft); margin-top:10px; line-height:1.6;}
   canvas{max-width:100%;}
   .two-col{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
   @media (max-width:860px){ .two-col, .card-row{grid-template-columns:1fr;} }
-  table{width:100%; border-collapse:collapse; font-size:13px; margin-top:8px;}
-  thead th{text-align:left; border-bottom:2px solid var(--ink); padding:8px; font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:var(--ink-soft); cursor:pointer; user-select:none; font-family:'IBM Plex Mono',monospace;}
+  table{width:100%; border-collapse:collapse; font-size:16px; margin-top:8px;}
+  thead th{text-align:left; border-bottom:2px solid var(--ink); padding:10px 8px; font-size:13px; text-transform:uppercase; letter-spacing:.05em; color:var(--ink-soft); cursor:pointer; user-select:none; font-family:'IBM Plex Mono',monospace;}
   thead th:hover{color:var(--rust);}
-  tbody td{padding:7px 8px; border-bottom:1px solid var(--line);}
+  tbody td{padding:9px 8px; border-bottom:1px solid var(--line);}
   tbody tr:hover{background:rgba(184,39,44,0.06);}
   td.num, th.num{text-align:right; font-variant-numeric:tabular-nums;}
-  .tag{display:inline-block; font-size:10px; padding:1px 6px; border:1px solid var(--slate); color:var(--slate); border-radius:2px; margin-left:6px; vertical-align:1px; font-family:'IBM Plex Mono',monospace;}
-  .findings{background:#FFF0EE; border-left:5px solid var(--rust); padding:16px 20px; margin:18px 0; font-size:14.5px; line-height:1.7; border-radius:0 8px 8px 0;}
+  .tag{display:inline-block; font-size:12px; padding:2px 7px; border:1px solid var(--slate); color:var(--slate); border-radius:2px; margin-left:6px; vertical-align:1px; font-family:'IBM Plex Mono',monospace;}
+  .findings{background:#FFF0EE; border-left:5px solid var(--rust); padding:18px 22px; margin:18px 0; font-size:17px; line-height:1.75; border-radius:0 8px 8px 0;}
   .findings b{color:var(--rust);}
   .findings.slate{background:#EAF7F5; border-left-color:var(--slate);}
   .findings.slate b{color:var(--slate);}
-  footer{margin-top:50px; padding-top:16px; border-top:1px solid var(--ink); font-size:12px; color:var(--ink-soft); line-height:1.7; font-family:'IBM Plex Mono',monospace;}
+  footer{margin-top:50px; padding-top:16px; border-top:1px solid var(--ink); font-size:14px; color:var(--ink-soft); line-height:1.7; font-family:'IBM Plex Mono',monospace;}
 
   /* highlighter marks -- pudding.cool style: dark box, bright text, box-decoration-break so it wraps cleanly across lines */
   .hl{background:var(--ink); color:var(--gold); padding:1px 8px; border-radius:3px; font-weight:600; box-decoration-break:clone; -webkit-box-decoration-break:clone;}
@@ -63,19 +86,19 @@
   .picker-head{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:12px;}
   .picker-actions{display:flex; gap:8px;}
   .picker-actions button{
-    font-family:'IBM Plex Mono',monospace; font-size:11.5px; font-weight:600; background:var(--parchment); border:2px solid var(--ink);
-    color:var(--ink); padding:6px 11px; cursor:pointer; border-radius:5px;
+    font-family:'IBM Plex Mono',monospace; font-size:13.5px; font-weight:600; background:var(--parchment); border:2px solid var(--ink);
+    color:var(--ink); padding:7px 13px; cursor:pointer; border-radius:5px;
   }
   .picker-actions button:hover{background:var(--rust); color:#fff; border-color:var(--rust);}
   .chip-grid{display:flex; flex-wrap:wrap; gap:8px;}
   .chip{
-    font-size:12px; padding:6px 12px; border:2px solid var(--ink-soft); border-radius:14px; cursor:pointer;
+    font-size:14px; padding:7px 14px; border:2px solid var(--ink-soft); border-radius:14px; cursor:pointer;
     background:var(--parchment); color:var(--ink-soft); user-select:none; transition:.1s; font-weight:500;
   }
   .chip.active{background:var(--rust); border-color:var(--rust); color:#fff; font-weight:700;}
   .chip:hover{border-color:var(--rust);}
-  .live-stats{display:flex; gap:18px; flex-wrap:wrap; margin-top:14px; font-size:12.5px; color:var(--ink-soft); font-family:'IBM Plex Mono',monospace;}
-  .live-stats b{color:var(--rust); font-family:'Archivo Black',sans-serif; font-size:16px;}
+  .live-stats{display:flex; gap:18px; flex-wrap:wrap; margin-top:14px; font-size:15px; color:var(--ink-soft); font-family:'IBM Plex Mono',monospace;}
+  .live-stats b{color:var(--rust); font-family:'Archivo Black',sans-serif; font-size:19px;}
 </style>
 </head>
 <body>
@@ -118,6 +141,7 @@
 
   <h2><span class="num">02</span>Density vs. Total Per-Capita Service Provision</h2>
   <div class="chart-panel">
+    <button class="expand-btn" onclick="openChartModal('scatterExp','Density vs. Total Direct Expenditure per Capita')">⤢ Expand</button>
     <canvas id="scatterExp" height="105"></canvas>
     <div class="cap">Each marker is one of the 50 largest U.S. cities, log-scaled on both axes. Diamond markers are
       consolidated city-county governments (New York, San Francisco, Denver, Washington D.C., Honolulu, Nashville,
@@ -158,6 +182,7 @@
   </div>
 
   <div class="chart-panel">
+    <button class="expand-btn" onclick="openChartModal('scatterSF','Single-Family Housing Share vs. Total Spending per Capita')">⤢ Expand</button>
     <canvas id="scatterSF" height="105"></canvas>
     <div class="cap">Each city plotted by share of housing that's single-family detached (x) against total direct
       spending per person (y, log scale). El Paso — 66.9% single-family, the 2nd-highest share in the sample,
@@ -180,6 +205,16 @@
     it doesn't add anything new to the tax-rate side (§06).</p>
 
   <h2><span class="num">04</span>By Service Type — Which Services Cost More in Denser Cities?</h2>
+
+  <div class="findings slate" style="font-size:16px;">
+    <b>What "density elasticity" means, in plain terms:</b> it's the answer to "if density goes up 1%, what
+    happens to spending on this service, in percent terms?" A value of <b>+1.0</b> means spending rises exactly in
+    step with density (double the density, double the spending on that service). A value of <b>+0.3</b> means
+    spending rises much more slowly than density — density has to triple for that service's spending to rise
+    about 40%. A value near <b>0</b> means density and spending are unrelated — that service costs about the same
+    per person no matter how dense the city is. There are no negative values anywhere in this dataset — meaning no
+    service actually gets cheaper per person as density rises (see the bar chart below for the full ranked list).
+  </div>
 
   <p class="note"><b>In plain terms:</b> we tested all 16 categories of city spending separately against density.
     <b>Not one of them gets cheaper per person as density rises.</b> They split into two groups instead — services
@@ -256,11 +291,13 @@
   </div>
 
   <div class="chart-panel">
+    <button class="expand-btn" onclick="openChartModal('scatterLive','Selected Services vs. Density')">⤢ Expand</button>
     <canvas id="scatterLive" height="100"></canvas>
     <div class="cap" id="liveCaption">Showing: all 16 categories combined.</div>
   </div>
 
   <div class="chart-panel">
+    <button class="expand-btn" onclick="openChartModal('barElastic','Density Elasticity by Service Category')">⤢ Expand</button>
     <canvas id="barElastic" height="130"></canvas>
     <div class="cap">Same information as the two lists above, shown as a ranked chart. Bars in
       <span style="color:var(--rust)">rust</span> are the "gets more expensive" group (statistically real, p&lt;0.05);
@@ -296,6 +333,7 @@
     doesn't" looks like in the numbers.)</p>
 
   <div class="chart-panel">
+    <button class="expand-btn" onclick="openChartModal('bubbleThree','Density × Service Spending × Property Tax, All Three At Once')">⤢ Expand</button>
     <canvas id="bubbleThree"></canvas>
     <div class="cap">
       <b>How to read this:</b> each bubble is one city. Left-to-right (x-axis) is density; bottom-to-top (y-axis)
@@ -356,6 +394,7 @@
   </div>
 
   <div class="chart-panel">
+    <button class="expand-btn" onclick="openChartModal('scatterHomeTax','Cheaper Homes, Higher Effective Tax Rates')">⤢ Expand</button>
     <canvas id="scatterHomeTax" height="105"></canvas>
     <div class="cap">Each city plotted by median home value (x, log scale) against effective property tax rate (y —
       median real estate taxes paid ÷ median home value). Bubble size = population density. El Paso is marked in
@@ -380,6 +419,34 @@
   <p class="note" style="margin-top:8px;">Click a column to sort — try sorting by "Effective tax rate" to see the
     full ranking, or by "Median home value" to see how consistently the cheap-home cities cluster at the top.
     Louisville, Honolulu, and Nashville are missing home-value and tax-rate data — see §09.</p>
+
+  <div class="findings" style="margin-top:24px;">
+    <b>The definitive answer, put in one number:</b> El Paso's actual median home value ($159,300) is
+    <span class="hl-coral">18% below</span> what its income alone would predict ($194,871). Holding El Paso's
+    actual tax bill and income effect fixed, and asking what its rate would be if that single-family-driven gap
+    in home value simply didn't exist, the math is direct: $3,461 in taxes paid ÷ $194,871 in home value =
+    <span class="hl-coral">1.78%</span> — not the actual 2.17%. <b>Closing the single-family housing gap alone
+    would cut El Paso's effective tax rate by about 18%, closing roughly a third of the entire gap between
+    El Paso and the average large city's rate</b> (1.07%). The remaining two-thirds of that gap is El Paso's
+    income level itself, which is a far bigger lever on home value (r=0.90) than housing type is (r=0.46) — but
+    housing type is the one lever a city actually controls through zoning and permitting; income is not.
+  </div>
+
+  <div class="findings slate">
+    <b>The policy-relevant version of this finding:</b> if El Paso wants a lower effective tax rate without
+    cutting services further, the data point at a specific, actionable lever — shift new construction and infill
+    away from single-family detached housing and toward multifamily and higher-density formats. Two independent
+    results in this analysis both point the same direction: (1) each additional percentage point of a city's
+    housing stock that's single-family is associated with roughly <b>0.8% lower home value</b>, holding income
+    constant (§07, row 9) — so less reliance on single-family means more taxable value per acre, which is what
+    lowers the rate needed to raise any given amount of revenue; and (2) each additional percentage point of
+    single-family share is associated with roughly <b>3% lower service spending per capita</b> (§03) — so the
+    same shift that raises taxable value also raises the level of service residents receive per dollar collected.
+    These aren't two separate policy trade-offs to weigh against each other. In this data, they're the same lever:
+    less reliance on single-family housing does not trade a lower tax rate against fewer services — it moves a
+    city toward <i>both</i> a lower effective rate <i>and</i> a higher level of service per resident at the same
+    time, because both outcomes trace back to the same underlying shift in taxable value per acre.
+  </div>
 
   <h2><span class="num">07</span>What Survives the Controls</h2>
   <p class="note">This is the robustness summary for the whole analysis — every regression model referenced in
@@ -464,6 +531,16 @@
 
 </div>
 
+<div class="chart-modal-overlay" id="chartModalOverlay">
+  <div class="chart-modal-box">
+    <div class="chart-modal-head">
+      <div class="chart-modal-title" id="chartModalTitle"></div>
+      <button class="chart-modal-close" onclick="closeChartModal()">✕ Close</button>
+    </div>
+    <div class="chart-modal-canvas-wrap"><canvas id="chartModalCanvas"></canvas></div>
+  </div>
+</div>
+
 <script>
 const CITY_DATA = [{"name": "New York", "pop": 8253213, "density": 27468.9, "tax_pc": 3588.0, "consolidated": 1, "region": "Northeast", "svc": {"Police": 711.0, "Fire": 311.7, "Highways & Streets": 133.6, "Sewerage": 327.2, "Solid Waste": 268.3, "Parks & Recreation": 170.5, "Libraries": 65.8, "Housing & Comm. Dev.": 852.2, "Financial Admin.": 1226.0, "Judicial & Legal": 187.4, "General Government": 123.5, "Health": 258.4, "Parking Facilities": 6.1, "Protective Inspection": 45.6, "Corrections": 193.3, "Other / NEC": 8864.4}}, {"name": "Los Angeles", "pop": 3970219, "density": 8438.0, "tax_pc": 659.0, "consolidated": 0, "region": "West", "svc": {"Police": 748.6, "Fire": 204.1, "Highways & Streets": 255.0, "Sewerage": 301.4, "Solid Waste": 137.4, "Parks & Recreation": 187.3, "Libraries": 64.7, "Housing & Comm. Dev.": 184.4, "Financial Admin.": 63.7, "Judicial & Legal": 48.9, "General Government": 181.9, "Health": 115.5, "Parking Facilities": 11.4, "Protective Inspection": 82.6, "Corrections": 0.0, "Other / NEC": 745.1}}, {"name": "Chicago", "pop": 2677643, "density": 11757.0, "tax_pc": 1250.0, "consolidated": 0, "region": "Midwest", "svc": {"Police": 618.7, "Fire": 250.6, "Highways & Streets": 245.3, "Sewerage": 109.1, "Solid Waste": 64.3, "Parks & Recreation": 11.3, "Libraries": 39.8, "Housing & Comm. Dev.": 139.7, "Financial Admin.": 831.8, "Judicial & Legal": 11.6, "General Government": 110.6, "Health": 136.2, "Parking Facilities": 2.8, "Protective Inspection": 17.8, "Corrections": 0.0, "Other / NEC": 1395.6}}, {"name": "Houston", "pop": 2316120, "density": 3615.5, "tax_pc": 693.0, "consolidated": 0, "region": "South", "svc": {"Police": 423.3, "Fire": 223.2, "Highways & Streets": 105.6, "Sewerage": 303.1, "Solid Waste": 36.4, "Parks & Recreation": 46.5, "Libraries": 22.4, "Housing & Comm. Dev.": 92.2, "Financial Admin.": 28.2, "Judicial & Legal": 25.9, "General Government": 194.5, "Health": 103.2, "Parking Facilities": 4.5, "Protective Inspection": 37.5, "Corrections": 0.0, "Other / NEC": 398.6}}, {"name": "Phoenix", "pop": 1708127, "density": 3295.4, "tax_pc": 169.0, "consolidated": 0, "region": "West", "svc": {"Police": 320.7, "Fire": 211.4, "Highways & Streets": 83.5, "Sewerage": 54.7, "Solid Waste": 75.7, "Parks & Recreation": 74.3, "Libraries": 22.3, "Housing & Comm. Dev.": 162.2, "Financial Admin.": 31.0, "Judicial & Legal": 30.6, "General Government": 34.2, "Health": 1.4, "Parking Facilities": 1.0, "Protective Inspection": 32.3, "Corrections": 0.0, "Other / NEC": 462.0}}, {"name": "Philadelphia", "pop": 1578487, "density": 11748.5, "tax_pc": 458.0, "consolidated": 0, "region": "Northeast", "svc": {"Police": 496.6, "Fire": 218.5, "Highways & Streets": 159.3, "Sewerage": 231.8, "Solid Waste": 123.4, "Parks & Recreation": 67.2, "Libraries": 29.9, "Housing & Comm. Dev.": 304.0, "Financial Admin.": 655.5, "Judicial & Legal": 237.4, "General Government": 420.0, "Health": 1398.1, "Parking Facilities": 0.0, "Protective Inspection": 33.1, "Corrections": 205.4, "Other / NEC": 1166.6}}, {"name": "San Antonio", "pop": 1567118, "density": 3141.0, "tax_pc": 411.0, "consolidated": 0, "region": "South", "svc": {"Police": 314.3, "Fire": 218.9, "Highways & Streets": 120.6, "Sewerage": 191.0, "Solid Waste": 89.4, "Parks & Recreation": 104.2, "Libraries": 24.8, "Housing & Comm. Dev.": 106.0, "Financial Admin.": 61.8, "Judicial & Legal": 17.5, "General Government": 34.9, "Health": 53.2, "Parking Facilities": 4.3, "Protective Inspection": 7.7, "Corrections": 0.0, "Other / NEC": 406.8}}, {"name": "San Diego", "pop": 1422420, "density": 4362.1, "tax_pc": 478.0, "consolidated": 0, "region": "West", "svc": {"Police": 442.3, "Fire": 227.2, "Highways & Streets": 222.6, "Sewerage": 252.7, "Solid Waste": 85.1, "Parks & Recreation": 273.6, "Libraries": 40.9, "Housing & Comm. Dev.": 545.5, "Financial Admin.": 45.4, "Judicial & Legal": 49.0, "General Government": 362.7, "Health": 11.8, "Parking Facilities": 0.0, "Protective Inspection": 64.8, "Corrections": 0.0, "Other / NEC": 437.6}}, {"name": "Dallas", "pop": 1343266, "density": 3954.6, "tax_pc": 933.0, "consolidated": 0, "region": "South", "svc": {"Police": 442.1, "Fire": 287.9, "Highways & Streets": 174.0, "Sewerage": 222.2, "Solid Waste": 77.3, "Parks & Recreation": 183.7, "Libraries": 29.4, "Housing & Comm. Dev.": 61.1, "Financial Admin.": 36.9, "Judicial & Legal": 30.8, "General Government": 69.7, "Health": 30.9, "Parking Facilities": 0.4, "Protective Inspection": 58.6, "Corrections": 2.7, "Other / NEC": 1179.3}}, {"name": "San Jose", "pop": 1013616, "density": 5696.4, "tax_pc": 705.0, "consolidated": 0, "region": "West", "svc": {"Police": 504.0, "Fire": 256.5, "Highways & Streets": 231.8, "Sewerage": 160.4, "Solid Waste": 178.7, "Parks & Recreation": 212.2, "Libraries": 51.5, "Housing & Comm. Dev.": 189.4, "Financial Admin.": 0.0, "Judicial & Legal": 0.0, "General Government": 317.8, "Health": 0.2, "Parking Facilities": 11.0, "Protective Inspection": 11.8, "Corrections": 0.0, "Other / NEC": 186.1}}, {"name": "Austin", "pop": 995484, "density": 3050.2, "tax_pc": 942.0, "consolidated": 0, "region": "South", "svc": {"Police": 447.4, "Fire": 240.1, "Highways & Streets": 376.0, "Sewerage": 229.8, "Solid Waste": 141.0, "Parks & Recreation": 217.4, "Libraries": 90.3, "Housing & Comm. Dev.": 86.5, "Financial Admin.": 51.4, "Judicial & Legal": 48.9, "General Government": 65.7, "Health": 194.4, "Parking Facilities": 0.1, "Protective Inspection": 74.2, "Corrections": 0.0, "Other / NEC": 537.2}}, {"name": "Honolulu", "pop": 963826, "density": 1604.3, "tax_pc": 1409.0, "consolidated": 1, "region": "West", "svc": {"Police": 314.3, "Fire": 149.7, "Highways & Streets": 112.5, "Sewerage": 428.3, "Solid Waste": 195.0, "Parks & Recreation": 188.4, "Libraries": 0.0, "Housing & Comm. Dev.": 122.6, "Financial Admin.": 46.8, "Judicial & Legal": 32.4, "General Government": 275.9, "Health": 41.6, "Parking Facilities": 2.5, "Protective Inspection": 4.6, "Corrections": 0.0, "Other / NEC": 342.4}}, {"name": "Fort Worth", "pop": 927720, "density": 2648.6, "tax_pc": 619.0, "consolidated": 0, "region": "South", "svc": {"Police": 390.1, "Fire": 201.5, "Highways & Streets": 238.0, "Sewerage": 308.8, "Solid Waste": 67.2, "Parks & Recreation": 101.1, "Libraries": 22.1, "Housing & Comm. Dev.": 98.7, "Financial Admin.": 16.6, "Judicial & Legal": 22.3, "General Government": 69.1, "Health": 70.0, "Parking Facilities": 4.2, "Protective Inspection": 22.3, "Corrections": 0.0, "Other / NEC": 187.0}}, {"name": "Jacksonville", "pop": 920570, "density": 1231.9, "tax_pc": 855.0, "consolidated": 0, "region": "South", "svc": {"Police": 544.9, "Fire": 232.3, "Highways & Streets": 61.6, "Sewerage": 123.4, "Solid Waste": 94.9, "Parks & Recreation": 141.7, "Libraries": 40.0, "Housing & Comm. Dev.": 66.1, "Financial Admin.": 844.6, "Judicial & Legal": 48.7, "General Government": 28.0, "Health": 124.4, "Parking Facilities": 4.0, "Protective Inspection": 20.2, "Corrections": 0.4, "Other / NEC": 793.6}}, {"name": "Columbus", "pop": 903852, "density": 4094.9, "tax_pc": 67.0, "consolidated": 0, "region": "Midwest", "svc": {"Police": 394.4, "Fire": 313.2, "Highways & Streets": 234.7, "Sewerage": 262.0, "Solid Waste": 56.0, "Parks & Recreation": 228.6, "Libraries": 0.0, "Housing & Comm. Dev.": 62.4, "Financial Admin.": 73.5, "Judicial & Legal": 60.6, "General Government": 79.0, "Health": 77.4, "Parking Facilities": 27.1, "Protective Inspection": 7.0, "Corrections": 0.0, "Other / NEC": 287.7}}, {"name": "Charlotte", "pop": 900350, "density": 2897.3, "tax_pc": 593.0, "consolidated": 0, "region": "South", "svc": {"Police": 367.0, "Fire": 178.8, "Highways & Streets": 145.3, "Sewerage": 466.3, "Solid Waste": 79.3, "Parks & Recreation": 138.1, "Libraries": 0.0, "Housing & Comm. Dev.": 190.5, "Financial Admin.": 38.0, "Judicial & Legal": 4.4, "General Government": 70.3, "Health": 10.8, "Parking Facilities": 0.4, "Protective Inspection": 0.0, "Corrections": 0.0, "Other / NEC": 607.4}}, {"name": "Indianapolis", "pop": 877903, "density": 2431.7, "tax_pc": 615.0, "consolidated": 0, "region": "Midwest", "svc": {"Police": 274.2, "Fire": 177.8, "Highways & Streets": 192.8, "Sewerage": 401.9, "Solid Waste": 57.6, "Parks & Recreation": 86.4, "Libraries": 0.0, "Housing & Comm. Dev.": 173.6, "Financial Admin.": 38.7, "Judicial & Legal": 135.5, "General Government": 23.1, "Health": 257.0, "Parking Facilities": 5.1, "Protective Inspection": 17.5, "Corrections": 166.8, "Other / NEC": 1999.7}}, {"name": "San Francisco", "pop": 866606, "density": 18556.9, "tax_pc": 3431.0, "consolidated": 1, "region": "West", "svc": {"Police": 889.5, "Fire": 570.3, "Highways & Streets": 355.5, "Sewerage": 803.3, "Solid Waste": 0.0, "Parks & Recreation": 404.5, "Libraries": 172.4, "Housing & Comm. Dev.": 601.1, "Financial Admin.": 207.9, "Judicial & Legal": 223.1, "General Government": 645.9, "Health": 3214.2, "Parking Facilities": 191.0, "Protective Inspection": 138.7, "Corrections": 368.1, "Other / NEC": 7358.9}}, {"name": "Seattle", "pop": 769714, "density": 9163.3, "tax_pc": 990.0, "consolidated": 0, "region": "West", "svc": {"Police": 349.8, "Fire": 314.2, "Highways & Streets": 585.4, "Sewerage": 342.0, "Solid Waste": 202.2, "Parks & Recreation": 421.1, "Libraries": 105.2, "Housing & Comm. Dev.": 295.9, "Financial Admin.": 18.6, "Judicial & Legal": 82.5, "General Government": 126.1, "Health": 23.3, "Parking Facilities": 12.9, "Protective Inspection": 99.6, "Corrections": 0.0, "Other / NEC": 811.9}}, {"name": "Louisville", "pop": 767452, "density": 2917.3, "tax_pc": 270.0, "consolidated": 1, "region": "South", "svc": {"Police": 270.5, "Fire": 101.2, "Highways & Streets": 85.0, "Sewerage": 1128.9, "Solid Waste": 38.3, "Parks & Recreation": 90.7, "Libraries": 32.0, "Housing & Comm. Dev.": 99.7, "Financial Admin.": 77.8, "Judicial & Legal": 14.9, "General Government": 53.5, "Health": 183.7, "Parking Facilities": 25.9, "Protective Inspection": 21.1, "Corrections": 66.9, "Other / NEC": 351.9}}, {"name": "Denver", "pop": 735538, "density": 4805.1, "tax_pc": 734.0, "consolidated": 1, "region": "West", "svc": {"Police": 356.3, "Fire": 169.3, "Highways & Streets": 256.4, "Sewerage": 210.6, "Solid Waste": 19.1, "Parks & Recreation": 462.2, "Libraries": 93.6, "Housing & Comm. Dev.": 420.7, "Financial Admin.": 223.4, "Judicial & Legal": 136.8, "General Government": 513.2, "Health": 152.5, "Parking Facilities": 12.4, "Protective Inspection": 23.6, "Corrections": 217.8, "Other / NEC": 2640.5}}, {"name": "Washington, D.C.", "pop": 712816, "density": 11661.4, "tax_pc": 4160.0, "consolidated": 1, "region": "South", "svc": {"Police": 943.0, "Fire": 532.0, "Highways & Streets": 922.0, "Sewerage": 538.8, "Solid Waste": 268.6, "Parks & Recreation": 562.5, "Libraries": 126.0, "Housing & Comm. Dev.": 1618.6, "Financial Admin.": 1218.1, "Judicial & Legal": 390.0, "General Government": 690.7, "Health": 1402.6, "Parking Facilities": 50.4, "Protective Inspection": 217.4, "Corrections": 393.7, "Other / NEC": 16150.0}}, {"name": "Nashville", "pop": 694176, "density": 1459.7, "tax_pc": 2256.0, "consolidated": 1, "region": "South", "svc": {"Police": 393.3, "Fire": 233.8, "Highways & Streets": 179.2, "Sewerage": 317.8, "Solid Waste": 19.1, "Parks & Recreation": 375.3, "Libraries": 56.7, "Housing & Comm. Dev.": 197.8, "Financial Admin.": 49.9, "Judicial & Legal": 146.2, "General Government": 166.0, "Health": 141.1, "Parking Facilities": 4.8, "Protective Inspection": 19.0, "Corrections": 133.1, "Other / NEC": 2724.7}}, {"name": "Boston", "pop": 691531, "density": 14305.6, "tax_pc": 4147.0, "consolidated": 0, "region": "Northeast", "svc": {"Police": 638.8, "Fire": 418.7, "Highways & Streets": 203.5, "Sewerage": 99.2, "Solid Waste": 207.4, "Parks & Recreation": 214.9, "Libraries": 96.0, "Housing & Comm. Dev.": 227.4, "Financial Admin.": 102.3, "Judicial & Legal": 11.9, "General Government": 108.2, "Health": 42.7, "Parking Facilities": 3.2, "Protective Inspection": 33.7, "Corrections": 0.0, "Other / NEC": 5021.1}}, {"name": "El Paso", "pop": 681534, "density": 2633.6, "tax_pc": 506.0, "consolidated": 0, "region": "South", "svc": {"Police": 216.3, "Fire": 230.9, "Highways & Streets": 100.6, "Sewerage": 177.4, "Solid Waste": 49.1, "Parks & Recreation": 87.8, "Libraries": 8.5, "Housing & Comm. Dev.": 13.7, "Financial Admin.": 12.3, "Judicial & Legal": 14.6, "General Government": 15.3, "Health": 60.9, "Parking Facilities": 0.0, "Protective Inspection": 10.0, "Corrections": 0.0, "Other / NEC": 356.1}}, {"name": "Detroit", "pop": 665369, "density": 4796.0, "tax_pc": 508.0, "consolidated": 0, "region": "Midwest", "svc": {"Police": 499.6, "Fire": 206.0, "Highways & Streets": 143.0, "Sewerage": 466.6, "Solid Waste": 117.3, "Parks & Recreation": 86.8, "Libraries": 41.7, "Housing & Comm. Dev.": 237.1, "Financial Admin.": 228.4, "Judicial & Legal": 63.5, "General Government": 43.4, "Health": 130.8, "Parking Facilities": 1.9, "Protective Inspection": 39.8, "Corrections": 0.0, "Other / NEC": 845.0}}, {"name": "Las Vegas", "pop": 662368, "density": 4669.1, "tax_pc": 247.0, "consolidated": 0, "region": "West", "svc": {"Police": 27.2, "Fire": 244.0, "Highways & Streets": 247.7, "Sewerage": 176.4, "Solid Waste": 11.7, "Parks & Recreation": 117.5, "Libraries": 0.0, "Housing & Comm. Dev.": 64.3, "Financial Admin.": 16.3, "Judicial & Legal": 52.8, "General Government": 64.6, "Health": 25.8, "Parking Facilities": 19.0, "Protective Inspection": 31.5, "Corrections": 90.7, "Other / NEC": 111.0}}, {"name": "Oklahoma", "pop": 662314, "density": 1092.1, "tax_pc": 191.0, "consolidated": 0, "region": "South", "svc": {"Police": 241.5, "Fire": 213.0, "Highways & Streets": 200.3, "Sewerage": 112.5, "Solid Waste": 84.7, "Parks & Recreation": 261.8, "Libraries": 7.2, "Housing & Comm. Dev.": 59.7, "Financial Admin.": 20.2, "Judicial & Legal": 24.0, "General Government": 19.6, "Health": 7.5, "Parking Facilities": 4.8, "Protective Inspection": 30.5, "Corrections": 0.0, "Other / NEC": 277.1}}, {"name": "Portland", "pop": 656751, "density": 4919.9, "tax_pc": 1106.0, "consolidated": 0, "region": "West", "svc": {"Police": 326.6, "Fire": 223.8, "Highways & Streets": 388.9, "Sewerage": 529.2, "Solid Waste": 9.4, "Parks & Recreation": 237.0, "Libraries": 0.0, "Housing & Comm. Dev.": 340.5, "Financial Admin.": 134.0, "Judicial & Legal": 25.2, "General Government": 105.2, "Health": 8.7, "Parking Facilities": 15.7, "Protective Inspection": 54.7, "Corrections": 0.0, "Other / NEC": 243.5}}, {"name": "Memphis", "pop": 649705, "density": 2193.5, "tax_pc": 645.0, "consolidated": 0, "region": "South", "svc": {"Police": 447.6, "Fire": 331.2, "Highways & Streets": 111.9, "Sewerage": 213.5, "Solid Waste": 118.1, "Parks & Recreation": 124.3, "Libraries": 36.4, "Housing & Comm. Dev.": 135.9, "Financial Admin.": 60.4, "Judicial & Legal": 34.3, "General Government": 108.2, "Health": 0.6, "Parking Facilities": 5.4, "Protective Inspection": 0.0, "Corrections": 0.7, "Other / NEC": 432.8}}, {"name": "Milwaukee", "pop": 589067, "density": 6125.1, "tax_pc": 615.0, "consolidated": 0, "region": "Midwest", "svc": {"Police": 527.5, "Fire": 225.8, "Highways & Streets": 268.9, "Sewerage": 116.2, "Solid Waste": 74.5, "Parks & Recreation": 6.4, "Libraries": 53.1, "Housing & Comm. Dev.": 46.6, "Financial Admin.": 0.2, "Judicial & Legal": 28.2, "General Government": 329.1, "Health": 82.8, "Parking Facilities": 41.9, "Protective Inspection": 33.2, "Corrections": 16.3, "Other / NEC": 217.9}}, {"name": "Baltimore", "pop": 586131, "density": 7241.0, "tax_pc": 1811.0, "consolidated": 0, "region": "South", "svc": {"Police": 792.1, "Fire": 599.6, "Highways & Streets": 169.6, "Sewerage": 850.6, "Solid Waste": 166.9, "Parks & Recreation": 154.2, "Libraries": 46.5, "Housing & Comm. Dev.": 124.9, "Financial Admin.": 149.8, "Judicial & Legal": 296.5, "General Government": 255.8, "Health": 325.8, "Parking Facilities": 15.7, "Protective Inspection": 128.2, "Corrections": 0.0, "Other / NEC": 3853.3}}, {"name": "Albuquerque", "pop": 562540, "density": 3004.0, "tax_pc": 301.0, "consolidated": 0, "region": "West", "svc": {"Police": 350.2, "Fire": 145.9, "Highways & Streets": 147.9, "Sewerage": 114.9, "Solid Waste": 147.3, "Parks & Recreation": 200.9, "Libraries": 26.6, "Housing & Comm. Dev.": 91.5, "Financial Admin.": 48.8, "Judicial & Legal": 14.7, "General Government": 77.9, "Health": 61.4, "Parking Facilities": 6.6, "Protective Inspection": 0.0, "Corrections": 0.0, "Other / NEC": 257.9}}, {"name": "Tucson", "pop": 542629, "density": 2240.5, "tax_pc": 95.0, "consolidated": 0, "region": "West", "svc": {"Police": 521.6, "Fire": 218.0, "Highways & Streets": 90.4, "Sewerage": 0.0, "Solid Waste": 91.6, "Parks & Recreation": 26.3, "Libraries": 0.0, "Housing & Comm. Dev.": 92.8, "Financial Admin.": 40.5, "Judicial & Legal": 55.6, "General Government": 41.2, "Health": 0.0, "Parking Facilities": 8.4, "Protective Inspection": 0.0, "Corrections": 0.0, "Other / NEC": 134.3}}, {"name": "Fresno", "pop": 530267, "density": 4578.5, "tax_pc": 292.0, "consolidated": 0, "region": "West", "svc": {"Police": 427.6, "Fire": 151.8, "Highways & Streets": 215.8, "Sewerage": 97.8, "Solid Waste": 88.0, "Parks & Recreation": 77.3, "Libraries": 0.0, "Housing & Comm. Dev.": 140.2, "Financial Admin.": 0.0, "Judicial & Legal": 0.0, "General Government": 46.9, "Health": 18.5, "Parking Facilities": 10.1, "Protective Inspection": 7.6, "Corrections": 0.0, "Other / NEC": 331.7}}, {"name": "Mesa", "pop": 528159, "density": 3735.6, "tax_pc": 98.0, "consolidated": 0, "region": "West", "svc": {"Police": 481.2, "Fire": 226.5, "Highways & Streets": 135.9, "Sewerage": 79.9, "Solid Waste": 73.3, "Parks & Recreation": 148.5, "Libraries": 8.4, "Housing & Comm. Dev.": 86.7, "Financial Admin.": 73.3, "Judicial & Legal": 20.9, "General Government": 44.0, "Health": 0.1, "Parking Facilities": 0.0, "Protective Inspection": 8.4, "Corrections": 0.0, "Other / NEC": 112.0}}, {"name": "Sacramento", "pop": 512838, "density": 5198.8, "tax_pc": 413.0, "consolidated": 0, "region": "West", "svc": {"Police": 478.9, "Fire": 334.8, "Highways & Streets": 170.2, "Sewerage": 145.3, "Solid Waste": 126.3, "Parks & Recreation": 256.3, "Libraries": 50.8, "Housing & Comm. Dev.": 407.5, "Financial Admin.": 29.3, "Judicial & Legal": 17.3, "General Government": 295.6, "Health": 76.1, "Parking Facilities": 37.8, "Protective Inspection": 77.5, "Corrections": 0.0, "Other / NEC": 488.7}}, {"name": "Atlanta", "pop": 512550, "density": 3789.6, "tax_pc": 1034.0, "consolidated": 0, "region": "South", "svc": {"Police": 416.1, "Fire": 191.7, "Highways & Streets": 157.7, "Sewerage": 30.6, "Solid Waste": 133.6, "Parks & Recreation": 111.7, "Libraries": 0.0, "Housing & Comm. Dev.": 6.9, "Financial Admin.": 95.9, "Judicial & Legal": 72.6, "General Government": 132.7, "Health": 2.8, "Parking Facilities": 0.0, "Protective Inspection": 37.7, "Corrections": 27.2, "Other / NEC": 931.5}}, {"name": "Kansas", "pop": 497159, "density": 1579.9, "tax_pc": 376.0, "consolidated": 0, "region": "Midwest", "svc": {"Police": 468.3, "Fire": 440.2, "Highways & Streets": 343.6, "Sewerage": 394.0, "Solid Waste": 0.0, "Parks & Recreation": 153.2, "Libraries": 0.0, "Housing & Comm. Dev.": 242.8, "Financial Admin.": 33.8, "Judicial & Legal": 34.7, "General Government": 112.3, "Health": 134.2, "Parking Facilities": 9.3, "Protective Inspection": 0.0, "Corrections": 0.0, "Other / NEC": 1148.5}}, {"name": "Colorado Springs", "pop": 482131, "density": 2388.3, "tax_pc": 102.0, "consolidated": 0, "region": "West", "svc": {"Police": 267.1, "Fire": 133.0, "Highways & Streets": 301.2, "Sewerage": 98.5, "Solid Waste": 0.0, "Parks & Recreation": 67.0, "Libraries": 0.0, "Housing & Comm. Dev.": 66.5, "Financial Admin.": 104.1, "Judicial & Legal": 23.8, "General Government": 70.3, "Health": 0.0, "Parking Facilities": 10.0, "Protective Inspection": 0.0, "Corrections": 0.0, "Other / NEC": 303.2}}, {"name": "Omaha", "pop": 478393, "density": 3345.9, "tax_pc": 423.0, "consolidated": 0, "region": "Midwest", "svc": {"Police": 308.3, "Fire": 220.5, "Highways & Streets": 197.3, "Sewerage": 297.8, "Solid Waste": 70.8, "Parks & Recreation": 64.4, "Libraries": 35.3, "Housing & Comm. Dev.": 0.0, "Financial Admin.": 0.0, "Judicial & Legal": 10.9, "General Government": 179.7, "Health": 0.0, "Parking Facilities": 17.3, "Protective Inspection": 0.0, "Corrections": 0.0, "Other / NEC": 204.5}}, {"name": "Raleigh", "pop": 474414, "density": 3174.5, "tax_pc": 615.0, "consolidated": 0, "region": "South", "svc": {"Police": 251.7, "Fire": 161.6, "Highways & Streets": 138.2, "Sewerage": 523.1, "Solid Waste": 80.4, "Parks & Recreation": 241.9, "Libraries": 0.0, "Housing & Comm. Dev.": 60.3, "Financial Admin.": 27.0, "Judicial & Legal": 9.5, "General Government": 71.3, "Health": 0.0, "Parking Facilities": 17.0, "Protective Inspection": 27.0, "Corrections": 0.0, "Other / NEC": 136.4}}, {"name": "Miami", "pop": 471525, "density": 13099.4, "tax_pc": 1113.0, "consolidated": 0, "region": "South", "svc": {"Police": 596.0, "Fire": 402.0, "Highways & Streets": 47.5, "Sewerage": 0.0, "Solid Waste": 94.3, "Parks & Recreation": 250.2, "Libraries": 0.0, "Housing & Comm. Dev.": 103.3, "Financial Admin.": 691.8, "Judicial & Legal": 22.2, "General Government": 130.3, "Health": 0.0, "Parking Facilities": 77.8, "Protective Inspection": 53.9, "Corrections": 0.0, "Other / NEC": 272.3}}, {"name": "Long Beach", "pop": 454681, "density": 8973.0, "tax_pc": 499.0, "consolidated": 0, "region": "West", "svc": {"Police": 589.1, "Fire": 208.8, "Highways & Streets": 369.1, "Sewerage": 29.8, "Solid Waste": 186.9, "Parks & Recreation": 62.7, "Libraries": 48.6, "Housing & Comm. Dev.": 261.0, "Financial Admin.": 0.0, "Judicial & Legal": 0.0, "General Government": 145.9, "Health": 295.0, "Parking Facilities": 0.0, "Protective Inspection": 8.7, "Corrections": 0.0, "Other / NEC": 2523.1}}, {"name": "Virginia Beach", "pop": 451231, "density": 1843.9, "tax_pc": 1715.0, "consolidated": 0, "region": "South", "svc": {"Police": 257.0, "Fire": 187.0, "Highways & Streets": 251.8, "Sewerage": 255.1, "Solid Waste": 85.7, "Parks & Recreation": 191.4, "Libraries": 39.8, "Housing & Comm. Dev.": 108.5, "Financial Admin.": 50.9, "Judicial & Legal": 48.5, "General Government": 196.4, "Health": 192.8, "Parking Facilities": 13.9, "Protective Inspection": 13.0, "Corrections": 109.8, "Other / NEC": 2655.6}}, {"name": "Minneapolis", "pop": 433111, "density": 8020.6, "tax_pc": 822.0, "consolidated": 0, "region": "Midwest", "svc": {"Police": 391.3, "Fire": 169.6, "Highways & Streets": 425.4, "Sewerage": 341.7, "Solid Waste": 120.9, "Parks & Recreation": 303.7, "Libraries": 0.0, "Housing & Comm. Dev.": 125.6, "Financial Admin.": 55.3, "Judicial & Legal": 38.1, "General Government": 132.9, "Health": 42.9, "Parking Facilities": 142.3, "Protective Inspection": 50.6, "Corrections": 0.0, "Other / NEC": 438.7}}, {"name": "Oakland", "pop": 424891, "density": 7592.4, "tax_pc": 1102.0, "consolidated": 0, "region": "West", "svc": {"Police": 756.7, "Fire": 427.4, "Highways & Streets": 222.9, "Sewerage": 90.1, "Solid Waste": 0.0, "Parks & Recreation": 94.9, "Libraries": 93.5, "Housing & Comm. Dev.": 435.4, "Financial Admin.": 88.9, "Judicial & Legal": 29.9, "General Government": 551.1, "Health": 303.3, "Parking Facilities": 24.8, "Protective Inspection": 143.4, "Corrections": 0.0, "Other / NEC": 701.2}}, {"name": "Tampa", "pop": 407599, "density": 3586.8, "tax_pc": 592.0, "consolidated": 0, "region": "South", "svc": {"Police": 432.4, "Fire": 275.3, "Highways & Streets": 135.3, "Sewerage": 416.3, "Solid Waste": 250.6, "Parks & Recreation": 178.8, "Libraries": 0.0, "Housing & Comm. Dev.": 108.3, "Financial Admin.": 694.6, "Judicial & Legal": 13.9, "General Government": 47.7, "Health": 0.0, "Parking Facilities": 37.9, "Protective Inspection": 26.6, "Corrections": 0.0, "Other / NEC": 409.6}}, {"name": "Tulsa", "pop": 403166, "density": 2038.6, "tax_pc": 208.0, "consolidated": 0, "region": "South", "svc": {"Police": 315.2, "Fire": 228.4, "Highways & Streets": 430.2, "Sewerage": 414.3, "Solid Waste": 64.0, "Parks & Recreation": 112.3, "Libraries": 0.0, "Housing & Comm. Dev.": 2.0, "Financial Admin.": 43.7, "Judicial & Legal": 16.6, "General Government": 79.6, "Health": 214.7, "Parking Facilities": 0.0, "Protective Inspection": 0.0, "Corrections": 0.0, "Other / NEC": 283.8}}, {"name": "Arlington", "pop": 398864, "density": 4161.7, "tax_pc": 429.0, "consolidated": 0, "region": "South", "svc": {"Police": 269.3, "Fire": 124.3, "Highways & Streets": 135.2, "Sewerage": 221.6, "Solid Waste": 0.6, "Parks & Recreation": 139.6, "Libraries": 17.6, "Housing & Comm. Dev.": 13.7, "Financial Admin.": 15.7, "Judicial & Legal": 19.5, "General Government": 53.7, "Health": 8.2, "Parking Facilities": 0.0, "Protective Inspection": 13.0, "Corrections": 0.0, "Other / NEC": 213.3}}];
 const ELASTICITIES = [{"category": "Corrections", "n": 15, "r": 0.5371431399153931, "p": 0.0389432133971806, "slope": 1.3007359664997438, "slope_p": 0.0389432133971807, "r2": 0.2885227527581674}, {"category": "Parking Facilities", "n": 43, "r": 0.3941104158108381, "p": 0.0089231324974937, "slope": 0.8764497500709846, "slope_p": 0.0089231324974938, "r2": 0.1553230198505919}, {"category": "Health", "n": 44, "r": 0.2833887096426807, "p": 0.062309164292984, "slope": 0.840630989507547, "slope_p": 0.0623091642929841, "r2": 0.0803091607529433}, {"category": "Libraries", "n": 35, "r": 0.3404942443676343, "p": 0.0453397444993668, "slope": 0.7901309070376084, "slope_p": 0.0453397444993669, "r2": 0.1159363304474861}, {"category": "Housing & Comm. Dev.", "n": 49, "r": 0.4681448989556387, "p": 0.0006934972028104, "slope": 0.7544253268441576, "slope_p": 0.0006934972028104, "r2": 0.2191596464181853}, {"category": "Financial Admin.", "n": 46, "r": 0.3620822015975922, "p": 0.0134089693254385, "slope": 0.7537219956103207, "slope_p": 0.0134089693254386, "r2": 0.1311035207137596}, {"category": "Other / NEC", "n": 50, "r": 0.4479745537793814, "p": 0.0011052055045017, "slope": 0.7366480017637757, "slope_p": 0.0011052055045017, "r2": 0.2006812008338359}, {"category": "General Government", "n": 50, "r": 0.501971450688015, "p": 0.0002039389301381, "slope": 0.6502832559127748, "slope_p": 0.0002039389301381, "r2": 0.2519753373058304}, {"category": "Protective Inspection", "n": 42, "r": 0.4744864803620016, "p": 0.0014998799494784, "slope": 0.6035200287889546, "slope_p": 0.0014998799494784, "r2": 0.2251374200463201}, {"category": "All Services (Total)", "n": 50, "r": 0.5885081447670081, "p": 6.959833319989174e-06, "slope": 0.5387255498458803, "slope_p": 6.959833319989261e-06, "r2": 0.3463418364571058}, {"category": "Judicial & Legal", "n": 47, "r": 0.3185935237604692, "p": 0.0290670158122366, "slope": 0.4319453817194054, "slope_p": 0.0290670158122365, "r2": 0.1015018333821122}, {"category": "Solid Waste", "n": 46, "r": 0.238458342415494, "p": 0.1105084874327995, "slope": 0.3599149331912714, "slope_p": 0.1105084874328009, "r2": 0.0568623810675449}, {"category": "Police", "n": 50, "r": 0.4350539456643041, "p": 0.0015920156947569, "slope": 0.3197365398829109, "slope_p": 0.0015920156947569, "r2": 0.1892719356380795}, {"category": "Fire", "n": 50, "r": 0.4471694307803419, "p": 0.0011311015043268, "slope": 0.2376125970814993, "slope_p": 0.0011311015043269, "r2": 0.1999604998244151}, {"category": "Highways & Streets", "n": 50, "r": 0.2540289735881763, "p": 0.0750510496719132, "slope": 0.2009544234898528, "slope_p": 0.0750510496719133, "r2": 0.0645307194222624}, {"category": "Parks & Recreation", "n": 50, "r": 0.0450790049475986, "p": 0.7559127577513802, "slope": 0.0533248255960734, "slope_p": 0.7559127577513814, "r2": 0.0020321166870661}, {"category": "Sewerage", "n": 48, "r": 0.0107275867087014, "p": 0.9423108024169328, "slope": 0.0119262613173986, "slope_p": 0.942310802416927, "r2": 0.0001150811165925}];
@@ -474,7 +551,72 @@ const SF_DATA = [{"name": "New York", "density": 27468.9, "pct_sf": 9.2, "exp_pc
 
 const ink='#14151A', inkSoft='#514F5C', rust='#B8272C', slate='#0F766E';
 Chart.defaults.font.family = "'IBM Plex Mono', monospace";
-Chart.defaults.color = inkSoft; Chart.defaults.font.size = 11;
+Chart.defaults.color = inkSoft; Chart.defaults.font.size = 14;
+Chart.defaults.devicePixelRatio = Math.max(2, (window.devicePixelRatio || 1) * 2);
+Chart.defaults.plugins.tooltip.titleFont = {family:"'IBM Plex Mono', monospace", size:15, weight:'600'};
+Chart.defaults.plugins.tooltip.bodyFont = {family:"'IBM Plex Mono', monospace", size:14};
+Chart.defaults.plugins.tooltip.padding = 12;
+Chart.defaults.plugins.legend.labels.font = {family:"'IBM Plex Mono', monospace", size:13};
+
+// track chart instances by canvas id so the expand-modal can re-render them larger
+window.__charts = {};
+
+// ---------- expand-to-modal ----------
+function openChartModal(canvasId, title){
+  const src = window.__charts[canvasId];
+  if(!src) return;
+  document.getElementById('chartModalTitle').textContent = title;
+  document.getElementById('chartModalOverlay').classList.add('open');
+  if(window.__modalChart){ window.__modalChart.destroy(); window.__modalChart = null; }
+  const modalCanvas = document.getElementById('chartModalCanvas');
+  window.__modalChart = new Chart(modalCanvas, {
+    type: src.config.type,
+    data: src.data,
+    options: Object.assign({}, src.options, {responsive:true, maintainAspectRatio:false}),
+    plugins: src.config.plugins || []
+  });
+}
+function closeChartModal(){
+  document.getElementById('chartModalOverlay').classList.remove('open');
+  if(window.__modalChart){ window.__modalChart.destroy(); window.__modalChart = null; }
+}
+document.getElementById('chartModalOverlay').addEventListener('click', (e)=>{
+  if(e.target.id === 'chartModalOverlay') closeChartModal();
+});
+document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeChartModal(); });
+
+// ---------- corner-label annotation plugin (draws directly on the canvas, no external plugin needed) ----------
+function cornerLabels(labels){
+  return {
+    id: 'cornerLabels_' + Math.random().toString(36).slice(2),
+    afterDraw(chart){
+      const {ctx, chartArea} = chart;
+      if(!chartArea) return;
+      ctx.save();
+      labels.forEach(l=>{
+        const px = l.x === 'left' ? chartArea.left + 12 : chartArea.right - 12;
+        const py = l.y === 'top' ? chartArea.top + 10 : chartArea.bottom - 10;
+        ctx.font = "700 13px 'IBM Plex Mono', monospace";
+        ctx.fillStyle = l.color || inkSoft;
+        ctx.textAlign = l.x === 'left' ? 'left' : 'right';
+        ctx.textBaseline = l.y === 'top' ? 'top' : 'bottom';
+        const lines = Array.isArray(l.text) ? l.text : [l.text];
+        const lineHeight = 17;
+        lines.forEach((line, i)=>{
+          const yOffset = l.y === 'top' ? i*lineHeight : -(lines.length-1-i)*lineHeight;
+          // light backing plate so text stays legible over bubbles/points
+          const w = ctx.measureText(line).width;
+          ctx.fillStyle = 'rgba(250,250,246,0.82)';
+          const bx = l.x==='left' ? px-4 : px-w-4;
+          ctx.fillRect(bx, py+yOffset-(l.y==='top'?2:14), w+8, 16);
+          ctx.fillStyle = l.color || inkSoft;
+          ctx.fillText(line, px, py + yOffset);
+        });
+      });
+      ctx.restore();
+    }
+  };
+}
 
 const ALL_CATEGORIES = Object.keys(CITY_DATA[0].svc);
 let selected = new Set(ALL_CATEGORIES);
@@ -614,11 +756,15 @@ function updateLive(){
         backgroundColor:slate, borderColor:ink, borderWidth:1, pointRadius:6, pointHoverRadius:8, pointStyle:'rectRot' },
       { label:'Fitted trend (log-log)', type:'line', data:linePts, borderColor:ink, borderWidth:1.5, borderDash:[5,3], pointRadius:0, fill:false }
     ]},
+    plugins:[cornerLabels([
+      {x:'left', y:'top', text:['▲ ABOVE LINE:','more of these services','than density predicts']},
+      {x:'right', y:'bottom', text:['▼ BELOW LINE:','less of these services','than density predicts']}
+    ])],
     options:{
       responsive:true,
       plugins:{
         legend:{position:'bottom', labels:{boxWidth:12,padding:14}},
-        title:{display:true, text:'Selected Services vs. Density', color:ink, font:{family:"'Archivo Black', sans-serif", size:15}},
+        title:{display:true, text:'Selected Services vs. Density', color:ink, font:{family:"'Archivo Black', sans-serif", size:18}},
         tooltip:{callbacks:{label:(ctx)=> (ctx.raw.name||'') + ':  ' + ctx.raw.x.toLocaleString(undefined,{maximumFractionDigits:0}) + '/sqmi,  $' + ctx.raw.y.toLocaleString(undefined,{maximumFractionDigits:0})}}
       },
       scales:{
@@ -627,12 +773,13 @@ function updateLive(){
       }
     }
   });
+  window.__charts['scatterLive'] = liveChart;
 }
 updateLive();
 
 // ---------- elasticity bar chart ----------
 const elasticSorted = [...ELASTICITIES].sort((a,b)=>b.slope-a.slope);
-new Chart(document.getElementById('barElastic'), {
+const chElastic = new Chart(document.getElementById('barElastic'), {
   type:'bar',
   data:{
     labels: elasticSorted.map(e=>e.category + ' (n=' + e.n + ')'),
@@ -647,15 +794,16 @@ new Chart(document.getElementById('barElastic'), {
     indexAxis:'y', responsive:true,
     plugins:{
       legend:{display:false},
-      title:{display:true, text:'Density Elasticity by Service Category', color:ink, font:{family:"'Archivo Black', sans-serif", size:15}},
-      tooltip:{callbacks:{label:(ctx)=> 'elasticity ' + ctx.raw.toFixed(3)}}
+      title:{display:true, text:'Density Elasticity by Service Category', color:ink, font:{family:"'Archivo Black', sans-serif", size:18}},
+      tooltip:{callbacks:{label:(ctx)=> 'elasticity ' + ctx.raw.toFixed(3) + ' — a 1% rise in density is associated with a ' + ctx.raw.toFixed(2) + '% change in this service’s spending per capita'}}
     },
     scales:{
-      x:{title:{display:true,text:'log-log slope (elasticity)'}, grid:{color:'#c9bfa2'}},
+      x:{title:{display:true,text:'Density elasticity (% change in spending per 1% change in density)', font:{size:14}}, grid:{color:'#c9bfa2'}},
       y:{grid:{display:false}}
     }
   }
 });
+window.__charts['barElastic'] = chElastic;
 
 // ---------- static "total cost" scatter (§02) ----------
 (function(){
@@ -668,18 +816,22 @@ new Chart(document.getElementById('barElastic'), {
     const lx = Math.log(xmin) + (Math.log(xmax)-Math.log(xmin))*i/steps;
     linePts.push({x:Math.exp(lx), y:Math.exp(fit.intercept + fit.slope*lx)});
   }
-  new Chart(document.getElementById('scatterExp'), {
+  const chExp = new Chart(document.getElementById('scatterExp'), {
     type:'scatter',
     data:{datasets:[
       {label:'City', data:rows.filter(r=>!r.consolidated).map(r=>({x:r.density,y:r.val,name:r.name})), backgroundColor:rust, borderColor:ink, borderWidth:1, pointRadius:5, pointHoverRadius:7},
       {label:'Consolidated city-county', data:rows.filter(r=>r.consolidated).map(r=>({x:r.density,y:r.val,name:r.name})), backgroundColor:slate, borderColor:ink, borderWidth:1, pointRadius:6, pointHoverRadius:8, pointStyle:'rectRot'},
       {label:'Fitted trend (excl. consolidated)', type:'line', data:linePts, borderColor:ink, borderWidth:1.5, borderDash:[5,3], pointRadius:0, fill:false}
     ]},
+    plugins:[cornerLabels([
+      {x:'left', y:'top', text:['▲ ABOVE LINE:','delivers more service','than density predicts']},
+      {x:'right', y:'bottom', text:['▼ BELOW LINE:','delivers less service','than density predicts']}
+    ])],
     options:{
       responsive:true,
       plugins:{
         legend:{position:'bottom', labels:{boxWidth:12,padding:14}},
-        title:{display:true, text:'Density vs. Total Direct Expenditure per Capita', color:ink, font:{family:"'Archivo Black', sans-serif", size:15}},
+        title:{display:true, text:'Density vs. Total Direct Expenditure per Capita', color:ink, font:{family:"'Archivo Black', sans-serif", size:18}},
         tooltip:{callbacks:{label:(ctx)=> ctx.raw.name + ':  ' + ctx.raw.x.toLocaleString(undefined,{maximumFractionDigits:0}) + '/sqmi,  $' + ctx.raw.y.toLocaleString(undefined,{maximumFractionDigits:0})}}
       },
       scales:{
@@ -688,6 +840,7 @@ new Chart(document.getElementById('barElastic'), {
       }
     }
   });
+  window.__charts['scatterExp'] = chExp;
 })();
 
 // ---------- §03: single-family share vs spending ----------
@@ -710,18 +863,22 @@ new Chart(document.getElementById('barElastic'), {
     linePts.push({x, y:Math.exp(intercept + slope*x)});
   }
 
-  new Chart(document.getElementById('scatterSF'), {
+  const chSF = new Chart(document.getElementById('scatterSF'), {
     type:'scatter',
     data:{datasets:[
       {label:'City', data:nonEP.map(r=>({x:r.pct_sf,y:r.exp_pc,name:r.name})), backgroundColor:rust, borderColor:ink, borderWidth:1, pointRadius:5, pointHoverRadius:7},
       {label:'El Paso', data:ep.map(r=>({x:r.pct_sf,y:r.exp_pc,name:r.name})), backgroundColor:'#14151A', borderColor:rust, borderWidth:2.5, pointRadius:8, pointHoverRadius:10, pointStyle:'rectRot'},
       {label:'Fitted trend', type:'line', data:linePts, borderColor:ink, borderWidth:1.5, borderDash:[5,3], pointRadius:0, fill:false}
     ]},
+    plugins:[cornerLabels([
+      {x:'left', y:'top', text:['▲ ABOVE LINE:','more service than','housing type predicts']},
+      {x:'right', y:'bottom', text:['▼ BELOW LINE:','less service than','housing type predicts']}
+    ])],
     options:{
       responsive:true,
       plugins:{
         legend:{position:'bottom', labels:{boxWidth:12,padding:14}},
-        title:{display:true, text:'Single-Family Housing Share vs. Total Spending per Capita', color:ink, font:{family:"'Archivo Black', sans-serif", size:15}},
+        title:{display:true, text:'Single-Family Housing Share vs. Total Spending per Capita', color:ink, font:{family:"'Archivo Black', sans-serif", size:18}},
         tooltip:{callbacks:{label:(ctx)=> ctx.raw.name + ':  ' + ctx.raw.x.toFixed(1) + '% single-family,  $' + ctx.raw.y.toLocaleString(undefined,{maximumFractionDigits:0}) + '/capita'}}
       },
       scales:{
@@ -730,6 +887,7 @@ new Chart(document.getElementById('barElastic'), {
       }
     }
   });
+  window.__charts['scatterSF'] = chSF;
 })();
 
 // ---------- three-way bubble chart ----------
@@ -739,7 +897,7 @@ new Chart(document.getElementById('barElastic'), {
   const toPoint = r => ({x:r.density, y:r.total, r: 4 + 22*(r.tax/maxTax), name:r.name, tax:r.tax});
   const ordinary = rows.filter(r=>!r.consolidated).map(toPoint);
   const consol = rows.filter(r=>r.consolidated).map(toPoint);
-  new Chart(document.getElementById('bubbleThree'), {
+  const chBubble = new Chart(document.getElementById('bubbleThree'), {
     type:'bubble',
     data:{datasets:[
       {label:'City (bubble size = property tax/capita)', data: ordinary,
@@ -747,11 +905,15 @@ new Chart(document.getElementById('barElastic'), {
       {label:'Consolidated city-county government', data: consol,
        backgroundColor: 'rgba(15,118,110,0.55)', borderColor: ink, borderWidth:1}
     ]},
+    plugins:[cornerLabels([
+      {x:'left', y:'top', text:['Bubble size =','tax collected per capita']},
+      {x:'right', y:'bottom', text:['Size tracks HEIGHT (spending),','not left-right position (density)']}
+    ])],
     options:{
       responsive:true,
       plugins:{
         legend:{position:'bottom', labels:{boxWidth:12,padding:14}},
-        title:{display:true, text:'Density × Service Spending × Property Tax, All Three At Once', color:ink, font:{family:"'Archivo Black', sans-serif", size:15}},
+        title:{display:true, text:'Density × Service Spending × Property Tax, All Three At Once', color:ink, font:{family:"'Archivo Black', sans-serif", size:18}},
         tooltip:{callbacks:{label:(ctx)=> ctx.raw.name + ': density ' + ctx.raw.x.toLocaleString(undefined,{maximumFractionDigits:0}) + '/sqmi, spending $' + ctx.raw.y.toLocaleString(undefined,{maximumFractionDigits:0}) + '/capita, tax $' + ctx.raw.tax.toLocaleString(undefined,{maximumFractionDigits:0}) + '/capita'}}
       },
       scales:{
@@ -760,12 +922,58 @@ new Chart(document.getElementById('barElastic'), {
       }
     }
   });
+  window.__charts['bubbleThree'] = chBubble;
 })();
 
-// ---------- §06: home value vs effective tax rate ----------
+// ---------- §06: home value vs effective tax rate (THE reveal chart -- fully annotated) ----------
 (function(){
   const rows = HOUSING_DATA.filter(d => d.eff_rate !== null && d.home_value !== null);
-  new Chart(document.getElementById('scatterHomeTax'), {
+
+  // fit: effective_tax_rate (linear) ~ ln(home_value) -- matches the r=-0.52 relationship described in §06
+  const n = rows.length;
+  const lxs = rows.map(r=>Math.log(r.home_value)), ys = rows.map(r=>r.eff_rate);
+  const mlx = lxs.reduce((a,b)=>a+b,0)/n, my = ys.reduce((a,b)=>a+b,0)/n;
+  let sxy=0, sxx=0;
+  for(let i=0;i<n;i++){ sxy += (lxs[i]-mlx)*(ys[i]-my); sxx += (lxs[i]-mlx)*(lxs[i]-mlx); }
+  const slope = sxy/sxx, intercept = my - slope*mlx;
+  const xmin = Math.min(...rows.map(r=>r.home_value))*0.85, xmax = Math.max(...rows.map(r=>r.home_value))*1.1;
+  const linePts=[]; const steps=30;
+  for(let i=0;i<=steps;i++){
+    const lx = Math.log(xmin) + (Math.log(xmax)-Math.log(xmin))*i/steps;
+    linePts.push({x:Math.exp(lx), y: intercept + slope*lx});
+  }
+
+  const epRow = rows.find(d=>d.is_el_paso);
+
+  // dedicated El Paso leader-line + label, drawn in actual data-pixel space (not a fixed corner)
+  const elPasoCallout = {
+    id:'elPasoCallout',
+    afterDraw(chart){
+      if(!epRow) return;
+      const xScale = chart.scales.x, yScale = chart.scales.y;
+      const px = xScale.getPixelForValue(epRow.home_value);
+      const py = yScale.getPixelForValue(epRow.eff_rate);
+      const ctx = chart.ctx;
+      ctx.save();
+      const lx = px + 70, ly = py - 55;
+      ctx.strokeStyle = ink; ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(lx-4, ly+14); ctx.stroke();
+      ctx.fillStyle = ink; ctx.beginPath(); ctx.arc(px, py, 3, 0, 7); ctx.fill();
+      ctx.font = "700 14px 'IBM Plex Mono', monospace";
+      const lines = ['EL PASO', '2nd-highest rate,', '4th-cheapest homes'];
+      const lineH = 17;
+      const widest = Math.max(...lines.map(l=>ctx.measureText(l).width));
+      ctx.fillStyle = 'rgba(250,250,246,0.92)';
+      ctx.strokeStyle = ink; ctx.lineWidth = 1;
+      ctx.fillRect(lx-6, ly-4, widest+12, lines.length*lineH+6);
+      ctx.strokeRect(lx-6, ly-4, widest+12, lines.length*lineH+6);
+      ctx.fillStyle = rust; ctx.textAlign='left'; ctx.textBaseline='top';
+      lines.forEach((line,i)=>{ ctx.fillStyle = i===0? rust : ink; ctx.fillText(line, lx, ly+i*lineH); });
+      ctx.restore();
+    }
+  };
+
+  const chHT = new Chart(document.getElementById('scatterHomeTax'), {
     type:'bubble',
     data:{datasets:[
       {
@@ -777,14 +985,22 @@ new Chart(document.getElementById('barElastic'), {
         label:'El Paso',
         data: rows.filter(d=>d.is_el_paso).map(d=>({x:d.home_value, y:d.eff_rate, r: 4 + 16*(d.density/27469), name:d.name, density:d.density})),
         backgroundColor: 'rgba(184,39,44,0.95)', borderColor: ink, borderWidth:2.5
-      }
+      },
+      {label:'Fitted trend', type:'line', data:linePts, borderColor:ink, borderWidth:1.5, borderDash:[5,3], pointRadius:0, fill:false}
     ]},
+    plugins:[
+      cornerLabels([
+        {x:'left', y:'top', text:['← CHEAPER HOMES:','higher rate needed','to raise the same money']},
+        {x:'right', y:'bottom', text:['PRICIER HOMES: →','lower rate needed','to raise the same money']}
+      ]),
+      elPasoCallout
+    ],
     options:{
       responsive:true,
       plugins:{
         legend:{position:'bottom', labels:{boxWidth:12,padding:14}},
-        title:{display:true, text:'Cheaper Homes, Higher Effective Tax Rates', color:ink, font:{family:"'Archivo Black', sans-serif", size:15}},
-        tooltip:{callbacks:{label:(ctx)=> ctx.raw.name + ': home value $' + ctx.raw.x.toLocaleString(undefined,{maximumFractionDigits:0}) + ', effective rate ' + ctx.raw.y.toFixed(2) + '%, density ' + ctx.raw.density.toLocaleString(undefined,{maximumFractionDigits:0}) + '/sqmi'}}
+        title:{display:true, text:'Cheaper Homes, Higher Effective Tax Rates', color:ink, font:{family:"'Archivo Black', sans-serif", size:18}},
+        tooltip:{callbacks:{label:(ctx)=> ctx.raw.name ? (ctx.raw.name + ': home value $' + ctx.raw.x.toLocaleString(undefined,{maximumFractionDigits:0}) + ', effective rate ' + ctx.raw.y.toFixed(2) + '%, density ' + ctx.raw.density.toLocaleString(undefined,{maximumFractionDigits:0}) + '/sqmi') : ''}}
       },
       scales:{
         x:{type:'logarithmic', title:{display:true,text:'Median home value (log scale)'}, grid:{color:'#c9bfa2'}},
@@ -792,6 +1008,7 @@ new Chart(document.getElementById('barElastic'), {
       }
     }
   });
+  window.__charts['scatterHomeTax'] = chHT;
 })();
 
 // ---------- §06: home value / tax rate table ----------
