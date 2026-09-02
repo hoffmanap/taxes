@@ -57,7 +57,7 @@
     border:none; padding:9px 16px; border-radius:6px; cursor:pointer; flex-shrink:0;
   }
   .chart-modal-close:hover{background:var(--rust);}
-  .chart-modal-canvas-wrap{flex:1; position:relative; min-height:0;}
+  .chart-modal-canvas-wrap{flex:1; position:relative; min-height:320px;}
   .chart-panel .cap{font-size:16px; color:var(--ink-soft); margin-top:10px; line-height:1.6;}
   canvas{max-width:100%;}
   .two-col{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
@@ -569,11 +569,23 @@ function openChartModal(canvasId, title){
   document.getElementById('chartModalOverlay').classList.add('open');
   if(window.__modalChart){ window.__modalChart.destroy(); window.__modalChart = null; }
   const modalCanvas = document.getElementById('chartModalCanvas');
-  window.__modalChart = new Chart(modalCanvas, {
-    type: src.config.type,
-    data: src.data,
-    options: Object.assign({}, src.options, {responsive:true, maintainAspectRatio:false}),
-    plugins: src.config.plugins || []
+  // clear any leftover sizing Chart.js stamped onto this canvas from a previous open --
+  // otherwise the new chart can inherit a stale (sometimes zero) size
+  modalCanvas.removeAttribute('style');
+  modalCanvas.removeAttribute('width');
+  modalCanvas.removeAttribute('height');
+  // the overlay is still display:none in this same tick (the class was just added),
+  // so the canvas's container reports zero size if we build the chart right now --
+  // wait two animation frames so the browser has actually painted the modal open first
+  requestAnimationFrame(()=>{
+    requestAnimationFrame(()=>{
+      window.__modalChart = new Chart(modalCanvas, {
+        type: src.config.type,
+        data: src.data,
+        options: Object.assign({}, src.options, {responsive:true, maintainAspectRatio:false}),
+        plugins: src.config.plugins || []
+      });
+    });
   });
 }
 function closeChartModal(){
