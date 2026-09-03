@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Density &amp; the Cost of Municipal Services — 150 Largest U.S. Cities</title>
+<title>Density and the Cost of Municipal Services in the 150 Largest U.S. Cities</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.5.1/chart.umd.min.js"></script>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap');
@@ -109,34 +109,42 @@
     <h1>Does Density Pay For Itself?<br>Population Density, Land Area &amp; the Cost of City Government</h1>
     <p class="subhead">A statistical look at whether denser cities deliver municipal services more cheaply per
       resident, whether that shows up in the property tax bill, and whether the answer differs service by service.
-      Fifty largest U.S. cities, ranked by 2022 population.</p>
+      The 150 largest U.S. cities, ranked by 2022 population.</p>
     <div class="meta-strip">
       <span>Cities analyzed: <b>150</b></span>
       <span>Service categories: <b>16</b></span>
-      <span>Finance data: <b>U.S. Census Bureau, 2022 Census of Governments — Individual Unit Finance File</b></span>
+      <span>Finance data: <b>U.S. Census Bureau, 2022 Census of Governments, Individual Unit Finance File</b></span>
       <span>Geography: <b>2023 Census Gazetteer (land area)</b></span>
     </div>
   </header>
 
   <h2><span class="num">01</span>Headline Result</h2>
   <p class="note"><b>A framing note before the findings:</b> throughout this analysis, per-capita spending is
-    treated as a proxy for the level of municipal service a resident actually receives — not simply a "cost."
+    treated as a proxy for the level of municipal service a resident actually receives, not simply a "cost."
     A city spending twice as much per resident is, functionally, providing something closer to twice the police
     staffing, parks upkeep, library hours, and administrative capacity per resident (setting aside pure efficiency
     differences, which §04 dissects service-by-service). Read that way, the findings below are less about which
-    cities are "expensive" and more about which cities deliver <i>more</i> government per resident — and which
-    deliver less.</p>
+    cities are "expensive" and more about which cities deliver <i>more</i> government per resident, and which
+    deliver less. <b>One important limit on that proxy:</b> "more/less service" compares the same category label
+    across cities ranging from 175,000 to 8.25 million people, and a label like "Libraries" doesn't guarantee the
+    same kind of institution at every size of city, see §11 for why this matters most for the policy discussion
+    in §06.</p>
   <div class="findings">
-    The relationship runs <span class="hl">the opposite direction from the density-efficiency hypothesis</span> —
+    The relationship runs <span class="hl">the opposite direction from the density-efficiency hypothesis</span>,
     but only in aggregate. Across the 150 largest cities, higher density is associated with cities that
     <span class="hl-coral">deliver more service per resident</span>, not less, and collect <span class="hl-coral">more</span> property tax per resident to fund it.
     But pooling every service together hides real differentiation: some services show no density penalty at all
     (§04), the tax relationship turns out to be almost entirely explained by the spending relationship rather than
-    an independent effect of density itself (§05), and a city's housing mix — not density itself — turns out to be
+    an independent effect of density itself (§05), and a city's housing mix, not density itself, turns out to be
     the sharper explanation for how much service a city delivers (§03). Separately, §06 shows the fullest picture:
     low home values and a heavy single-family housing mix combine to push the effective property tax
     <span class="hl">rate</span> up in less-dense cities, even though those same cities are delivering
-    <span class="hl">below-average service</span> for the money — which is exactly El Paso's situation.
+    <span class="hl">below-average service</span> for the money, which is exactly El Paso's situation. Business
+    density behaves the same way population density does: it looks meaningful on its own but adds nothing once
+    housing type is in the picture, and more jobs nearby does not lower a homeowner's tax rate (§07). Real
+    property tax records confirm the same story from a different angle: El Paso's commercial tax base is
+    ordinary for a large Texas city, but its multifamily housing share is the lowest of its peers by a wide
+    margin, and that gap tracks the tax rate far more closely than commercial development does (§08).
   </div>
 
   <h2><span class="num">02</span>Density vs. Total Per-Capita Service Provision</h2>
@@ -146,8 +154,8 @@
     <div class="cap">Each marker is one of the 150 largest U.S. cities, log-scaled on both axes. Diamond markers are
       consolidated city-county governments (11 of them here, including New York, San Francisco, Denver,
       Washington D.C., Honolulu, Nashville, Louisville, Anchorage, Baton Rouge, and two in Georgia), which carry
-      county-level responsibilities most peer cities don't and are natural high-leverage points — excluded from
-      the fitted trend line and from the models in §07.</div>
+      county-level responsibilities most peer cities don't and are natural high-leverage points, excluded from
+      the fitted trend line and from the models in §09.</div>
   </div>
   <div class="card-row">
     <div class="stampcard"><div class="label">Density ↔ Total cost/capita</div><div class="value">r = 0.32</div><div class="sub">Pearson r, all 150</div></div>
@@ -159,39 +167,38 @@
   <p class="note"><b>The question here:</b> "density" (people per square mile) treats a city of small
     single-family lots and a city of apartment towers the same, as long as they pack in the same number of people.
     But those are very different things to build and service. So we also pulled the share of each city's housing
-    that's single-family detached homes — the more direct stand-in for "spread-out, low-rise, one-house-per-lot"
-    versus "compact, multifamily, built-up" — and tested it the same way.</p>
+    that's single-family detached homes, the more direct stand-in for "spread-out, low-rise, one-house-per-lot"
+    versus "compact, multifamily, built-up", and tested it the same way.</p>
 
   <div class="findings">
-    It works <span class="hl">even better than density does</span> — and with three times the cities now in the
-    sample, that comparison is much more solid than before. The share of a city's homes that are single-family
-    explains municipal spending per person more precisely than density does (<span class="hl-coral">45%</span> of
-    the city-to-city variation in total spending vs. 11% for density; 31% vs. 7% for the density-sensitive service
-    bundle from §04). And when both are put in the same model together, density's own effect doesn't just fade —
-    with this much more data, it actually tips slightly negative (though not quite past the conventional
-    significance bar, p≈0.08–0.13), while housing type stays strong and clearly significant in both models. In
-    plain terms: it was never really "density" driving the cost pattern. It was housing type. Density looked like
-    it mattered because dense cities also tend to be apartment-heavy cities — but housing type is the more
-    fundamental variable, and once you account for it, density on its own leans toward the opposite direction, not
-    just toward nothing.
+    It works <span class="hl">even better than density does</span>. The share of a city's homes that are
+    single-family explains municipal spending per person more precisely than density does
+    (<span class="hl-coral">45%</span> of the city-to-city variation in total spending vs. 11% for density; 31%
+    vs. 7% for the density-sensitive service bundle from §04). When both are put in the same model together,
+    density's own effect doesn't just fade, it actually tips slightly negative (though not quite past the
+    conventional significance bar, p≈0.08 to 0.13), while housing type stays strong and clearly significant in
+    both models. In plain terms: it was never really "density" driving the cost pattern. It was housing type.
+    Density looked like it mattered because dense cities also tend to be apartment-heavy cities, but housing type
+    is the more fundamental variable, and once you account for it, density on its own leans toward the opposite
+    direction, not just toward nothing.
   </div>
 
   <div class="findings slate">
-    The direction is the same as before, just sharper: cities with a higher share of single-family homes
-    spend <span class="hl-teal">less</span> per person — meaning residents there get less city service per capita, not more.
+    The direction is simple: cities with a higher share of single-family homes
+    spend <span class="hl-teal">less</span> per person, meaning residents there get less city service per capita, not more.
     Cities built more around apartments and multifamily housing spend, and deliver, more. That's consistent with
-    everything in §02–§04 — it doesn't reverse the earlier finding, it explains it better. This is also the
-    opposite of the common "sprawl costs more" intuition — in this data, the single-family, lower-density cities
-    are the ones delivering less government per resident, at least at the level of the whole city budget.
+    everything in §02 through §04. This is also the opposite of the common "sprawl costs more" intuition. In this
+    data, the single-family, lower-density cities are the ones delivering less government per resident, at least
+    at the level of the whole city budget.
   </div>
 
   <div class="chart-panel">
     <button class="expand-btn" onclick="openChartModal('scatterSF','Single-Family Housing Share vs. Total Spending per Capita')">⤢ Expand</button>
     <canvas id="scatterSF" height="105"></canvas>
     <div class="cap">Each city plotted by share of housing that's single-family detached (x) against total direct
-      spending per person (y, log scale). El Paso — 66.9% single-family, top sixth of the 147-city sample (25th
-      of 147; the highest is Port St. Lucie, FL at 87.7%) — sits toward the low-spending end, consistent with the
-      pattern.</div>
+      spending per person (y, log scale). El Paso, at 66.9% single-family, sits in the top sixth of the sample
+      (25th of 147; the highest is Port St. Lucie, FL at 87.7%), and sits toward the low-spending end, consistent
+      with the pattern.</div>
   </div>
 
   <table>
@@ -202,36 +209,37 @@
     </tbody>
   </table>
 
-  <p class="note" style="margin-top:10px;"><b>Updated finding on the effective tax rate:</b> with the larger
-    147-city sample, housing type does now add something to home value's explanation of the tax rate (§06) —
-    home value alone explains about 28% of the city-to-city difference in effective tax rate, and adding housing
-    type on top is now statistically significant (p=0.008), running toward a slightly <i>lower</i> rate at a
-    given home value. That's the opposite direction from a simple "housing type also hurts the rate" story — see
-    §06 for why, and for what it means for El Paso specifically. Housing type's clearest, most consistent role
-    remains the spending side of the analysis (§02–§04); on the tax-rate side, its effect is smaller and runs
-    counter to the home-value channel rather than alongside it.</p>
+  <p class="note" style="margin-top:10px;"><b>On the effective tax rate:</b> housing type does add something to
+    home value's explanation of the tax rate (§06). Home value alone explains about 28% of the city-to-city
+    difference in effective tax rate, and adding housing type on top is statistically significant (p=0.008),
+    running toward a slightly <i>lower</i> rate at a given home value. That's the opposite direction from a
+    simple "housing type also hurts the rate" story, see §06 for why, and for what it means for El Paso
+    specifically. Housing type's clearest, most consistent role is on the spending side of the analysis (§02
+    through §04); on the tax-rate side, its effect is smaller and runs counter to the home-value channel rather
+    than alongside it.</p>
 
-  <h2><span class="num">04</span>By Service Type — Which Services Cost More in Denser Cities?</h2>
+  <h2><span class="num">04</span>By Service Type: Which Services Scale Up With Density?</h2>
 
   <div class="findings slate" style="font-size:16px;">
     <b>What "density elasticity" means, in plain terms:</b> it's the answer to "if density goes up 1%, what
-    happens to spending on this service, in percent terms?" A value of <b>+1.0</b> means spending rises exactly in
-    step with density (double the density, double the spending on that service). A value of <b>+0.3</b> means
-    spending rises much more slowly than density — density has to triple for that service's spending to rise
-    about 40%. A value near <b>0</b> means density and spending are unrelated — that service costs about the same
-    per person no matter how dense the city is. There are no negative values anywhere in this dataset — meaning no
-    service actually gets cheaper per person as density rises (see the bar chart below for the full ranked list).
+    happens to the amount of this service delivered per resident, in percent terms?" A value of <b>+1.0</b> means
+    service delivery rises exactly in step with density (double the density, double the service on that category).
+    A value of <b>+0.3</b> means it rises much more slowly than density, density has to triple for that
+    category's per-resident delivery to rise about 40%. A value near <b>0</b> means density and service level are
+    unrelated, residents get about the same amount of that service no matter how dense the city is. There are no
+    negative values anywhere in this dataset, meaning no service category delivers <i>less</i> per resident as
+    density rises (see the bar chart below for the full ranked list).
   </div>
 
-  <p class="note"><b>In plain terms:</b> we tested all 16 categories of city spending separately against density.
-    <b>Not one of them gets cheaper per person as density rises.</b> They split into two groups instead — services
-    that get <b>more expensive per person</b> as a city gets denser, and services where density makes
-    <b>no measurable difference</b> either way. There is no category, in this data, where being denser saves money
-    per resident.</p>
+  <p class="note"><b>In plain terms:</b> we tested all 16 categories of city spending, used as the proxy for
+    service delivered, per §01, separately against density. <b>Not one of them delivers less per resident as
+    density rises.</b> They split into two groups instead, services that deliver <b>more per resident</b> as a
+    city gets denser, and services where density makes <b>no measurable difference</b> either way. There is no
+    category, in this data, where being denser means residents get less of it.</p>
 
   <div class="two-col">
     <div class="chart-panel">
-      <div style="font-family:'Archivo Black',sans-serif; font-size:15px; margin-bottom:10px; color:var(--rust);">Gets more expensive per person as density rises</div>
+      <div style="font-family:'Archivo Black',sans-serif; font-size:15px; margin-bottom:10px; color:var(--rust);">Delivers more per resident as density rises</div>
       <table style="font-size:12px;">
         <tbody>
           <tr><td>Corrections (jails)</td><td class="num">strongest effect</td></tr>
@@ -246,7 +254,7 @@
           <tr><td>Fire</td><td class="num">↑ mild</td></tr>
         </tbody>
       </table>
-      <div class="cap">All ten are statistically real (p&lt;0.05) — not noise. Police and fire rise too, but much more
+      <div class="cap">All ten are statistically real (p&lt;0.05), not noise. Police and fire rise too, but much more
         gently than the administrative categories above them.</div>
     </div>
     <div class="chart-panel">
@@ -260,19 +268,24 @@
           <tr><td>Health services</td><td class="num">flat (borderline)</td></tr>
         </tbody>
       </table>
-      <div class="cap">These are the classic "shared pipes and roads" services — exactly where you'd expect density to
-        help. It doesn't cost more per person here, but it doesn't cost less either. Flat, not falling.</div>
+      <div class="cap">These are the classic "shared pipes and roads" services, exactly where you'd expect density to
+        help. Residents don't get more of this per person here, but they don't get less either. Flat, not falling.</div>
     </div>
   </div>
 
   <div class="findings">
-    <b>Bottom line:</b> the original idea — pack people in tighter and each person's share of the water main or the
-    road gets cheaper — doesn't show up as <i>savings</i> anywhere in this data. At best (sewers, parks, roads,
-    trash, health) density is a wash: no more service, no less. Everywhere else — and especially in jails, parking,
-    libraries, housing programs, and general administration — being denser means delivering <i>more</i> service per
-    person, not less. That's why total service provision in §02 rises with density: residents of denser cities are
-    getting more government capacity per person, concentrated in the administrative and social-service side of the
-    budget rather than physical infrastructure.
+    <b>Bottom line:</b> the original idea, pack people in tighter and each person's share of the water main or the
+    road gets cheaper, so a denser city could deliver the same service for less, doesn't show up as <i>savings</i>
+    anywhere in this data. At best (sewers, parks, roads, trash, health) density is a wash: no more service, no
+    less. Everywhere else, and especially in jails, parking, libraries, housing programs, and general
+    administration, being denser means delivering <i>more</i> service per person, not less. That's why total
+    service provision in §02 rises with density: residents of denser cities are getting more government capacity
+    per person, concentrated in the administrative and social-service side of the budget rather than physical
+    infrastructure. <b>An important caveat on what "more" and "less" mean here:</b> this compares the same named
+    category (e.g. "Police") across very differently-sized and differently-scoped cities. A large historic city
+    and a newer, smaller, single-family-dominated city aren't necessarily offering the same depth or type of
+    service within a category just because both report spending under "Housing & Community Development" or
+    "Libraries", see §11 for why this matters for how "less service" should be read.
   </div>
 
   <p class="note" style="margin-top:24px;"><b>Explore it yourself:</b> pick any combination of the 16 categories
@@ -307,16 +320,16 @@
     <button class="expand-btn" onclick="openChartModal('barElastic','Density Elasticity by Service Category')">⤢ Expand</button>
     <canvas id="barElastic" height="130"></canvas>
     <div class="cap">Same information as the two lists above, shown as a ranked chart. Bars in
-      <span style="color:var(--rust)">rust</span> are the "gets more expensive" group (statistically real, p&lt;0.05);
+      <span style="color:var(--rust)">rust</span> are the "delivers more" group (statistically real, p&lt;0.05);
       bars in <span style="color:var(--ink-soft)">grey</span> are the "no real relationship" group. Nothing dips
-      below zero — there's no category that gets cheaper.</div>
+      below zero, there's no category that delivers less.</div>
   </div>
 
-  <h2><span class="num">05</span>Density, Service Provision, and Tax — Together</h2>
-  <p class="note"><b>The question here:</b> is the tax-bill pattern in §02 really about density — or is it just
+  <h2><span class="num">05</span>Density, Service Provision, and Tax Together</h2>
+  <p class="note"><b>The question here:</b> is the tax-bill pattern in §02 really about density, or is it just
     riding along with how much service a city provides? We already know three things move together: denser cities
     deliver more service per person (§02), and cities that deliver more service also collect more property tax per
-    person — no surprise there, since taxes are largely how that service gets funded. The question is whether
+    person, no surprise there, since taxes are largely how that service gets funded. The question is whether
     density is doing anything <i>on its own</i> to push tax bills up, separate from service level, or whether it's
     only showing up in the tax numbers because it's already showing up in the service numbers.</p>
 
@@ -326,17 +339,17 @@
   <div class="findings">
     <b>In plain terms: density does not directly drive tax bills. It drives service provision, and service
     provision drives tax bills.</b> Once you compare cities delivering about the same amount of service per person,
-    density stops predicting property tax per person almost entirely — the connection all but disappears. But
+    density stops predicting property tax per person almost entirely, the connection all but disappears. But
     service level itself still strongly predicts tax bills even after accounting for density. So the real chain is:
     <b>denser city → delivers more service per person → collects more property tax per person.</b> Density doesn't
-    have its own separate effect on your tax bill — it only matters because of what it does to service level. If
+    have its own separate effect on your tax bill, it only matters because of what it does to service level. If
     you found two cities delivering the same amount of service per resident, you would <i>not</i> expect the
     denser one to have a higher tax bill just because it's denser.
   </div>
   <p class="note">(For the statistically inclined: this was tested with partial correlations. Density vs. spending,
     controlling for tax, stays strong and significant. Density vs. tax, controlling for spending, drops to
     essentially zero and stops being statistically significant. Spending vs. tax, controlling for density, stays
-    strong. That pattern — one link survives, the other one vanishes — is what "service level explains it, density
+    strong. That pattern, one link survives, the other one vanishes, is what "service level explains it, density
     doesn't" looks like in the numbers.)</p>
 
   <div class="chart-panel">
@@ -344,16 +357,16 @@
     <canvas id="bubbleThree"></canvas>
     <div class="cap">
       <b>How to read this:</b> each bubble is one city. Left-to-right (x-axis) is density; bottom-to-top (y-axis)
-      is total service spending per capita — both log-scaled, so equal distances mean equal percentage
-      differences, not equal dollar differences. Bubble <i>size</i> is property tax collected per capita — the
+      is total service spending per capita, both log-scaled, so equal distances mean equal percentage
+      differences, not equal dollar differences. Bubble <i>size</i> is property tax collected per capita, the
       variable this chart is testing. Color separates ordinary city governments (rust) from the seven consolidated
-      city-county governments (teal), which run larger budgets for structural reasons (§09) and would otherwise
+      city-county governments (teal), which run larger budgets for structural reasons (§11) and would otherwise
       skew the pattern.<br><br>
       <b>What to look for:</b> if density itself drove tax bills, the biggest bubbles would cluster on the
-      <i>right</i> side of the chart regardless of height. They don't — bubble size tracks the <i>vertical</i>
+      <i>right</i> side of the chart regardless of height. They don't, bubble size tracks the <i>vertical</i>
       position (service spending) far more consistently than the horizontal one (density). A low-density city
       near the bottom (low service spending) reliably has a small bubble (low tax); a low-density city that
-      happens to sit higher up the y-axis has a bigger bubble to match — density alone doesn't predict bubble
+      happens to sit higher up the y-axis has a bigger bubble to match, density alone doesn't predict bubble
       size, height does. That's the visual version of the mediation finding above.
     </div>
   </div>
@@ -362,46 +375,46 @@
   <p class="note"><b>The question behind this section:</b> a city's property tax <i>bill</i> and its property tax
     <i>rate</i> are two different things. The bill is dollars collected per person. The rate is the bill divided by
     what the home is actually worth. By definition, if a city needs to raise a given amount of tax revenue per
-    resident and its housing stock isn't worth very much, the rate has to be higher to get there — that part is
+    resident and its housing stock isn't worth very much, the rate has to be higher to get there, that part is
     just arithmetic, not a statistical finding. The real question is what makes a city's housing stock worth less
     in the first place, and whether density and housing type play a genuine role in that or are beside the point.
-    They do play a role — a real, measurable, secondary one.</p>
+    They do play a role, a real, measurable, secondary one.</p>
 
   <div class="findings">
     <b>Three things determine the rate, in order of how much they matter:</b> a city's income level dominates home
-    values (r = 0.90 — by far the strongest relationship in this entire analysis), single-family housing share
-    matters independently on top of income (even more clearly significant with the larger sample, p &lt; 0.0001 —
-    this is the density/housing-type channel), and home value in turn is what mechanically sets the effective rate
-    (r = −0.42). Put together: <b>income sets the baseline, housing type pulls it down further, and the
-    combination determines how hard the rate has to work.</b> On their own, housing type and density don't show a
-    strong <i>direct</i> relationship with the tax rate (r ≈ 0.05, not significant either way) — most of their
-    effect runs <i>through</i> home value, not around it. One genuine wrinkle from the bigger sample: once you
-    hold home value fixed, single-family share does now show a small but statistically real direct relationship
-    with the rate (p = 0.008) — and it runs the <i>opposite</i> direction, toward a slightly <i>lower</i> rate.
-    The likely reason isn't mysterious: at a given home value, a more single-family city needs less total revenue
-    (§03 — it delivers less service), so it can charge a bit less to raise that smaller amount. That's a real,
-    separate channel, but a small one next to the value channel, and it works against El Paso's situation rather
-    than adding to it — which makes the value-driven story below the conservative, not the inflated, read.
+    values (r = 0.90, by far the strongest relationship in this entire analysis), single-family housing share
+    matters independently on top of income (p &lt; 0.0001, this is the density/housing-type channel), and home
+    value in turn is what mechanically sets the effective rate (r = -0.42). Put together: <b>income sets the
+    baseline, housing type pulls it down further, and the combination determines how hard the rate has to
+    work.</b> On their own, housing type and density don't show a strong <i>direct</i> relationship with the tax
+    rate (r ≈ 0.05, not significant either way). Most of their effect runs <i>through</i> home value, not around
+    it. One genuine wrinkle: once you hold home value fixed, single-family share shows a small but statistically
+    real direct relationship with the rate (p = 0.008), and it runs the <i>opposite</i> direction, toward a
+    slightly <i>lower</i> rate. The likely reason isn't mysterious: at a given home value, a more single-family
+    city needs less total revenue (§03, it delivers less service), so it can charge a bit less to raise that
+    smaller amount. That's a real, separate channel, but a small one next to the value channel, and it works
+    against El Paso's situation rather than adding to it, which makes the value-driven story below the
+    conservative, not the inflated, read.
   </div>
 
   <div class="findings slate">
     <b>El Paso is close to the worst-case combination this data can produce.</b> Its income is low
-    (<span class="hl-teal">119th of 147</span>, in the bottom fifth) — which alone would predict a fairly low home
+    (<span class="hl-teal">119th of 147</span>, in the bottom fifth), which alone would predict a fairly low home
     value. Its housing stock is also heavily single-family (66.9%, <span class="hl-teal">25th-highest share</span>
-    of 147 cities, top sixth of the sample) — and single-family share keeps pulling value down even after income
+    of 147 cities, top sixth of the sample), and single-family share keeps pulling value down even after income
     is accounted for. The result: El Paso's actual median home value ($159,300) is
     <span class="hl-teal">22% below what its income alone would predict</span>. Less taxable value per resident,
     for two compounding reasons instead of one, means El Paso needs an unusually high rate just to raise an
-    ordinary amount of money — <span class="hl-teal">5th-highest effective tax rate</span> of 147 cities, 2.17%,
+    ordinary amount of money, <span class="hl-teal">5th-highest effective tax rate</span> of 147 cities, 2.17%,
     even though its actual dollar tax bill per resident lands almost exactly in the middle of the pack (80th of
     147).<br><br>
     And per §02–§04's reframing, that same housing pattern means El Paso is <i>also</i> on the low end of service
-    delivery: direct spending per resident ranks <span class="hl-teal">22nd-lowest of 147</span> — about 65% of
+    delivery: direct spending per resident ranks <span class="hl-teal">22nd-lowest of 147</span>, about 65% of
     the citywide median. So the full picture isn't just "El Paso's rate is high." It's
     <span class="hl-teal">El Paso residents pay a higher rate to fund below-average service</span>, and the same
-    underlying housing pattern — low-value, low-density, heavily single-family — is doing double duty: it's why
+    underlying housing pattern, low-value, low-density, heavily single-family, is doing double duty: it's why
     the city delivers less (§02–§04), and it's part of why raising even that reduced amount of money requires a
-    higher rate (this section). Denser cities with a larger multifamily share don't just deliver more service —
+    higher rate (this section). Denser cities with a larger multifamily share don't just deliver more service,
     they raise their bigger budgets at a <i>lower</i> rate, because their housing stock carries more taxable value
     per acre to spread it across.
   </div>
@@ -409,10 +422,10 @@
   <div class="chart-panel">
     <button class="expand-btn" onclick="openChartModal('scatterHomeTax','Cheaper Homes, Higher Effective Tax Rates')">⤢ Expand</button>
     <canvas id="scatterHomeTax" height="105"></canvas>
-    <div class="cap">Each city plotted by median home value (x, log scale) against effective property tax rate (y —
+    <div class="cap">Each city plotted by median home value (x, log scale) against effective property tax rate (y,
       median real estate taxes paid ÷ median home value). Bubble size = population density. El Paso is marked in
       dark rust with a bold outline. The downward slope is the direct, mechanical relationship: cheaper homes on
-      the left run higher rates. Density's role is upstream of this chart — it's part of why some cities land on
+      the left run higher rates. Density's role is upstream of this chart, it's part of why some cities land on
       the cheap-home left side in the first place (see the findings above), not a separate force visible here.</div>
   </div>
 
@@ -429,46 +442,49 @@
     </thead>
     <tbody></tbody>
   </table>
-  <p class="note" style="margin-top:8px;">Click a column to sort — try sorting by "Effective tax rate" to see the
+  <p class="note" style="margin-top:8px;">Click a column to sort, try sorting by "Effective tax rate" to see the
     full ranking, or by "Median home value" to see how consistently the cheap-home cities cluster at the top.
-    Louisville, Honolulu, and Nashville are missing home-value and tax-rate data — see §09.</p>
+    Louisville, Honolulu, and Nashville are missing home-value and tax-rate data, see §11.</p>
 
   <div class="findings" style="margin-top:24px;">
     <b>The definitive answer, put in one number:</b> El Paso's actual median home value ($159,300) is
     <span class="hl-coral">22% below</span> what its income alone would predict ($203,954). Holding El Paso's
     actual tax bill and income effect fixed, and asking what its rate would be if that single-family-driven gap
     in home value simply didn't exist, the math is direct: $3,461 in taxes paid ÷ $203,954 in home value =
-    <span class="hl-coral">1.70%</span> — not the actual 2.17%. <b>Closing the single-family housing gap alone
+    <span class="hl-coral">1.70%</span>, not the actual 2.17%. <b>Closing the single-family housing gap alone
     would cut El Paso's effective tax rate by about 22%, closing roughly 43% of the entire gap between
     El Paso and the average large city's rate</b> (1.07%). The rest of that gap is El Paso's income level itself,
-    which is a far bigger lever on home value (r≈0.86) than housing type is (r≈0.27) — but housing type is the
+    which is a far bigger lever on home value (r≈0.86) than housing type is (r≈0.27), but housing type is the
     one lever a city actually controls through zoning and permitting; income is not.
   </div>
 
   <div class="findings slate">
     <b>The policy-relevant version of this finding:</b> if El Paso wants a lower effective tax rate without
-    cutting services further, the data point at a specific, actionable lever — shift new construction and infill
+    cutting services further, the data point at a specific, actionable lever, shift new construction and infill
     away from single-family detached housing and toward multifamily and higher-density formats. Two independent
     results in this analysis both point the same direction: (1) each additional percentage point of a city's
     housing stock that's single-family is associated with roughly <b>0.8% lower home value</b>, holding income
-    constant (§07, row 9) — so less reliance on single-family means more taxable value per acre, which is what
+    constant (§09, row 9), so less reliance on single-family means more taxable value per acre, which is what
     lowers the rate needed to raise any given amount of revenue; and (2) each additional percentage point of
-    single-family share is associated with roughly <b>3% lower service spending per capita</b> (§03) — so the
-    same shift that raises taxable value also raises the level of service residents receive per dollar collected.
-    These aren't two separate policy trade-offs to weigh against each other. In this data, they're the same lever:
-    less reliance on single-family housing does not trade a lower tax rate against fewer services — it moves a
-    city toward <i>both</i> a lower effective rate <i>and</i> a higher level of service per resident at the same
-    time, because both outcomes trace back to the same underlying shift in taxable value per acre.
+    single-family share is associated with roughly <b>3% lower per-capita spending</b> in the same category
+    dollars (§03). These aren't two separate policy trade-offs to weigh against each other, in this data, they
+    trace back to the same underlying shift in taxable value per acre. What's solid: more taxable value and more
+    revenue collected is a direct, mechanical consequence of this shift, not a hopeful extrapolation. What's less
+    certain: whether that extra revenue would translate into the same <i>kind</i> of expanded civic services that
+    older, larger cities in this sample provide, or into a proportionally larger version of what El Paso already
+    offers, the data can't fully distinguish those, for the reasons in §11's first caveat. Either way, "more
+    revenue, funding more of something" is the defensible claim; "more revenue funding the same breadth of
+    services a much larger legacy city offers" is a plausible but unproven extension of it.
   </div>
 
   <div class="chart-panel" style="margin-top:28px;">
     <div style="font-family:'Archivo Black',sans-serif; font-size:20px; margin-bottom:6px;">Try It Yourself: Simulate El Paso's Housing Mix</div>
     <p class="note" style="margin-bottom:16px;">Drag the slider to change El Paso's share of multifamily housing
-      and watch both outcomes move together — spending per capita (left) and effective tax rate (right). El Paso's
+      and watch both outcomes move together, spending per capita (left) and effective tax rate (right). El Paso's
       own real-world deviation from each trend is held fixed as you drag, so what moves is the <i>position along
       the trend</i>, not El Paso's underlying tendency to run a bit above or below it. To say the direction
       plainly: sliding toward <b>more</b> multifamily housing <span class="hl">increases</span> simulated spending
-      per capita (more service delivered) and <span class="hl">decreases</span> the simulated effective tax rate —
+      per capita (more service delivered) and <span class="hl">decreases</span> the simulated effective tax rate,
       the same two findings from §02–§06, just made adjustable.</p>
 
     <div style="display:flex; align-items:center; gap:16px; flex-wrap:wrap; background:var(--parchment); border:2px solid var(--ink); border-radius:8px; padding:14px 18px; margin-bottom:18px;">
@@ -499,26 +515,26 @@
 
     <p class="note" style="margin-top:14px;"><b>How the two panels differ, and why:</b> the left panel's dashed
       trend line is a real, statistically significant regression across all 147 cities (§03, R²=0.45). The right
-      panel's dashed line is different — the raw relationship between housing type and tax rate <i>alone</i> isn't
+      panel's dashed line is different, the raw relationship between housing type and tax rate <i>alone</i> isn't
       statistically significant on its own (§06); most of the mechanism runs through home value. So that reference
       curve is model-implied rather than a raw fit: it shows what a city with the <i>sample's typical</i> income
       and tax bill would be expected to pay at each housing mix, using the same income+housing-type→home-value
-      relationship behind §06's headline number (R²=0.81). Both dashed lines are there for visual context — where
-      El Paso's dot sits relative to other cities — not as the number to watch as you drag. The two figures under
+      relationship behind §06's headline number (R²=0.81). Both dashed lines are there for visual context, where
+      El Paso's dot sits relative to other cities, not as the number to watch as you drag. The two figures under
       "change from El Paso today" are the ones that actually move with the slider and answer the practical
       question: how much would El Paso's own spending and tax rate shift from where they are right now. Slider
-      range is bounded close to the observed data (13%–93% multifamily share across the 147 cities) — pushing much
+      range is bounded close to the observed data (13%–93% multifamily share across the 147 cities), pushing much
       further outside that range means extrapolating beyond what the data actually shows.</p>
   </div>
 
   <div class="chart-panel" style="margin-top:28px;">
     <div style="font-family:'Archivo Black',sans-serif; font-size:20px; margin-bottom:6px;">In Plain Numbers: What Would New Multifamily Units Actually Save?</div>
-    <p class="note">El Paso's housing stock is large — about 260,000 units, of which roughly 174,000 (66.9%) are
+    <p class="note">El Paso's housing stock is large, about 260,000 units, of which roughly 174,000 (66.9%) are
       single-family detached. That size matters for this question: adding new multifamily units shifts the
       city's housing <i>mix</i> only gradually, because each new unit is a small fraction of a very large base.
-      Here's what that means in real dollars, using El Paso's own income, tax bill, and the §06/§07 model (each
-      row assumes the new units are added on top of the existing stock, with everything else — income, the
-      city's total tax bill — held at today's actual levels):</p>
+      Here's what that means in real dollars, using El Paso's own income, tax bill, and the §06/§09 model (each
+      row assumes the new units are added on top of the existing stock, with everything else, income, the
+      city's total tax bill, held at today's actual levels):</p>
 
     <table>
       <thead>
@@ -541,65 +557,143 @@
     </table>
 
     <div class="findings" style="margin-top:16px;">
-      <b>The honest read: at 1,000 units, the effect is real but small</b> — about $9 a year on a median-priced
+      <b>The honest read: at 1,000 units, the effect is real but small</b>, about $9 a year on a median-priced
       home, a 0.3% cut to the rate. That's not nothing, but it's not the number to lead with. The <span class="hl">meaningful,
-      still-realistic scale is closer to 25,000 new multifamily units</span> — about 9.6% growth in El Paso's
-      total housing stock, plausible as a multi-year rezoning and infill target rather than a single project —
+      still-realistic scale is closer to 25,000 new multifamily units</span>, about 9.6% growth in El Paso's
+      total housing stock, plausible as a multi-year rezoning and infill target rather than a single project,
       which would cut the effective rate by roughly 5.6% and save the owner of a median-priced home about
       <span class="hl">$194 a year</span>. The relationship is gradual by nature: El Paso's housing stock is
       large enough that no single, realistic construction wave moves the citywide rate dramatically on its own.
-      The case for this lever is cumulative — every unit added this way moves the number in the right direction
+      The case for this lever is cumulative, every unit added this way moves the number in the right direction
       and never in the wrong one, on top of adding service capacity (§03) at the same time.
     </div>
   </div>
 
   <div class="chart-panel" style="margin-top:28px;">
     <div style="font-family:'Archivo Black',sans-serif; font-size:20px; margin-bottom:6px;">Does the Type of Multifamily Housing Matter?</div>
-    <p class="note"><span class="hl">This question is why the dataset was expanded from 50 to 150 cities</span> —
-      the first pass hinted at an answer but didn't have the statistical power to confirm it. With three times the
-      data, it now does. The ACS breaks housing structures down further than just "single-family vs. not" —
-      duplexes, 3-4 unit buildings, 5-9, 10-19, 20-49, and 50+ unit structures are each tracked separately. That
-      lets us test whether "missing middle" housing (duplex through 9-unit buildings — roughly single-family-lot
-      scale, and generally the easier kind of infill for a city to permit in existing neighborhoods) does the same
-      work as larger apartment buildings (10+ units). El Paso is currently 13.7% missing-middle and 12.6% large
-      multifamily — both below the 150-city sample average (16.5% and 21.5%).</p>
+    <p class="note">The ACS breaks housing structures down further than just "single-family vs. not": duplexes,
+      3-4 unit buildings, 5-9, 10-19, 20-49, and 50+ unit structures are each tracked separately. That lets us
+      test whether "missing middle" housing (duplex through 9-unit buildings, roughly single-family-lot scale,
+      and generally the easier kind of infill for a city to permit in existing neighborhoods) does the same work
+      as larger apartment buildings (10+ units). El Paso is currently 13.7% missing-middle and 12.6% large
+      multifamily, both below the sample average (16.5% and 21.5%).</p>
 
     <div class="two-col">
       <div class="stampcard" style="border-radius:8px;">
         <div class="label">On spending per capita</div>
-        <div class="value" style="font-size:18px;">Confirmed: no difference</div>
-        <div class="sub">Missing-middle: +2.7% spending per point (p&lt;0.0001) · Large multifamily: +2.3% per
-          point (p&lt;0.0001) — both now clearly significant on their own, and a direct test of whether the two
-          coefficients differ from each other is still firmly not significant (p=0.51), with three times the
-          statistical power behind that null result. For service delivery, one point of missing-middle infill
-          does the same amount of work as one point of large-apartment development — this isn't a hint anymore.</div>
+        <div class="value" style="font-size:18px;">No difference</div>
+        <div class="sub">Missing-middle: +2.7% spending per point (p&lt;0.0001). Large multifamily: +2.3% per
+          point (p&lt;0.0001). Both are clearly significant on their own, and a direct test of whether the two
+          coefficients differ from each other is firmly not significant (p=0.51). For service delivery, one
+          point of missing-middle infill does the same amount of work as one point of large-apartment
+          development.</div>
       </div>
       <div class="stampcard" style="border-radius:8px;">
         <div class="label">On home value (and so, the tax rate)</div>
-        <div class="value" style="font-size:18px;">Still no confirmed difference</div>
-        <div class="sub">Both effects are now clearly significant on their own: large multifamily +1.3% home
-          value per point (p&lt;0.0001), missing-middle +0.8% per point (p=0.002 — no longer just borderline).
-          But tested directly against each other, the two coefficients still aren't statistically distinguishable
-          (p=0.25). With 3x the sample and both individual effects now firmly confirmed, this is a much stronger
-          null result than before — there just isn't good evidence that structure size itself changes the
-          home-value effect, even though the point estimates still lean toward large buildings mattering somewhat
-          more.</div>
+        <div class="value" style="font-size:18px;">No confirmed difference</div>
+        <div class="sub">Both effects are clearly significant on their own: large multifamily +1.3% home
+          value per point (p&lt;0.0001), missing-middle +0.8% per point (p=0.002). Tested directly against each
+          other, the two coefficients aren't statistically distinguishable (p=0.25). There isn't good evidence
+          that structure size itself changes the home-value effect, even though the point estimates lean toward
+          large buildings mattering somewhat more.</div>
       </div>
     </div>
 
     <div class="findings slate" style="margin-top:16px;">
-      <b>The honest bottom line, now with real power behind it:</b> missing-middle housing is not a lesser lever
-      than large apartment buildings for service delivery — that's now a confirmed result, not just an absence of
-      evidence to the contrary. For the tax-rate side, both structure sizes clearly matter on their own, and the
-      difference between them still isn't statistically confirmed even with 147 cities. Practically: there's now
-      solid evidence that missing-middle infill (duplexes, small apartment buildings) is a productive lever for El
-      Paso in its own right, not just an unproven alternative to large apartment construction — while likely
-      remaining the easier political and physical lift in existing single-family neighborhoods.
+      <b>The honest bottom line:</b> missing-middle housing is not a lesser lever than large apartment buildings
+      for service delivery. That's a confirmed result, not an absence of evidence to the contrary. For the
+      tax-rate side, both structure sizes clearly matter on their own, and the difference between them isn't
+      statistically confirmed. Practically: there's solid evidence that missing-middle infill (duplexes, small
+      apartment buildings) is a productive lever for El Paso in its own right, not just an unproven alternative
+      to large apartment construction, while likely remaining the easier political and physical lift in existing
+      single-family neighborhoods.
     </div>
   </div>
 
-  <h2><span class="num">07</span>What Survives the Controls</h2>
-  <p class="note">This is the robustness summary for the whole analysis — every regression model referenced in
+  <h2><span class="num">07</span>Does Business Density Matter the Way Population Density Does?</h2>
+  <p class="note"><b>The question here:</b> everything so far measures residential density. Does a city's
+    concentration of jobs, its business density, behave the same way? We pulled total employment by workplace
+    location from the Census Bureau's LEHD LODES data (the same federal source behind El Paso's own job growth
+    work) for 146 of the 150 cities, and computed jobs per square mile as the direct commercial analog to
+    population density.</p>
+
+  <div class="findings">
+    Jobs density is a real, measurable thing, and it moves closely with population density (r = 0.86). On its
+    own, jobs density actually predicts spending per capita a bit better than population density does (31% of
+    the variation explained versus 17%). But once housing type is added to the model, jobs density stops adding
+    anything: its own effect drops to essentially zero and stops being significant, the same pattern population
+    density showed in §03. Jobs density is not an independent lever on spending. It is riding on the same
+    underlying housing-type story as everything else in this analysis.
+  </div>
+
+  <div class="findings slate">
+    <b>Jobs density does not lower the homeowner's tax rate. If anything, it points the other way.</b> The
+    simple relationship between jobs per resident and the effective tax rate is not significant (r = -0.09,
+    p = 0.30). Tested more carefully, holding home value constant, jobs density is significantly associated with
+    a <i>higher</i> rate, not a lower one (p = 0.002). The likely reason: cities with more jobs per acre tend to
+    have higher home values for reasons unrelated to jobs themselves (land scarcity, regional economics), and
+    once that's accounted for, having more jobs nearby does not translate into tax relief for residents. El
+    Paso's own jobs-per-resident ratio is 0.42, below the sample median of 0.53, placing it 108th of 146 cities,
+    meaning most large cities run a more job-dense economy relative to their population than El Paso does. That
+    is a real fact about El Paso's economy. It is a separate fact from whether more jobs would lower the tax
+    rate, and this data says it would not, at least not on its own.
+  </div>
+
+  <p class="note">One limit worth stating plainly: jobs density measures economic activity, not commercial
+    property value. A city can have many jobs in leased office space without much of that showing up as local
+    commercial tax base. The next section uses real property assessment data instead of this jobs proxy, and
+    tells a more precise version of the same story.</p>
+
+  <h2><span class="num">08</span>Commercial Tax Base: What the Real Numbers Show</h2>
+  <p class="note"><b>The question here:</b> a common idea in El Paso is that the city should shift its tax base
+    toward businesses and away from homeowners. To test this properly requires the actual split between
+    residential and commercial assessed property value, which the federal datasets used everywhere else in this
+    analysis do not report. Property classification is a state and county function. We pulled it directly from
+    the Texas Comptroller's Appraisal District Ratio Study, the state's own official value-by-category report,
+    for El Paso and five comparable Texas cities: Austin, Dallas, Fort Worth, Houston, and San Antonio.</p>
+
+  <table>
+    <thead>
+      <tr><th>City</th><th class="num">Commercial and industrial share of value</th><th class="num">Multifamily share of value</th><th class="num">Effective tax rate</th></tr>
+    </thead>
+    <tbody>
+      <tr style="background:rgba(184,39,44,0.08);"><td><b>El Paso</b></td><td class="num"><b>27.6%</b></td><td class="num"><b>5.0%</b></td><td class="num"><b>2.17%</b></td></tr>
+      <tr><td>San Antonio</td><td class="num">24.4%</td><td class="num">8.9%</td><td class="num">1.88%</td></tr>
+      <tr><td>Fort Worth</td><td class="num">24.5%</td><td class="num">9.8%</td><td class="num">1.89%</td></tr>
+      <tr><td>Houston</td><td class="num">34.2%</td><td class="num">9.4%</td><td class="num">1.60%</td></tr>
+      <tr><td>Dallas</td><td class="num">30.2%</td><td class="num">12.8%</td><td class="num">1.67%</td></tr>
+      <tr><td>Austin</td><td class="num">23.9%</td><td class="num">13.4%</td><td class="num">1.59%</td></tr>
+    </tbody>
+  </table>
+
+  <div class="findings">
+    <b>El Paso's commercial tax base is not unusually thin.</b> Its commercial and industrial share of taxable
+    value, 27.6%, is higher than Austin's (23.9%) and roughly in line with San Antonio and Fort Worth. Only
+    Houston and Dallas run more commercial-heavy than El Paso. The common idea that El Paso needs to attract more
+    business to fix its tax base is not well supported by this data. On this specific measure, El Paso looks like
+    a typical large Texas city.
+  </div>
+
+  <div class="findings slate">
+    <b>What is actually different is the multifamily share, and it is not close.</b> El Paso's multifamily value
+    share, 5.0%, is <span class="hl-teal">less than half</span> that of any other city in this comparison. Among
+    these six cities, the multifamily share correlates strongly with the effective tax rate (r = -0.85,
+    p = 0.03). The commercial and industrial share does not (r = -0.31, not significant). This is a small
+    comparison, six cities, but it uses real assessed-value data rather than a proxy, and it points in exactly
+    the same direction as the housing-type finding in §03 and §06: the lever connected to a lower tax rate is
+    <span class="hl-teal">multifamily housing</span>, not commercial development. If El Paso wants to lower its
+    effective tax rate, the data says to build more multifamily housing, not to chase more retail or office
+    space.
+  </div>
+
+  <p class="note">This section covers six cities rather than the full 150 because property classification data
+    is not standardized nationally, each state and county reports differently, and no single federal source
+    covers it the way the Census of Governments finance data or the ACS covers everything else in this analysis.
+    The scope here is intentionally narrower and more direct: real numbers for El Paso and its closest Texas
+    peers, rather than a proxy applied everywhere.</p>
+
+  <h2><span class="num">09</span>What Survives the Controls</h2>
+  <p class="note">This is the robustness summary for the whole analysis, every regression model referenced in
     §02 through §06, side by side, so the density/service/tax/housing-type/income relationships can be checked
     against each other in one place rather than taken on faith from the prose above. Each row is one OLS
     regression on log-transformed variables (except the effective-tax-rate models, which are already a ratio).
@@ -609,20 +703,19 @@
     <thead><tr><th>Specification</th><th class="num">n</th><th>Key coefficient</th><th class="num">p-value</th><th class="num">R²</th></tr></thead>
     <tbody></tbody>
   </table>
-  <p class="note" style="margin-top:8px;">Rows 1–6 test whether density's relationship with spending and tax
-    survives adding controls (§02, §05). Row 7 tests housing type against density head-to-head for spending
-    (§03) — with 150 cities, density's own coefficient now leans slightly negative rather than just vanishing,
-    though not quite past conventional significance. Row 8 tests whether housing type adds anything to home
-    value's explanation of the tax rate, on top of home value itself — with three times the cities, it now does
-    (p=0.008), running in the direction of a slightly <i>lower</i> rate at a given home value, the wrinkle
-    discussed in §06. Row 9 is the key mediation result behind §06's causal chain: housing type still predicts
-    home value even after controlling for income, and this relationship is now even more strongly confirmed than
-    with the smaller sample. Rows 10–11 are the missing-middle vs. large-multifamily test — the "key coefficient"
-    there is the formal test of whether the two structure sizes' effects differ from each other, and with 147
-    cities the answer is still no (not a significant difference) — now a confirmed null result with real power
-    behind it, not just an absence of evidence.</p>
+  <p class="note" style="margin-top:8px;">Rows 1 through 6 test whether density's relationship with spending and
+    tax survives adding controls (§02, §05). Row 7 tests housing type against density head-to-head for spending
+    (§03): density's own coefficient leans slightly negative rather than toward zero, though not quite past
+    conventional significance. Row 8 tests whether housing type adds anything to home value's explanation of the
+    tax rate, on top of home value itself: it does (p=0.008), running in the direction of a slightly <i>lower</i>
+    rate at a given home value, the wrinkle discussed in §06. Row 9 is the key mediation result behind §06's
+    causal chain: housing type predicts home value even after controlling for income, a strongly confirmed
+    relationship. Rows 10 and 11 are the missing-middle vs. large-multifamily test. The "key coefficient" there
+    is the formal test of whether the two structure sizes' effects differ from each other, and the answer is no
+    (not a significant difference), a confirmed null result with real statistical power behind it, not an
+    absence of evidence.</p>
 
-  <h2><span class="num">08</span>Full City Table</h2>
+  <h2><span class="num">10</span>Full City Table</h2>
 
   <p class="note">Click a column header to sort.</p>
   <table id="cityTable">
@@ -638,66 +731,97 @@
     <tbody></tbody>
   </table>
 
-  <h2><span class="num">09</span>Method &amp; Caveats</h2>
+  <h2><span class="num">11</span>Method &amp; Caveats</h2>
   <p class="note">
+    <b>Do mid-size and large cities actually provide comparable services? Probably not fully, and this is the
+    most important limitation in the whole analysis.</b> Every finding here compares the same 16 <i>named</i>
+    Census functional categories (Police, Libraries, Housing &amp; Community Development, etc.) across 150 cities
+    ranging from 175,000 to 8.25 million people, a 47x range. The category label being identical doesn't mean
+    what's delivered under it is comparable: a "Libraries" line for a smaller, newer, single-family-dominated
+    Sunbelt city might mean a couple of branch locations with limited hours, while the same label for a large
+    historic city can mean an extensive multi-branch system built up over a century. The same goes for Housing
+    &amp; Community Development, General Government, and several of the other categories that showed the
+    strongest density/housing-type elasticities in §04, these are exactly the categories where large legacy
+    cities have built out the most extensive civic infrastructure (homelessness services, public housing
+    agencies, large permitting bureaucracies), often infrastructure that smaller or newer cities never built, in
+    some cases by deliberate low-tax, minimal-government design rather than simple underfunding.<br><br>
+    This is a real, confirmed pattern in the data, not a hypothetical: single-family share is significantly
+    correlated with population size itself (r=−0.34, p&lt;0.0001), smaller cities in this sample are
+    systematically more single-family-dominated. That means "housing type" and "city age/scale/historical role"
+    move together, and this analysis can't fully separate them. So <b>"single-family-dominant cities deliver less
+    service" is solid as a description of dollars spent</b>, that part is just arithmetic on real government
+    finance data. It's less certain as a causal claim that <i>changing El Paso's housing mix would cause it to
+    build the same kind of civic institutions that older, larger cities have</i>. It's equally possible that a
+    city like El Paso could increase its multifamily share substantially and still never develop, say, an
+    extensive public library system or homelessness-services apparatus, if what's really driving those
+    institutions in the data is a city's age and historical role rather than its current housing stock. The
+    safer, better-supported claim, and the one this analysis leans on for the policy discussion in §06, is the
+    narrower one: more taxable value and more tax revenue collected, which is a real, mechanical fact regardless
+    of what specific services that revenue eventually funds. The broader "and therefore more/better civic
+    services" reading should be treated as a plausible hypothesis this data is consistent with, not a proven
+    mechanism.<br><br>
     <b>Service categories:</b> built from Census of Governments item codes, combining current-operations and
     capital-construction spending for each function (e.g., Police = E62 + F62). Sixteen categories cover nearly
     every functional code reported by these 150 cities; utility enterprises (water, electric, gas, transit) and
     liquor stores are excluded throughout as self-funded, not general-tax-supported. "Other / NEC" is a catch-all
     for smaller or inconsistently-reported functions (air transport, corrections in states where cities don't run
-    jails, education support, hospitals) and is large for a few consolidated governments — notably New York and
-    Philadelphia — that fund welfare, hospital, and education-adjacent programs directly in ways most peer cities
+    jails, education support, hospitals) and is large for a few consolidated governments, notably New York and
+    Philadelphia, that fund welfare, hospital, and education-adjacent programs directly in ways most peer cities
     don't; treat cross-city comparison of that one bucket with caution.<br><br>
     <b>Elasticities (§04):</b> each category's elasticity is fit independently on cities reporting non-zero spending
-    in that category (sample sizes range 35–150; shown per bar). A handful of cities report $0 for functions like
-    corrections or parking because a county or special district handles that function instead of the city — this is
-    a real feature of how U.S. local government fragments responsibility, not missing data, but it does mean the
-    smaller-n categories (corrections, n=35) are less reliable than the near-universal ones (police, n=149; parks,
-    n=150). Several elasticities are noticeably weaker in this larger, more diverse sample than they were in the
-    original 50-city version — notably corrections, which was the strongest relationship in the smaller sample and
-    is no longer statistically significant here — a reminder that patterns in a small, curated sample of the very
-    largest cities don't always hold once the comparison set widens.<br><br>
+    in that category (sample sizes range 35 to 150; shown per bar). A handful of cities report $0 for functions
+    like corrections or parking because a county or special district handles that function instead of the city.
+    This is a real feature of how U.S. local government fragments responsibility, not missing data, but it does
+    mean the smaller-n categories (corrections, n=35) are less reliable than the near-universal ones (police,
+    n=149; parks, n=150). Corrections in particular is worth reading with caution: it is the category with the
+    fewest reporting cities, and its relationship with density is not statistically significant here, a reminder
+    that categories with thin reporting deserve less confidence than the near-universal ones.<br><br>
     <b>Partial correlations (§05):</b> computed on log-transformed variables via residualization (regress each
     variable on the "control" variable, correlate the residuals). This is the standard method but assumes the
     controlled-for relationship is linear in logs, which held reasonably well on inspection here.<br><br>
-    <b>Home value, income, and effective tax rate (§06):</b> pulled from the ACS 2022 5-year estimates —
+    <b>Home value, income, and effective tax rate (§06):</b> pulled from the ACS 2022 5-year estimates,
     median household income (B19013), median home value (B25077), and median real estate taxes paid (B25103), all
-    at the place level. "Effective tax rate" is median real estate taxes paid ÷ median home value; this is a
-    city-wide median-on-median ratio, not an average of individual households' rates, so it's a solid
+    at the place level. "Effective tax rate" is median real estate taxes paid divided by median home value; this
+    is a city-wide median-on-median ratio, not an average of individual households' rates, so it's a solid
     apples-to-apples comparison across cities but won't match any single homeowner's actual bill exactly.<br><br>
     <b>Single-family housing share (§03):</b> from the same ACS 2022 5-year pull, table B25024 ("Units in
     Structure"). The headline figure used throughout is "1-unit, detached" only (freestanding single-family homes);
     attached single-family (townhomes/rowhouses) is pulled separately but not used in §03's headline numbers, since
     detached-only is the more conservative, more commonly used definition. Same place-level geography as §06, so
     the same three cities are affected (next note).<br><br>
+    <b>Jobs density (§07):</b> from the Census Bureau's LEHD LODES workplace employment data, 2021, the most
+    recent year available consistently across the states in this sample. Alaska is excluded because its LODES
+    data has not been updated since 2016, too stale to mix with the rest.<br><br>
+    <b>Commercial and multifamily tax base (§08):</b> from the Texas Comptroller's Appraisal District Ratio
+    Study, the state's official property value by category report, for El Paso, Austin, Dallas, Fort Worth,
+    Houston, and San Antonio. El Paso, Bexar, Dallas, and Travis counties report on the 2024 tax year; Harris and
+    Tarrant counties report on 2023, the most recent year available for each under the state's biennial reporting
+    cycle. This section covers six cities rather than 150 because property classification is not standardized
+    nationally.<br><br>
     <b>Missing consolidated governments:</b> Louisville/Jefferson County, Honolulu, and Nashville-Davidson don't
     have ACS place-level estimates under the same geographic code used for the finance data, so they're absent from
-    §03 and §06 (n=147 instead of 150). Everything else in the dashboard (density, spending, service
-    categories, §04–§05) is unaffected, since those come from the government finance survey, not the ACS.<br><br>
-    <b>Income as a covariate — checked, and now more confidently ruled out:</b> with three times the sample,
-    median household income adds essentially nothing on top of housing type for the spending models (R² is
-    unchanged to three decimal places for total spending, p=0.98 for income's own effect; barely moves for the
-    density-sensitive bundle, p=0.66). Housing type remains the dominant, overwhelmingly significant predictor
-    throughout (p&lt;10⁻¹⁶) with or without income in the model, and density's own effect stays weak — in this
-    larger sample it leans slightly negative rather than just vanishing (p≈0.07), though not quite past the
-    conventional significance threshold. Income is not a missing piece that would change the §03 conclusion; if
-    anything, the larger sample makes that conclusion more solid, not less.<br><br>
-    <b>Sample size (this update):</b> expanded from the 50 largest to the 150 largest U.S. cities specifically to
-    get enough power to resolve the missing-middle vs. large-multifamily question in §06 — the original 47-city
-    version could see the two structure sizes' point estimates differ but couldn't confirm whether that
-    difference was real or noise. With 147 cities, the same test still can't confirm a real difference, but now
-    with enough power that the null result means something (see §06, §07 rows 10–11). The tradeoff worth naming:
-    a broader sample generally weakens the raw density-vs-spending relationship (R² for the simplest model dropped
-    from roughly 0.41 to roughly 0.10) even as the core housing-type story holds up and, in places, strengthens.
-    That's consistent with the top-50 cities being a more extreme, less representative slice of American cities
-    than the top-150 — expect relationships to keep softening, and some smaller-sample patterns to keep
-    disappearing, with any further expansion.
+    §03 and §06 (n=147 instead of 150). Anchorage is present in most sections but absent from §07 for the LODES
+    data-vintage reason above. Everything else in the dashboard (density, spending, service categories, §04 and
+    §05) is unaffected, since those come from the government finance survey, not the ACS.<br><br>
+    <b>Income as a covariate:</b> median household income adds essentially nothing on top of housing type for the
+    spending models (R² is unchanged to three decimal places for total spending, p=0.98 for income's own effect;
+    barely moves for the density-sensitive bundle, p=0.66). Housing type is the dominant, overwhelmingly
+    significant predictor throughout (p&lt;10⁻¹⁶) with or without income in the model, and density's own effect
+    stays weak, leaning slightly negative rather than toward zero (p≈0.07), though not quite past the
+    conventional significance threshold. Income is not a missing piece that would change the §03 conclusion.<br><br>
+    <b>Why 150 cities:</b> the sample covers the 150 largest U.S. cities by population. This size was chosen to
+    give the missing-middle versus large-multifamily test in §06 enough statistical power to produce a real
+    answer rather than an inconclusive one (see §06, §09 rows 10 and 11). One tradeoff worth naming: the raw
+    density-vs-spending relationship in §02 is real but modest (R² around 0.10 to 0.17 depending on
+    specification), while the housing-type story in §03 is considerably stronger and more consistent. Both are
+    genuine findings; they simply carry different amounts of explanatory weight.
   </p>
 
   <footer>
-    Sources: U.S. Census Bureau, 2022 Census of Governments — State &amp; Local Government Finance, Individual Unit
+    Sources: U.S. Census Bureau, 2022 Census of Governments, State &amp; Local Government Finance, Individual Unit
     Public Use File; U.S. Census Bureau, 2023 Gazetteer Files; U.S. Census Bureau, American Community Survey 2022
-    5-Year Estimates. Compiled and analyzed September 2026.
+    5-Year Estimates; U.S. Census Bureau, LEHD Origin-Destination Employment Statistics (LODES), 2021; Texas
+    Comptroller of Public Accounts, Appraisal District Ratio Study. Compiled and analyzed September 2026.
   </footer>
 
 </div>
@@ -723,7 +847,7 @@ const SF_DATA = [{"name": "New York", "density": 27468.9, "pct_sf": 9.2, "exp_pc
 const ink='#14151A', inkSoft='#514F5C', rust='#B8272C', slate='#0F766E';
 Chart.defaults.font.family = "'IBM Plex Mono', monospace";
 Chart.defaults.color = inkSoft; Chart.defaults.font.size = 14;
-Chart.defaults.devicePixelRatio = Math.max(2, (window.devicePixelRatio || 1) * 2);
+Chart.defaults.devicePixelRatio = Math.min(2, Math.max(1.5, window.devicePixelRatio || 1));
 Chart.defaults.plugins.tooltip.titleFont = {family:"'IBM Plex Mono', monospace", size:15, weight:'600'};
 Chart.defaults.plugins.tooltip.bodyFont = {family:"'IBM Plex Mono', monospace", size:14};
 Chart.defaults.plugins.tooltip.padding = 12;
@@ -740,24 +864,39 @@ function openChartModal(canvasId, title){
   document.getElementById('chartModalOverlay').classList.add('open');
   if(window.__modalChart){ window.__modalChart.destroy(); window.__modalChart = null; }
   const modalCanvas = document.getElementById('chartModalCanvas');
+  const wrap = modalCanvas.parentElement;
   // clear any leftover sizing Chart.js stamped onto this canvas from a previous open --
   // otherwise the new chart can inherit a stale (sometimes zero) size
   modalCanvas.removeAttribute('style');
   modalCanvas.removeAttribute('width');
   modalCanvas.removeAttribute('height');
-  // the overlay is still display:none in this same tick (the class was just added),
-  // so the canvas's container reports zero size if we build the chart right now --
-  // wait two animation frames so the browser has actually painted the modal open first
-  requestAnimationFrame(()=>{
-    requestAnimationFrame(()=>{
-      window.__modalChart = new Chart(modalCanvas, {
-        type: src.config.type,
-        data: src.data,
-        options: Object.assign({}, src.options, {responsive:true, maintainAspectRatio:false}),
-        plugins: src.config.plugins || []
-      });
+
+  // the overlay is still display:none in this same tick (the class was just added), so the
+  // canvas's container reports zero size if we build the chart right now. Poll for a real,
+  // non-zero container size across a few animation frames rather than assuming two frames is
+  // always enough (font loading / late reflows can push the real layout later than that).
+  let attempts = 0;
+  function tryCreate(){
+    attempts++;
+    const w = wrap.clientWidth, h = wrap.clientHeight;
+    if((w < 20 || h < 20) && attempts < 15){
+      requestAnimationFrame(tryCreate);
+      return;
+    }
+    window.__modalChart = new Chart(modalCanvas, {
+      type: src.config.type,
+      data: src.data,
+      options: Object.assign({}, src.options, {
+        responsive:true, maintainAspectRatio:false,
+        devicePixelRatio: Math.min(1.5, window.devicePixelRatio || 1)
+      }),
+      plugins: src.config.plugins || []
     });
-  });
+    // belt-and-suspenders: force one resize pass shortly after creation in case the
+    // container's measured size still shifts slightly once everything settles
+    setTimeout(()=>{ if(window.__modalChart) window.__modalChart.resize(); }, 60);
+  }
+  requestAnimationFrame(()=>requestAnimationFrame(tryCreate));
 }
 function closeChartModal(){
   document.getElementById('chartModalOverlay').classList.remove('open');
@@ -978,7 +1117,7 @@ const chElastic = new Chart(document.getElementById('barElastic'), {
     plugins:{
       legend:{display:false},
       title:{display:true, text:'Density Elasticity by Service Category', color:ink, font:{family:"'Archivo Black', sans-serif", size:18}},
-      tooltip:{callbacks:{label:(ctx)=> 'elasticity ' + ctx.raw.toFixed(3) + ' — a 1% rise in density is associated with a ' + ctx.raw.toFixed(2) + '% change in this service’s spending per capita'}}
+      tooltip:{callbacks:{label:(ctx)=> 'elasticity ' + ctx.raw.toFixed(3) + ', a 1% rise in density is associated with a ' + ctx.raw.toFixed(2) + '% change in this service’s spending per capita'}}
     },
     scales:{
       x:{title:{display:true,text:'Density elasticity (% change in spending per 1% change in density)', font:{size:14}}, grid:{color:'#c9bfa2'}},
@@ -1206,13 +1345,13 @@ window.__charts['barElastic'] = chElastic;
   const EP_HOME_VALUE_ACTUAL = epH.home_value;           // 159300
   const EP_TAXES_PAID = (epH.eff_rate/100) * epH.home_value; // back-computed, ~3461
 
-  // Panel A: log(spending/capita) ~ pct_single_family_detached  (real, significant regression, §03/§07 row 7-ish)
+  // Panel A: log(spending/capita) ~ pct_single_family_detached  (real, significant regression, §03/§09 row 7-ish)
   const A_INT = 9.04425, A_SLOPE = -0.024551;
   const A_RESID = Math.log(EP_EXP_ACTUAL) - (A_INT + A_SLOPE*EP_PCT_SF_ACTUAL);
   function simExpPc(pctSF){ return Math.exp(A_INT + A_SLOPE*pctSF + A_RESID); }
   function trendExpPc(pctSF){ return Math.exp(A_INT + A_SLOPE*pctSF); }
 
-  // Panel B: log(home_value) ~ log(income) + pct_single_family_detached  (real, significant, §06/§07 row 9)
+  // Panel B: log(home_value) ~ log(income) + pct_single_family_detached  (real, significant, §06/§09 row 9)
   const B_INT = -6.73537, B_INCOME_COEF = 1.78282, B_SF_COEF = -0.009821;
   const B_RESID = Math.log(EP_HOME_VALUE_ACTUAL) - (B_INT + B_INCOME_COEF*Math.log(EP_INCOME) + B_SF_COEF*EP_PCT_SF_ACTUAL);
   function simHomeValue(pctSF){ return Math.exp(B_INT + B_INCOME_COEF*Math.log(EP_INCOME) + B_SF_COEF*pctSF + B_RESID); }
@@ -1358,7 +1497,7 @@ document.querySelectorAll('#taxRateTable thead th').forEach(th=>{
 });
 renderTaxTable();
 
-// ---------- model table (§07, static results from server-side regressions) ----------
+// ---------- model table (§09, static results from server-side regressions) ----------
 const models = [
   {spec:'Pooled: log(spending/capita) ~ log(density)', n:150, coefLabel:'density', coef:0.258, p:'<0.001', r2:0.099},
   {spec:'log(spending/capita) ~ log(density) + consolidated dummy', n:150, coefLabel:'density', coef:0.294, p:'<0.001', r2:0.305},
