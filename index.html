@@ -924,10 +924,11 @@ Chart.defaults.plugins.legend.labels.font = {family:"'IBM Plex Mono', monospace"
 
 // track chart instances by canvas id so the expand-modal can re-render them larger
 window.__charts = {};
+window.__chartConfigs = {};
 
 // ---------- expand-to-modal ----------
 function openChartModal(canvasId, title){
-  const src = window.__charts[canvasId];
+  const src = window.__chartConfigs[canvasId];
   if(!src) return;
   document.getElementById('chartModalTitle').textContent = title;
   document.getElementById('chartModalOverlay').classList.add('open');
@@ -952,14 +953,20 @@ function openChartModal(canvasId, title){
       requestAnimationFrame(tryCreate);
       return;
     }
+    // IMPORTANT: build the modal chart from the pristine config object captured before it
+    // was ever passed to `new Chart()` for the small inline chart, not from that chart's
+    // live `.options`/`.data` getters. Chart.js internally wraps a rendered chart's options
+    // in a resolver/proxy for defaults merging; reusing that resolved view as input to a
+    // second `new Chart()` call is what caused the modal to render blank with console errors
+    // like "Ignoring resolver passed as options for scale" and a legend-plugin crash.
     window.__modalChart = new Chart(modalCanvas, {
-      type: src.config.type,
+      type: src.type,
       data: src.data,
       options: Object.assign({}, src.options, {
         responsive:true, maintainAspectRatio:false,
         devicePixelRatio: Math.min(1.5, window.devicePixelRatio || 1)
       }),
-      plugins: src.config.plugins || []
+      plugins: src.plugins || []
     });
     // belt-and-suspenders: force one resize pass shortly after creation in case the
     // container's measured size still shifts slightly once everything settles
@@ -1139,7 +1146,7 @@ function updateLive(){
   const epRow = rows.filter(r=>r.name==='El Paso');
 
   if(liveChart) liveChart.destroy();
-  liveChart = new Chart(document.getElementById('scatterLive'), {
+  const cfgLive = {
     type:'scatter',
     data:{ datasets:[
       { label:'City', data:circles.map(r=>({x:r.density,y:r.val,name:r.name})),
@@ -1166,14 +1173,16 @@ function updateLive(){
         y:{type:'logarithmic', title:{display:true,text:'$ per capita, selected services (log scale)'}, grid:{color:'#c9bfa2'}}
       }
     }
-  });
+  };
+  liveChart = new Chart(document.getElementById('scatterLive'), cfgLive);
   window.__charts['scatterLive'] = liveChart;
+  window.__chartConfigs['scatterLive'] = cfgLive;
 }
 updateLive();
 
 // ---------- elasticity bar chart ----------
 const elasticSorted = [...ELASTICITIES].sort((a,b)=>b.slope-a.slope);
-const chElastic = new Chart(document.getElementById('barElastic'), {
+const cfgElastic = {
   type:'bar',
   data:{
     labels: elasticSorted.map(e=>e.category + ' (n=' + e.n + ')'),
@@ -1196,8 +1205,10 @@ const chElastic = new Chart(document.getElementById('barElastic'), {
       y:{grid:{display:false}}
     }
   }
-});
+};
+const chElastic = new Chart(document.getElementById('barElastic'), cfgElastic);
 window.__charts['barElastic'] = chElastic;
+window.__chartConfigs['barElastic'] = cfgElastic;
 
 // ---------- static "total cost" scatter (§02) ----------
 (function(){
@@ -1210,7 +1221,7 @@ window.__charts['barElastic'] = chElastic;
     const lx = Math.log(xmin) + (Math.log(xmax)-Math.log(xmin))*i/steps;
     linePts.push({x:Math.exp(lx), y:Math.exp(fit.intercept + fit.slope*lx)});
   }
-  const chExp = new Chart(document.getElementById('scatterExp'), {
+  const cfgExp = {
     type:'scatter',
     data:{datasets:[
       {label:'City', data:rows.filter(r=>!r.consolidated && r.name!=='El Paso').map(r=>({x:r.density,y:r.val,name:r.name})), backgroundColor:'rgba(184,39,44,0.45)', borderColor:'rgba(20,21,26,0.5)', borderWidth:1, pointRadius:4, pointHoverRadius:6},
@@ -1234,8 +1245,10 @@ window.__charts['barElastic'] = chElastic;
         y:{type:'logarithmic', title:{display:true,text:'$ per capita (log scale)'}, grid:{color:'#c9bfa2'}}
       }
     }
-  });
+  };
+  const chExp = new Chart(document.getElementById('scatterExp'), cfgExp);
   window.__charts['scatterExp'] = chExp;
+  window.__chartConfigs['scatterExp'] = cfgExp;
 })();
 
 // ---------- §03: single-family share vs spending ----------
@@ -1258,7 +1271,7 @@ window.__charts['barElastic'] = chElastic;
     linePts.push({x, y:Math.exp(intercept + slope*x)});
   }
 
-  const chSF = new Chart(document.getElementById('scatterSF'), {
+  const cfgSF = {
     type:'scatter',
     data:{datasets:[
       {label:'City', data:nonEP.map(r=>({x:r.pct_sf,y:r.exp_pc,name:r.name})), backgroundColor:'rgba(184,39,44,0.4)', borderColor:'rgba(20,21,26,0.5)', borderWidth:1, pointRadius:4, pointHoverRadius:6},
@@ -1281,8 +1294,10 @@ window.__charts['barElastic'] = chElastic;
         y:{type:'logarithmic', title:{display:true,text:'Total direct spending per capita (log scale)'}, grid:{color:'#c9bfa2'}}
       }
     }
-  });
+  };
+  const chSF = new Chart(document.getElementById('scatterSF'), cfgSF);
   window.__charts['scatterSF'] = chSF;
+  window.__chartConfigs['scatterSF'] = cfgSF;
 })();
 
 // ---------- three-way bubble chart ----------
@@ -1293,7 +1308,7 @@ window.__charts['barElastic'] = chElastic;
   const ordinary = rows.filter(r=>!r.consolidated && r.name!=='El Paso').map(toPoint);
   const consol = rows.filter(r=>r.consolidated).map(toPoint);
   const epBubble = rows.filter(r=>r.name==='El Paso').map(toPoint);
-  const chBubble = new Chart(document.getElementById('bubbleThree'), {
+  const cfgBubble = {
     type:'bubble',
     data:{datasets:[
       {label:'City (bubble size = property tax/capita)', data: ordinary,
@@ -1319,8 +1334,10 @@ window.__charts['barElastic'] = chElastic;
         y:{type:'logarithmic', title:{display:true,text:'Total service spending per capita (log scale)'}, grid:{color:'#c9bfa2'}}
       }
     }
-  });
+  };
+  const chBubble = new Chart(document.getElementById('bubbleThree'), cfgBubble);
   window.__charts['bubbleThree'] = chBubble;
+  window.__chartConfigs['bubbleThree'] = cfgBubble;
 })();
 
 // ---------- §06: home value vs effective tax rate (THE reveal chart -- fully annotated) ----------
@@ -1371,7 +1388,7 @@ window.__charts['barElastic'] = chElastic;
     }
   };
 
-  const chHT = new Chart(document.getElementById('scatterHomeTax'), {
+  const cfgHT = {
     type:'bubble',
     data:{datasets:[
       {
@@ -1405,8 +1422,10 @@ window.__charts['barElastic'] = chElastic;
         y:{title:{display:true,text:'Effective tax rate (%)'}, grid:{color:'#c9bfa2'}}
       }
     }
-  });
+  };
+  const chHT = new Chart(document.getElementById('scatterHomeTax'), cfgHT);
   window.__charts['scatterHomeTax'] = chHT;
+  window.__chartConfigs['scatterHomeTax'] = cfgHT;
 })();
 
 // ---------- §06 addendum: interactive multifamily-share simulator ----------
@@ -1461,7 +1480,7 @@ window.__charts['barElastic'] = chElastic;
   const spendingTrend = buildTrendLine(mf=>trendExpPc(100-mf), MF_MIN, MF_MAX);
   const rateTrend = buildTrendLine(mf=>typicalRate(100-mf), MF_MIN, MF_MAX);
 
-  const chSimExp = new Chart(document.getElementById('simSpending'), {
+  const cfgSimExp = {
     type:'scatter',
     data:{datasets:[
       {label:'Other cities', data:bgSpending, backgroundColor:'rgba(20,21,26,0.22)', borderColor:'rgba(20,21,26,0.3)', borderWidth:1, pointRadius:3.5},
@@ -1484,10 +1503,12 @@ window.__charts['barElastic'] = chElastic;
         y:{type:'logarithmic', title:{display:true,text:'Total direct spending per capita (log scale)'}, grid:{color:'#c9bfa2'}}
       }
     }
-  });
+  };
+  const chSimExp = new Chart(document.getElementById('simSpending'), cfgSimExp);
   window.__charts['simSpending'] = chSimExp;
+  window.__chartConfigs['simSpending'] = cfgSimExp;
 
-  const chSimRate = new Chart(document.getElementById('simTaxRate'), {
+  const cfgSimRate = {
     type:'scatter',
     data:{datasets:[
       {label:'Other cities', data:bgRate, backgroundColor:'rgba(20,21,26,0.22)', borderColor:'rgba(20,21,26,0.3)', borderWidth:1, pointRadius:3.5},
@@ -1510,8 +1531,10 @@ window.__charts['barElastic'] = chElastic;
         y:{title:{display:true,text:'Effective tax rate (%)'}, grid:{color:'#c9bfa2'}}
       }
     }
-  });
+  };
+  const chSimRate = new Chart(document.getElementById('simTaxRate'), cfgSimRate);
   window.__charts['simTaxRate'] = chSimRate;
+  window.__chartConfigs['simTaxRate'] = cfgSimRate;
 
   function updateSim(mfPct){
     const pctSF = 100 - mfPct;
@@ -1522,6 +1545,10 @@ window.__charts['barElastic'] = chElastic;
     chSimExp.update('none');
     chSimRate.data.datasets[2].data = [{x:mfPct, y:rateVal, name:'El Paso'}];
     chSimRate.update('none');
+    // keep the pristine stashed configs in sync too, so re-opening the modal after
+    // dragging the slider shows the current simulated position, not the initial one
+    cfgSimExp.data.datasets[2].data = [{x:mfPct, y:expVal, name:'El Paso'}];
+    cfgSimRate.data.datasets[2].data = [{x:mfPct, y:rateVal, name:'El Paso'}];
 
     document.getElementById('mfSliderValue').textContent = mfPct.toFixed(1) + '%';
     document.getElementById('simExpReadout').textContent = '$' + Math.round(expVal).toLocaleString();
