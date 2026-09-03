@@ -34,6 +34,18 @@
   .stampcard .label{font-size:13px; text-transform:uppercase; letter-spacing:.08em; color:var(--ink-soft); font-family:'IBM Plex Mono',monospace;}
   .stampcard .value{font-family:'Archivo Black',sans-serif; font-size:30px; color:var(--rust); margin-top:6px;}
   .stampcard .sub{font-size:13.5px; color:var(--ink-soft); margin-top:4px;}
+  .strength-tag{display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:11.5px; font-weight:700;
+    text-transform:uppercase; letter-spacing:.05em; padding:3px 8px; border-radius:4px; margin-top:8px;}
+  .strength-none{background:#E4E1D6; color:var(--ink-soft);}
+  .strength-weak{background:#F3E3C6; color:#8A5A00;}
+  .strength-moderate{background:#F5D4B0; color:#A34A00;}
+  .strength-strong{background:var(--rust); color:#fff;}
+  .chart-legend{display:flex; gap:16px; flex-wrap:wrap; align-items:center; font-size:12.5px;
+    font-family:'IBM Plex Mono',monospace; color:var(--ink-soft); margin-top:10px; margin-bottom:2px;}
+  .chart-legend .sw{display:inline-block; width:11px; height:11px; border-radius:3px; margin-right:5px;
+    vertical-align:middle; border:1px solid var(--ink);}
+  .chart-legend .sw-line{display:inline-block; width:16px; height:0; border-top:2px dashed var(--ink);
+    margin-right:5px; vertical-align:middle;}
   .chart-panel{background:var(--parchment-dark); border:2px solid var(--ink); padding:18px 18px 18px 18px; margin-bottom:22px; border-radius:8px; position:relative;}
   .expand-btn{
     position:absolute; top:14px; right:14px; font-family:'IBM Plex Mono',monospace; font-size:12.5px; font-weight:600;
@@ -142,15 +154,22 @@
     <span class="hl">below-average service</span> for the money, which is exactly El Paso's situation. Business
     density behaves the same way population density does: it looks meaningful on its own but adds nothing once
     housing type is in the picture, and more jobs nearby does not lower a homeowner's tax rate (§07). Real
-    property tax records confirm the same story from a different angle: El Paso's commercial tax base is
-    ordinary for a large Texas city, but its multifamily housing share is the lowest of its peers by a wide
-    margin, and that gap tracks the tax rate far more closely than commercial development does (§08).
+    property tax records across every Texas city in the sample tell a consistent, if more modest, version of the
+    same story: El Paso's commercial tax base is ordinary for a large Texas city, while its multifamily housing
+    share is the lowest of any of its Texas peers, and that gap tracks the tax rate more closely than commercial
+    development does, though not strongly enough on its own to call it confirmed (§08).
   </div>
 
   <h2><span class="num">02</span>Density vs. Total Per-Capita Service Provision</h2>
   <div class="chart-panel">
     <button class="expand-btn" onclick="openChartModal('scatterExp','Density vs. Total Direct Expenditure per Capita')">⤢ Expand</button>
     <canvas id="scatterExp" height="105"></canvas>
+    <div class="chart-legend">
+      <span><span class="sw" style="background:rgba(184,39,44,0.45);"></span>City</span>
+      <span><span class="sw" style="background:rgba(15,118,110,0.55);"></span>Consolidated city-county</span>
+      <span><span class="sw" style="background:#F5B700;"></span>El Paso</span>
+      <span><span class="sw-line"></span>Fitted trend</span>
+    </div>
     <div class="cap">Each marker is one of the 150 largest U.S. cities, log-scaled on both axes. Diamond markers are
       consolidated city-county governments (11 of them here, including New York, San Francisco, Denver,
       Washington D.C., Honolulu, Nashville, Louisville, Anchorage, Baton Rouge, and two in Georgia), which carry
@@ -158,10 +177,11 @@
       the fitted trend line and from the models in §09.</div>
   </div>
   <div class="card-row">
-    <div class="stampcard"><div class="label">Density ↔ Total cost/capita</div><div class="value">r = 0.32</div><div class="sub">Pearson r, all 150</div></div>
-    <div class="stampcard"><div class="label">Density ↔ Property tax/capita</div><div class="value">r = 0.21</div><div class="sub">Pearson r, all 150</div></div>
-    <div class="stampcard"><div class="label">Elasticity, cost on density</div><div class="value">+0.25</div><div class="sub">consolidated govts. excluded</div></div>
+    <div class="stampcard"><div class="label">Density ↔ Total cost/capita</div><div class="value">r = 0.32</div><div class="sub">Pearson r, all 150</div><div class="strength-tag strength-moderate">Moderate, positive</div></div>
+    <div class="stampcard"><div class="label">Density ↔ Property tax/capita</div><div class="value">r = 0.21</div><div class="sub">Pearson r, all 150</div><div class="strength-tag strength-weak">Weak, positive</div></div>
+    <div class="stampcard"><div class="label">Elasticity, cost on density</div><div class="value">+0.25</div><div class="sub">consolidated govts. excluded</div><div class="strength-tag strength-moderate">Real, but gradual</div></div>
   </div>
+  <p class="note" style="font-size:13.5px; margin-top:4px;">Strength labels follow the standard convention for Pearson correlation: under 0.1 negligible, 0.1 to 0.3 weak, 0.3 to 0.5 moderate, 0.5 to 0.7 strong, above 0.7 very strong.</p>
 
   <h2><span class="num">03</span>A Sharper Lens Than Density: Housing Type</h2>
   <p class="note"><b>The question here:</b> "density" (people per square mile) treats a city of small
@@ -195,6 +215,11 @@
   <div class="chart-panel">
     <button class="expand-btn" onclick="openChartModal('scatterSF','Single-Family Housing Share vs. Total Spending per Capita')">⤢ Expand</button>
     <canvas id="scatterSF" height="105"></canvas>
+    <div class="chart-legend">
+      <span><span class="sw" style="background:rgba(184,39,44,0.4);"></span>City</span>
+      <span><span class="sw" style="background:#F5B700;"></span>El Paso</span>
+      <span><span class="sw-line"></span>Fitted trend</span>
+    </div>
     <div class="cap">Each city plotted by share of housing that's single-family detached (x) against total direct
       spending per person (y, log scale). El Paso, at 66.9% single-family, sits in the top sixth of the sample
       (25th of 147; the highest is Port St. Lucie, FL at 87.7%), and sits toward the low-spending end, consistent
@@ -313,6 +338,12 @@
   <div class="chart-panel">
     <button class="expand-btn" onclick="openChartModal('scatterLive','Selected Services vs. Density')">⤢ Expand</button>
     <canvas id="scatterLive" height="100"></canvas>
+    <div class="chart-legend">
+      <span><span class="sw" style="background:rgba(184,39,44,0.4);"></span>City</span>
+      <span><span class="sw" style="background:rgba(15,118,110,0.55);"></span>Consolidated city-county</span>
+      <span><span class="sw" style="background:#F5B700;"></span>El Paso</span>
+      <span><span class="sw-line"></span>Fitted trend</span>
+    </div>
     <div class="cap" id="liveCaption">Showing: all 16 categories combined.</div>
   </div>
 
@@ -355,13 +386,18 @@
   <div class="chart-panel">
     <button class="expand-btn" onclick="openChartModal('bubbleThree','Density × Service Spending × Property Tax, All Three At Once')">⤢ Expand</button>
     <canvas id="bubbleThree"></canvas>
+    <div class="chart-legend">
+      <span><span class="sw" style="background:rgba(184,39,44,0.35); border-radius:50%;"></span>City</span>
+      <span><span class="sw" style="background:rgba(15,118,110,0.45); border-radius:50%;"></span>Consolidated city-county</span>
+      <span><span class="sw" style="background:#F5B700; border-radius:50%;"></span>El Paso</span>
+    </div>
     <div class="cap">
       <b>How to read this:</b> each bubble is one city. Left-to-right (x-axis) is density; bottom-to-top (y-axis)
       is total service spending per capita, both log-scaled, so equal distances mean equal percentage
       differences, not equal dollar differences. Bubble <i>size</i> is property tax collected per capita, the
-      variable this chart is testing. Color separates ordinary city governments (rust) from the seven consolidated
-      city-county governments (teal), which run larger budgets for structural reasons (§11) and would otherwise
-      skew the pattern.<br><br>
+      variable this chart is testing. Color separates ordinary city governments (rust), El Paso (gold), and the
+      11 consolidated city-county governments (teal), which run larger budgets for structural reasons (§11) and
+      would otherwise skew the pattern.<br><br>
       <b>What to look for:</b> if density itself drove tax bills, the biggest bubbles would cluster on the
       <i>right</i> side of the chart regardless of height. They don't, bubble size tracks the <i>vertical</i>
       position (service spending) far more consistently than the horizontal one (density). A low-density city
@@ -422,9 +458,14 @@
   <div class="chart-panel">
     <button class="expand-btn" onclick="openChartModal('scatterHomeTax','Cheaper Homes, Higher Effective Tax Rates')">⤢ Expand</button>
     <canvas id="scatterHomeTax" height="105"></canvas>
+    <div class="chart-legend">
+      <span><span class="sw" style="background:rgba(184,39,44,0.45); border-radius:50%;"></span>City (bubble size = density)</span>
+      <span><span class="sw" style="background:#F5B700; border-radius:50%;"></span>El Paso</span>
+      <span><span class="sw-line"></span>Fitted trend</span>
+    </div>
     <div class="cap">Each city plotted by median home value (x, log scale) against effective property tax rate (y,
       median real estate taxes paid ÷ median home value). Bubble size = population density. El Paso is marked in
-      dark rust with a bold outline. The downward slope is the direct, mechanical relationship: cheaper homes on
+      gold with a bold outline. The downward slope is the direct, mechanical relationship: cheaper homes on
       the left run higher rates. Density's role is upstream of this chart, it's part of why some cities land on
       the cheap-home left side in the first place (see the findings above), not a separate force visible here.</div>
   </div>
@@ -495,14 +536,22 @@
       <button id="mfReset" class="picker-actions" style="font-family:'IBM Plex Mono',monospace; font-size:13.5px; font-weight:600; background:var(--parchment); border:2px solid var(--ink); color:var(--ink); padding:7px 13px; cursor:pointer; border-radius:5px;">↺ Reset to Actual (33.1%)</button>
     </div>
 
-    <div class="two-col">
-      <div style="position:relative;">
-        <button class="expand-btn" onclick="openChartModal('simSpending','Simulated: Multifamily Share vs. Spending per Capita')">⤢ Expand</button>
-        <canvas id="simSpending" height="140"></canvas>
+    <div style="position:relative; margin-bottom:22px;">
+      <button class="expand-btn" onclick="openChartModal('simSpending','Simulated: Multifamily Share vs. Spending per Capita')">⤢ Expand</button>
+      <canvas id="simSpending" height="105"></canvas>
+      <div class="chart-legend">
+        <span><span class="sw" style="background:rgba(20,21,26,0.22);"></span>Other cities</span>
+        <span><span class="sw-line"></span>Fitted trend (all 147 cities)</span>
+        <span><span class="sw" style="background:#F5B700;"></span>El Paso (simulated)</span>
       </div>
-      <div style="position:relative;">
-        <button class="expand-btn" onclick="openChartModal('simTaxRate','Simulated: Multifamily Share vs. Effective Tax Rate')">⤢ Expand</button>
-        <canvas id="simTaxRate" height="140"></canvas>
+    </div>
+    <div style="position:relative;">
+      <button class="expand-btn" onclick="openChartModal('simTaxRate','Simulated: Multifamily Share vs. Effective Tax Rate')">⤢ Expand</button>
+      <canvas id="simTaxRate" height="105"></canvas>
+      <div class="chart-legend">
+        <span><span class="sw" style="background:rgba(20,21,26,0.22);"></span>Other cities</span>
+        <span><span class="sw-line"></span>Reference: typical-income city</span>
+        <span><span class="sw" style="background:#F5B700;"></span>El Paso (simulated)</span>
       </div>
     </div>
 
@@ -650,47 +699,66 @@
     residential and commercial assessed property value, which the federal datasets used everywhere else in this
     analysis do not report. Property classification is a state and county function. We pulled it directly from
     the Texas Comptroller's Appraisal District Ratio Study, the state's own official value-by-category report,
-    for El Paso and five comparable Texas cities: Austin, Dallas, Fort Worth, Houston, and San Antonio.</p>
+    for every Texas city in the 150-city sample: 18 cities across 12 counties. Several cities share a county
+    (Fort Worth and Arlington both sit in Tarrant; Dallas, Irving, Garland, and Grand Prairie all sit in Dallas
+    County; Plano, Frisco, and McKinney all sit in Collin County), so the property-mix figures are identical
+    within those groups even though each city's own effective tax rate differs.</p>
 
   <table>
     <thead>
-      <tr><th>City</th><th class="num">Commercial and industrial share of value</th><th class="num">Multifamily share of value</th><th class="num">Effective tax rate</th></tr>
+      <tr><th>County</th><th>Cities in this sample</th><th class="num">Commercial and industrial share of value</th><th class="num">Multifamily share of value</th></tr>
     </thead>
     <tbody>
-      <tr style="background:rgba(184,39,44,0.08);"><td><b>El Paso</b></td><td class="num"><b>27.6%</b></td><td class="num"><b>5.0%</b></td><td class="num"><b>2.17%</b></td></tr>
-      <tr><td>San Antonio</td><td class="num">24.4%</td><td class="num">8.9%</td><td class="num">1.88%</td></tr>
-      <tr><td>Fort Worth</td><td class="num">24.5%</td><td class="num">9.8%</td><td class="num">1.89%</td></tr>
-      <tr><td>Houston</td><td class="num">34.2%</td><td class="num">9.4%</td><td class="num">1.60%</td></tr>
-      <tr><td>Dallas</td><td class="num">30.2%</td><td class="num">12.8%</td><td class="num">1.67%</td></tr>
-      <tr><td>Austin</td><td class="num">23.9%</td><td class="num">13.4%</td><td class="num">1.59%</td></tr>
+      <tr style="background:rgba(184,39,44,0.08);"><td><b>El Paso</b></td><td><b>El Paso</b></td><td class="num"><b>27.6%</b></td><td class="num"><b>5.0%</b></td></tr>
+      <tr><td>Harris</td><td>Houston</td><td class="num">34.2%</td><td class="num">9.4%</td></tr>
+      <tr><td>Bexar</td><td>San Antonio</td><td class="num">24.4%</td><td class="num">8.9%</td></tr>
+      <tr><td>Dallas</td><td>Dallas, Irving, Garland, Grand Prairie</td><td class="num">30.2%</td><td class="num">12.8%</td></tr>
+      <tr><td>Travis</td><td>Austin</td><td class="num">23.9%</td><td class="num">13.4%</td></tr>
+      <tr><td>Tarrant</td><td>Fort Worth, Arlington</td><td class="num">24.5%</td><td class="num">9.8%</td></tr>
+      <tr><td>Nueces</td><td>Corpus Christi</td><td class="num">31.0%</td><td class="num">4.8%</td></tr>
+      <tr><td>Collin</td><td>Plano, Frisco, McKinney</td><td class="num">21.5%</td><td class="num">8.6%</td></tr>
+      <tr><td>Webb</td><td>Laredo</td><td class="num">27.1%</td><td class="num">2.6%</td></tr>
+      <tr><td>Lubbock</td><td>Lubbock</td><td class="num">24.1%</td><td class="num">7.8%</td></tr>
+      <tr><td>Potter</td><td>Amarillo</td><td class="num">25.1%</td><td class="num">3.0%</td></tr>
+      <tr><td>Cameron</td><td>Brownsville</td><td class="num">21.2%</td><td class="num">4.2%</td></tr>
     </tbody>
   </table>
 
   <div class="findings">
-    <b>El Paso's commercial tax base is not unusually thin.</b> Its commercial and industrial share of taxable
-    value, 27.6%, is higher than Austin's (23.9%) and roughly in line with San Antonio and Fort Worth. Only
-    Houston and Dallas run more commercial-heavy than El Paso. The common idea that El Paso needs to attract more
-    business to fix its tax base is not well supported by this data. On this specific measure, El Paso looks like
-    a typical large Texas city.
+    <b>El Paso's commercial tax base is still not unusually thin.</b> At 27.6%, its commercial and industrial
+    share sits comfortably in the middle of these 12 counties, close to Laredo (27.1%) and Amarillo (25.1%),
+    higher than Austin, Fort Worth, San Antonio, Collin County, and Brownsville, and lower than Houston, Dallas,
+    and Corpus Christi. There's no sign here that El Paso is unusually light on commercial development compared
+    to other large and mid-size Texas cities. The idea that El Paso needs to attract more business specifically
+    to fix its tax base still isn't well supported by this data.
   </div>
 
   <div class="findings slate">
-    <b>What is actually different is the multifamily share, and it is not close.</b> El Paso's multifamily value
-    share, 5.0%, is <span class="hl-teal">less than half</span> that of any other city in this comparison. Among
-    these six cities, the multifamily share correlates strongly with the effective tax rate (r = -0.85,
-    p = 0.03). The commercial and industrial share does not (r = -0.31, not significant). This is a small
-    comparison, six cities, but it uses real assessed-value data rather than a proxy, and it points in exactly
-    the same direction as the housing-type finding in §03 and §06: the lever connected to a lower tax rate is
-    <span class="hl-teal">multifamily housing</span>, not commercial development. If El Paso wants to lower its
-    effective tax rate, the data says to build more multifamily housing, not to chase more retail or office
-    space.
+    <b>El Paso's multifamily share is still the lowest, but the wider comparison tempers how strong that
+    story is.</b> At 5.0%, El Paso's multifamily share remains below every county except Webb (Laredo, 2.6%) and
+    Potter (Amarillo, 3.0%), both of which are smaller, less dense cities than El Paso. Across all 12 counties,
+    multifamily share correlates negatively with the effective tax rate (r = -0.50), while commercial and
+    industrial share barely correlates with it at all (r = -0.08). Restricting the same comparison to just the
+    six largest Texas cities in the sample shows a stronger, statistically significant correlation (r = -0.85,
+    p = 0.03); the full 18-city, 12-county comparison shows the same direction but does not clear the
+    conventional significance bar (p = 0.10). The honest read: multifamily share is still
+    the more consistent story here, clearly more so than commercial share, but this Texas comparison alone isn't
+    large enough to call the relationship confirmed. It's a real, plausible pattern worth weighing alongside the
+    much larger and more statistically solid finding in §03 and §06, not a standalone proof on its own.
   </div>
 
-  <p class="note">This section covers six cities rather than the full 150 because property classification data
+  <p class="note">One data point worth flagging rather than smoothing over: Laredo (Webb County) has an unusual
+    property profile, only 38% of its taxable value is residential at all, with a large "other" category (35%)
+    that doesn't fit neatly into the residential/commercial split used elsewhere in this table, likely reflecting
+    Laredo's role as a major international trade and logistics hub. Its numbers are included above for
+    completeness, but its effective tax rate (2.03%, the second-highest in this Texas comparison after El Paso)
+    may be shaped by factors this table doesn't capture well.</p>
+
+  <p class="note">This section covers 18 cities rather than the full 150 because property classification data
     is not standardized nationally, each state and county reports differently, and no single federal source
     covers it the way the Census of Governments finance data or the ACS covers everything else in this analysis.
-    The scope here is intentionally narrower and more direct: real numbers for El Paso and its closest Texas
-    peers, rather than a proxy applied everywhere.</p>
+    The scope here is intentionally narrower and more direct: real numbers for El Paso and every other Texas city
+    in the sample, rather than a proxy applied everywhere.</p>
 
   <h2><span class="num">09</span>What Survives the Controls</h2>
   <p class="note">This is the robustness summary for the whole analysis, every regression model referenced in
@@ -844,9 +912,10 @@ const HOUSING_DATA = [{"name": "New York", "density": 27468.9, "home_value": 732
 
 const SF_DATA = [{"name": "New York", "density": 27468.9, "pct_sf": 9.2, "exp_pc": 13744.9, "core_pc": 1582.0, "consolidated": 1, "is_el_paso": 0}, {"name": "Los Angeles", "density": 8438.0, "pct_sf": 36.8, "exp_pc": 3332.1, "core_pc": 1572.8, "consolidated": 0, "is_el_paso": 0}, {"name": "Chicago", "density": 11757.0, "pct_sf": 25.9, "exp_pc": 3985.2, "core_pc": 1250.3, "consolidated": 0, "is_el_paso": 0}, {"name": "Houston", "density": 3615.5, "pct_sf": 43.5, "exp_pc": 2045.1, "core_pc": 900.7, "consolidated": 0, "is_el_paso": 0}, {"name": "Phoenix", "density": 3295.4, "pct_sf": 59.8, "exp_pc": 1597.2, "core_pc": 751.9, "consolidated": 0, "is_el_paso": 0}, {"name": "Philadelphia", "density": 11748.5, "pct_sf": 8.4, "exp_pc": 5747.0, "core_pc": 1378.5, "consolidated": 0, "is_el_paso": 0}, {"name": "San Antonio", "density": 3141.0, "pct_sf": 59.6, "exp_pc": 1755.4, "core_pc": 927.9, "consolidated": 0, "is_el_paso": 0}, {"name": "San Diego", "density": 4362.1, "pct_sf": 43.7, "exp_pc": 3061.3, "core_pc": 1397.4, "consolidated": 0, "is_el_paso": 0}, {"name": "Dallas", "density": 3954.6, "pct_sf": 42.1, "exp_pc": 2887.1, "core_pc": 1205.8, "consolidated": 0, "is_el_paso": 0}, {"name": "San Jose", "density": 5696.4, "pct_sf": 51.4, "exp_pc": 2311.3, "core_pc": 1325.6, "consolidated": 0, "is_el_paso": 0}, {"name": "Austin", "density": 3050.2, "pct_sf": 44.4, "exp_pc": 2800.4, "core_pc": 1255.5, "consolidated": 0, "is_el_paso": 0}, {"name": "Honolulu", "density": 1604.3, "pct_sf": null, "exp_pc": 2257.1, "core_pc": 1000.6, "consolidated": 1, "is_el_paso": 0}, {"name": "Fort Worth", "density": 2648.6, "pct_sf": 64.9, "exp_pc": 1819.2, "core_pc": 1006.9, "consolidated": 0, "is_el_paso": 0}, {"name": "Jacksonville", "density": 1231.9, "pct_sf": 60.2, "exp_pc": 3168.8, "core_pc": 1176.4, "consolidated": 0, "is_el_paso": 0}, {"name": "Columbus", "density": 4094.9, "pct_sf": 45.2, "exp_pc": 2163.6, "core_pc": 1197.2, "consolidated": 0, "is_el_paso": 0}, {"name": "Charlotte", "density": 2897.3, "pct_sf": 53.0, "exp_pc": 2296.7, "core_pc": 945.1, "consolidated": 0, "is_el_paso": 0}, {"name": "Indianapolis", "density": 2431.7, "pct_sf": 59.6, "exp_pc": 4007.8, "core_pc": 838.6, "consolidated": 0, "is_el_paso": 0}, {"name": "San Francisco", "density": 18556.9, "pct_sf": 18.5, "exp_pc": 16144.5, "core_pc": 2508.2, "consolidated": 1, "is_el_paso": 0}, {"name": "Seattle", "density": 9163.3, "pct_sf": 38.7, "exp_pc": 3790.6, "core_pc": 1719.9, "consolidated": 0, "is_el_paso": 0}, {"name": "Louisville", "density": 2917.3, "pct_sf": null, "exp_pc": 2642.3, "core_pc": 1007.8, "consolidated": 1, "is_el_paso": 0}, {"name": "Denver", "density": 4805.1, "pct_sf": 42.1, "exp_pc": 5908.5, "core_pc": 1261.6, "consolidated": 1, "is_el_paso": 0}, {"name": "Washington, D.C.", "density": 11661.4, "pct_sf": 11.5, "exp_pc": 26024.3, "core_pc": 2944.1, "consolidated": 1, "is_el_paso": 0}, {"name": "Nashville", "density": 1459.7, "pct_sf": null, "exp_pc": 5157.9, "core_pc": 933.3, "consolidated": 1, "is_el_paso": 0}, {"name": "Boston", "density": 14305.6, "pct_sf": 12.0, "exp_pc": 7429.0, "core_pc": 1609.9, "consolidated": 0, "is_el_paso": 0}, {"name": "El Paso", "density": 2633.6, "pct_sf": 66.9, "exp_pc": 1353.4, "core_pc": 698.1, "consolidated": 0, "is_el_paso": 1}, {"name": "Detroit", "density": 4796.0, "pct_sf": 65.1, "exp_pc": 3151.0, "core_pc": 1438.1, "consolidated": 0, "is_el_paso": 0}, {"name": "Las Vegas", "density": 4669.1, "pct_sf": 62.4, "exp_pc": 1300.5, "core_pc": 546.3, "consolidated": 0, "is_el_paso": 0}, {"name": "Oklahoma", "density": 1092.1, "pct_sf": 67.8, "exp_pc": 1564.4, "core_pc": 942.2, "consolidated": 0, "is_el_paso": 0}, {"name": "Portland", "density": 4919.9, "pct_sf": 53.6, "exp_pc": 2642.3, "core_pc": 1385.7, "consolidated": 0, "is_el_paso": 0}, {"name": "Memphis", "density": 2193.5, "pct_sf": 60.5, "exp_pc": 2161.3, "core_pc": 1274.7, "consolidated": 0, "is_el_paso": 0}, {"name": "Milwaukee", "density": 6125.1, "pct_sf": 39.4, "exp_pc": 2068.6, "core_pc": 1229.2, "consolidated": 0, "is_el_paso": 0}, {"name": "Baltimore", "density": 7241.0, "pct_sf": 14.7, "exp_pc": 7929.5, "core_pc": 2292.8, "consolidated": 0, "is_el_paso": 0}, {"name": "Albuquerque", "density": 3004.0, "pct_sf": 62.1, "exp_pc": 1692.6, "core_pc": 947.7, "consolidated": 0, "is_el_paso": 0}, {"name": "Tucson", "density": 2240.5, "pct_sf": 52.1, "exp_pc": 1321.0, "core_pc": 887.6, "consolidated": 0, "is_el_paso": 0}, {"name": "Fresno", "density": 4578.5, "pct_sf": 61.6, "exp_pc": 1613.4, "core_pc": 935.7, "consolidated": 0, "is_el_paso": 0}, {"name": "Mesa", "density": 3735.6, "pct_sf": 55.0, "exp_pc": 1499.0, "core_pc": 1077.1, "consolidated": 0, "is_el_paso": 0}, {"name": "Sacramento", "density": 5198.8, "pct_sf": 59.1, "exp_pc": 2992.5, "core_pc": 1257.5, "consolidated": 0, "is_el_paso": 0}, {"name": "Atlanta", "density": 3789.6, "pct_sf": 36.5, "exp_pc": 2348.7, "core_pc": 1024.8, "consolidated": 0, "is_el_paso": 0}, {"name": "Kansas", "density": 1579.9, "pct_sf": 60.8, "exp_pc": 3514.7, "core_pc": 1419.8, "consolidated": 0, "is_el_paso": 0}, {"name": "Colorado Springs", "density": 2388.3, "pct_sf": 60.9, "exp_pc": 1444.8, "core_pc": 571.6, "consolidated": 0, "is_el_paso": 0}, {"name": "Omaha", "density": 3345.9, "pct_sf": 63.6, "exp_pc": 1606.8, "core_pc": 978.7, "consolidated": 0, "is_el_paso": 0}, {"name": "Raleigh", "density": 3174.5, "pct_sf": 44.3, "exp_pc": 1745.3, "core_pc": 858.6, "consolidated": 0, "is_el_paso": 0}, {"name": "Miami", "density": 13099.4, "pct_sf": 23.9, "exp_pc": 2741.5, "core_pc": 1321.8, "consolidated": 0, "is_el_paso": 0}, {"name": "Long Beach", "density": 8973.0, "pct_sf": 40.6, "exp_pc": 4728.5, "core_pc": 1452.2, "consolidated": 0, "is_el_paso": 0}, {"name": "Virginia Beach", "density": 1843.9, "pct_sf": 54.4, "exp_pc": 4657.5, "core_pc": 1054.3, "consolidated": 0, "is_el_paso": 0}, {"name": "Minneapolis", "density": 8020.6, "pct_sf": 40.8, "exp_pc": 2779.1, "core_pc": 1521.7, "consolidated": 0, "is_el_paso": 0}, {"name": "Oakland", "density": 7592.4, "pct_sf": 41.7, "exp_pc": 3963.6, "core_pc": 1708.1, "consolidated": 0, "is_el_paso": 0}, {"name": "Tampa", "density": 3586.8, "pct_sf": 51.4, "exp_pc": 3027.2, "core_pc": 1471.3, "consolidated": 0, "is_el_paso": 0}, {"name": "Tulsa", "density": 2038.6, "pct_sf": 62.3, "exp_pc": 2204.7, "core_pc": 958.5, "consolidated": 0, "is_el_paso": 0}, {"name": "Arlington", "density": 4161.7, "pct_sf": 60.6, "exp_pc": 1245.3, "core_pc": 724.5, "consolidated": 0, "is_el_paso": 0}, {"name": "Wichita", "density": 2404.1, "pct_sf": 66.4, "exp_pc": 1066.3, "core_pc": 689.1, "consolidated": 0, "is_el_paso": 0}, {"name": "New Orleans", "density": 2297.8, "pct_sf": 45.6, "exp_pc": 4595.1, "core_pc": 1508.0, "consolidated": 0, "is_el_paso": 0}, {"name": "Aurora", "density": 2376.4, "pct_sf": 53.3, "exp_pc": 1827.5, "core_pc": 903.6, "consolidated": 0, "is_el_paso": 0}, {"name": "Bakersfield", "density": 2566.8, "pct_sf": 71.3, "exp_pc": 1456.3, "core_pc": 820.2, "consolidated": 0, "is_el_paso": 0}, {"name": "Cleveland", "density": 4870.3, "pct_sf": 47.0, "exp_pc": 2050.0, "core_pc": 1210.5, "consolidated": 0, "is_el_paso": 0}, {"name": "Anaheim", "density": 7033.7, "pct_sf": 40.8, "exp_pc": 2087.6, "core_pc": 1142.0, "consolidated": 0, "is_el_paso": 0}, {"name": "Santa Ana", "density": 12101.9, "pct_sf": 45.8, "exp_pc": 2481.9, "core_pc": 846.0, "consolidated": 0, "is_el_paso": 0}, {"name": "Riverside", "density": 4076.3, "pct_sf": 64.1, "exp_pc": 1348.9, "core_pc": 921.0, "consolidated": 0, "is_el_paso": 0}, {"name": "Henderson", "density": 2731.2, "pct_sf": 69.4, "exp_pc": 1478.7, "core_pc": 878.0, "consolidated": 0, "is_el_paso": 0}, {"name": "Corpus Christi", "density": 2016.5, "pct_sf": 64.8, "exp_pc": 1437.6, "core_pc": 856.0, "consolidated": 0, "is_el_paso": 0}, {"name": "Lexington-Fayette Urban County Government", "density": 1144.0, "pct_sf": 59.3, "exp_pc": 1605.5, "core_pc": 817.8, "consolidated": 0, "is_el_paso": 0}, {"name": "Stockton", "density": 4956.3, "pct_sf": 66.7, "exp_pc": 1509.4, "core_pc": 990.8, "consolidated": 0, "is_el_paso": 0}, {"name": "St Paul", "density": 5901.5, "pct_sf": 48.7, "exp_pc": 2341.4, "core_pc": 1349.8, "consolidated": 0, "is_el_paso": 0}, {"name": "Cincinnati", "density": 3908.8, "pct_sf": 38.7, "exp_pc": 2090.8, "core_pc": 1143.3, "consolidated": 0, "is_el_paso": 0}, {"name": "Pittsburgh", "density": 5403.3, "pct_sf": 44.3, "exp_pc": 2487.8, "core_pc": 1305.4, "consolidated": 0, "is_el_paso": 0}, {"name": "Greensboro", "density": 2225.3, "pct_sf": 52.2, "exp_pc": 1847.6, "core_pc": 1340.8, "consolidated": 0, "is_el_paso": 0}, {"name": "St Louis", "density": 4822.5, "pct_sf": 43.7, "exp_pc": 3451.9, "core_pc": 1537.3, "consolidated": 0, "is_el_paso": 0}, {"name": "Plano", "density": 4062.8, "pct_sf": 59.8, "exp_pc": 1737.1, "core_pc": 926.5, "consolidated": 0, "is_el_paso": 0}, {"name": "Lincoln", "density": 2905.9, "pct_sf": 56.1, "exp_pc": 1379.8, "core_pc": 683.2, "consolidated": 0, "is_el_paso": 0}, {"name": "Orlando", "density": 2602.2, "pct_sf": 32.6, "exp_pc": 3943.4, "core_pc": 2094.1, "consolidated": 0, "is_el_paso": 0}, {"name": "Anchorage", "density": 168.2, "pct_sf": 48.0, "exp_pc": 6259.2, "core_pc": 1477.4, "consolidated": 1, "is_el_paso": 0}, {"name": "Durham", "density": 2448.7, "pct_sf": 51.8, "exp_pc": 1574.2, "core_pc": 863.1, "consolidated": 0, "is_el_paso": 0}, {"name": "Irvine", "density": 4323.8, "pct_sf": 36.8, "exp_pc": 1613.7, "core_pc": 766.2, "consolidated": 0, "is_el_paso": 0}, {"name": "Newark", "density": 11701.5, "pct_sf": 11.2, "exp_pc": 2941.9, "core_pc": 1356.1, "consolidated": 0, "is_el_paso": 0}, {"name": "Chula Vista", "density": 5499.4, "pct_sf": 53.1, "exp_pc": 1575.6, "core_pc": 674.9, "consolidated": 0, "is_el_paso": 0}, {"name": "Fort Wayne", "density": 2462.3, "pct_sf": 68.8, "exp_pc": 1077.9, "core_pc": 753.2, "consolidated": 0, "is_el_paso": 0}, {"name": "Toledo", "density": 3372.6, "pct_sf": 66.2, "exp_pc": 639.1, "core_pc": 179.5, "consolidated": 0, "is_el_paso": 0}, {"name": "St Petersburg", "density": 4333.1, "pct_sf": 55.9, "exp_pc": 2240.8, "core_pc": 1304.5, "consolidated": 0, "is_el_paso": 0}, {"name": "Chandler", "density": 4043.3, "pct_sf": 68.0, "exp_pc": 1437.8, "core_pc": 828.0, "consolidated": 0, "is_el_paso": 0}, {"name": "Laredo", "density": 2468.0, "pct_sf": 67.2, "exp_pc": 1633.6, "core_pc": 1066.0, "consolidated": 0, "is_el_paso": 0}, {"name": "Madison", "density": 3166.5, "pct_sf": 41.2, "exp_pc": 1958.4, "core_pc": 1207.5, "consolidated": 0, "is_el_paso": 0}, {"name": "Jersey", "density": 17810.1, "pct_sf": 6.7, "exp_pc": 2753.7, "core_pc": 948.4, "consolidated": 0, "is_el_paso": 0}, {"name": "Scottsdale", "density": 1427.4, "pct_sf": 53.4, "exp_pc": 2151.6, "core_pc": 1137.6, "consolidated": 0, "is_el_paso": 0}, {"name": "Lubbock", "density": 1849.9, "pct_sf": 64.3, "exp_pc": 1317.8, "core_pc": 678.2, "consolidated": 0, "is_el_paso": 0}, {"name": "North Las Vegas", "density": 2469.6, "pct_sf": 75.5, "exp_pc": 1124.4, "core_pc": 645.4, "consolidated": 0, "is_el_paso": 0}, {"name": "Reno", "density": 2379.0, "pct_sf": 50.2, "exp_pc": 1570.0, "core_pc": 895.3, "consolidated": 0, "is_el_paso": 0}, {"name": "Gilbert Town", "density": 3752.5, "pct_sf": 83.5, "exp_pc": 1336.7, "core_pc": 819.9, "consolidated": 0, "is_el_paso": 0}, {"name": "Glendale", "density": 3803.4, "pct_sf": 59.0, "exp_pc": 1612.5, "core_pc": 1020.5, "consolidated": 0, "is_el_paso": 0}, {"name": "Buffalo", "density": 6302.3, "pct_sf": 36.6, "exp_pc": 6324.5, "core_pc": 1266.9, "consolidated": 0, "is_el_paso": 0}, {"name": "Winston-Salem", "density": 1857.3, "pct_sf": 60.8, "exp_pc": 1265.0, "core_pc": 811.4, "consolidated": 0, "is_el_paso": 0}, {"name": "Chesapeake", "density": 729.8, "pct_sf": 67.7, "exp_pc": 4639.3, "core_pc": 1087.3, "consolidated": 0, "is_el_paso": 0}, {"name": "Norfolk", "density": 4557.5, "pct_sf": 48.8, "exp_pc": 5295.1, "core_pc": 1142.4, "consolidated": 0, "is_el_paso": 0}, {"name": "Irving", "density": 3596.9, "pct_sf": 39.2, "exp_pc": 1527.5, "core_pc": 963.0, "consolidated": 0, "is_el_paso": 0}, {"name": "Garland", "density": 4188.4, "pct_sf": 69.8, "exp_pc": 1722.6, "core_pc": 781.5, "consolidated": 0, "is_el_paso": 0}, {"name": "Fremont", "density": 3003.3, "pct_sf": 57.3, "exp_pc": 1511.4, "core_pc": 1057.2, "consolidated": 0, "is_el_paso": 0}, {"name": "Richmond", "density": 3875.3, "pct_sf": 46.3, "exp_pc": 6147.3, "core_pc": 1623.0, "consolidated": 0, "is_el_paso": 0}, {"name": "Hialeah", "density": 10751.4, "pct_sf": 38.8, "exp_pc": 1288.8, "core_pc": 1006.3, "consolidated": 0, "is_el_paso": 0}, {"name": "Boise", "density": 2717.5, "pct_sf": 65.2, "exp_pc": 1963.5, "core_pc": 1064.2, "consolidated": 0, "is_el_paso": 0}, {"name": "Spokane", "density": 3229.3, "pct_sf": 63.6, "exp_pc": 2213.8, "core_pc": 1407.5, "consolidated": 0, "is_el_paso": 0}, {"name": "Tacoma", "density": 4424.2, "pct_sf": 62.4, "exp_pc": 2865.0, "core_pc": 1763.8, "consolidated": 0, "is_el_paso": 0}, {"name": "Baton Rouge", "density": 2519.5, "pct_sf": 55.8, "exp_pc": 4925.8, "core_pc": 2006.8, "consolidated": 1, "is_el_paso": 0}, {"name": "San Bernardino", "density": 3502.3, "pct_sf": 58.9, "exp_pc": 1110.7, "core_pc": 801.4, "consolidated": 0, "is_el_paso": 0}, {"name": "Fontana", "density": 4995.0, "pct_sf": 77.6, "exp_pc": 1541.6, "core_pc": 979.0, "consolidated": 0, "is_el_paso": 0}, {"name": "Modesto", "density": 4974.1, "pct_sf": 71.1, "exp_pc": 1434.5, "core_pc": 962.9, "consolidated": 0, "is_el_paso": 0}, {"name": "Moreno Valley", "density": 4138.5, "pct_sf": 78.5, "exp_pc": 986.9, "core_pc": 364.4, "consolidated": 0, "is_el_paso": 0}, {"name": "Des Moines", "density": 2408.2, "pct_sf": 62.2, "exp_pc": 2627.1, "core_pc": 1660.1, "consolidated": 0, "is_el_paso": 0}, {"name": "Fayetteville", "density": 1427.9, "pct_sf": 61.5, "exp_pc": 1644.4, "core_pc": 966.7, "consolidated": 0, "is_el_paso": 0}, {"name": "Santa Clarita", "density": 2852.6, "pct_sf": 60.1, "exp_pc": 942.5, "core_pc": 460.7, "consolidated": 0, "is_el_paso": 0}, {"name": "Frisco", "density": 3061.5, "pct_sf": 71.1, "exp_pc": 1662.5, "core_pc": 936.3, "consolidated": 0, "is_el_paso": 0}, {"name": "Port St Lucie", "density": 1759.1, "pct_sf": 87.7, "exp_pc": 1287.7, "core_pc": 401.0, "consolidated": 0, "is_el_paso": 0}, {"name": "Mckinney", "density": 3110.3, "pct_sf": 72.3, "exp_pc": 1766.1, "core_pc": 745.5, "consolidated": 0, "is_el_paso": 0}, {"name": "Oxnard", "density": 7833.7, "pct_sf": 54.2, "exp_pc": 2476.3, "core_pc": 946.4, "consolidated": 0, "is_el_paso": 0}, {"name": "Birmingham", "density": 1407.2, "pct_sf": 58.3, "exp_pc": 2455.2, "core_pc": 1376.8, "consolidated": 0, "is_el_paso": 0}, {"name": "Rochester", "density": 5738.8, "pct_sf": 44.2, "exp_pc": 7436.6, "core_pc": 1348.1, "consolidated": 0, "is_el_paso": 0}, {"name": "Salt Lake", "density": 1840.4, "pct_sf": 45.3, "exp_pc": 5735.1, "core_pc": 1373.9, "consolidated": 0, "is_el_paso": 0}, {"name": "Huntsville", "density": 907.6, "pct_sf": 63.4, "exp_pc": 2485.5, "core_pc": 890.9, "consolidated": 0, "is_el_paso": 0}, {"name": "Cape Coral", "density": 1893.8, "pct_sf": 79.7, "exp_pc": 1884.3, "core_pc": 981.8, "consolidated": 0, "is_el_paso": 0}, {"name": "Tempe", "density": 5012.4, "pct_sf": 38.8, "exp_pc": 2423.0, "core_pc": 1214.1, "consolidated": 0, "is_el_paso": 0}, {"name": "Yonkers", "density": 11109.6, "pct_sf": 24.5, "exp_pc": 6284.8, "core_pc": 1221.6, "consolidated": 0, "is_el_paso": 0}, {"name": "Grand Rapids", "density": 4467.4, "pct_sf": 57.0, "exp_pc": 2197.3, "core_pc": 949.6, "consolidated": 0, "is_el_paso": 0}, {"name": "Amarillo", "density": 1926.9, "pct_sf": 70.1, "exp_pc": 1688.1, "core_pc": 816.0, "consolidated": 0, "is_el_paso": 0}, {"name": "Huntington Beach", "density": 7347.3, "pct_sf": 46.7, "exp_pc": 1743.0, "core_pc": 1084.8, "consolidated": 0, "is_el_paso": 0}, {"name": "Little Rock", "density": 1645.0, "pct_sf": 61.1, "exp_pc": 2740.5, "core_pc": 1176.0, "consolidated": 0, "is_el_paso": 0}, {"name": "Glendale", "density": 6488.0, "pct_sf": 32.6, "exp_pc": 2512.8, "core_pc": 1261.9, "consolidated": 0, "is_el_paso": 0}, {"name": "Augusta", "density": 653.3, "pct_sf": 59.1, "exp_pc": 2152.5, "core_pc": 1095.1, "consolidated": 1, "is_el_paso": 0}, {"name": "Overland Park", "density": 2624.1, "pct_sf": 57.5, "exp_pc": 1267.7, "core_pc": 571.1, "consolidated": 0, "is_el_paso": 0}, {"name": "Columbus, GA", "density": 907.4, "pct_sf": 66.3, "exp_pc": 2003.0, "core_pc": 915.5, "consolidated": 1, "is_el_paso": 0}, {"name": "Aurora", "density": 4359.1, "pct_sf": 58.7, "exp_pc": 1259.2, "core_pc": 848.6, "consolidated": 0, "is_el_paso": 0}, {"name": "Tallahassee", "density": 1916.7, "pct_sf": 40.3, "exp_pc": 3214.0, "core_pc": 1418.8, "consolidated": 0, "is_el_paso": 0}, {"name": "Montgomery", "density": 1227.8, "pct_sf": 69.4, "exp_pc": 1037.8, "core_pc": 751.0, "consolidated": 0, "is_el_paso": 0}, {"name": "Akron", "density": 3164.6, "pct_sf": 66.5, "exp_pc": 2433.1, "core_pc": 1327.4, "consolidated": 0, "is_el_paso": 0}, {"name": "Grand Prairie", "density": 2693.0, "pct_sf": 63.6, "exp_pc": 2099.1, "core_pc": 1082.2, "consolidated": 0, "is_el_paso": 0}, {"name": "Knoxville", "density": 1926.7, "pct_sf": 53.5, "exp_pc": 2493.0, "core_pc": 1161.9, "consolidated": 0, "is_el_paso": 0}, {"name": "Sioux Falls", "density": 2271.8, "pct_sf": 54.0, "exp_pc": 1655.0, "core_pc": 832.5, "consolidated": 0, "is_el_paso": 0}, {"name": "Mobile", "density": 1346.0, "pct_sf": 67.2, "exp_pc": 1728.4, "core_pc": 994.4, "consolidated": 0, "is_el_paso": 0}, {"name": "Vancouver", "density": 3819.5, "pct_sf": 52.3, "exp_pc": 1389.6, "core_pc": 986.9, "consolidated": 0, "is_el_paso": 0}, {"name": "Shreveport", "density": 1708.7, "pct_sf": 68.1, "exp_pc": 1871.4, "core_pc": 1189.2, "consolidated": 0, "is_el_paso": 0}, {"name": "Chattanooga", "density": 1297.8, "pct_sf": 58.7, "exp_pc": 2841.5, "core_pc": 1623.7, "consolidated": 0, "is_el_paso": 0}, {"name": "Worcester", "density": 4940.3, "pct_sf": 32.0, "exp_pc": 5386.9, "core_pc": 964.3, "consolidated": 0, "is_el_paso": 0}, {"name": "Fort Lauderdale", "density": 5327.8, "pct_sf": 35.0, "exp_pc": 3231.5, "core_pc": 1692.9, "consolidated": 0, "is_el_paso": 0}, {"name": "Brownsville", "density": 1391.8, "pct_sf": 68.0, "exp_pc": 1160.6, "core_pc": 568.7, "consolidated": 0, "is_el_paso": 0}, {"name": "Ontario", "density": 3669.0, "pct_sf": 57.5, "exp_pc": 3706.4, "core_pc": 1763.3, "consolidated": 0, "is_el_paso": 0}, {"name": "Peoria", "density": 1018.0, "pct_sf": 73.7, "exp_pc": 1460.6, "core_pc": 1037.8, "consolidated": 0, "is_el_paso": 0}, {"name": "Providence", "density": 9739.8, "pct_sf": 25.4, "exp_pc": 5012.9, "core_pc": 1247.0, "consolidated": 0, "is_el_paso": 0}, {"name": "Newport News", "density": 2595.3, "pct_sf": 49.6, "exp_pc": 5881.6, "core_pc": 1260.0, "consolidated": 0, "is_el_paso": 0}, {"name": "Rancho Cucamonga", "density": 3845.4, "pct_sf": 62.2, "exp_pc": 1427.9, "core_pc": 946.9, "consolidated": 0, "is_el_paso": 0}, {"name": "Elk Grove", "density": 4161.9, "pct_sf": 86.6, "exp_pc": 983.3, "core_pc": 605.4, "consolidated": 0, "is_el_paso": 0}, {"name": "Salem", "density": 3594.7, "pct_sf": 58.4, "exp_pc": 1901.7, "core_pc": 1008.0, "consolidated": 0, "is_el_paso": 0}, {"name": "Oceanside", "density": 4232.0, "pct_sf": 51.9, "exp_pc": 1847.5, "core_pc": 1126.9, "consolidated": 0, "is_el_paso": 0}, {"name": "Santa Rosa", "density": 4105.1, "pct_sf": 57.1, "exp_pc": 1730.9, "core_pc": 1201.7, "consolidated": 0, "is_el_paso": 0}];
 
-const ink='#14151A', inkSoft='#514F5C', rust='#B8272C', slate='#0F766E';
+const ink='#14151A', inkSoft='#514F5C', rust='#B8272C', slate='#0F766E', elpaso='#F5B700';
 Chart.defaults.font.family = "'IBM Plex Mono', monospace";
 Chart.defaults.color = inkSoft; Chart.defaults.font.size = 14;
+Chart.defaults.plugins.legend.display = false;
 Chart.defaults.devicePixelRatio = Math.min(2, Math.max(1.5, window.devicePixelRatio || 1));
 Chart.defaults.plugins.tooltip.titleFont = {family:"'IBM Plex Mono', monospace", size:15, weight:'600'};
 Chart.defaults.plugins.tooltip.bodyFont = {family:"'IBM Plex Mono', monospace", size:14};
@@ -1065,17 +1134,20 @@ function updateLive(){
     linePts.push({x:Math.exp(lx), y:Math.exp(fit.intercept + fit.slope*lx)});
   }
 
-  const circles = rows.filter(r=>!r.consolidated);
+  const circles = rows.filter(r=>!r.consolidated && r.name!=='El Paso');
   const diamonds = rows.filter(r=>r.consolidated);
+  const epRow = rows.filter(r=>r.name==='El Paso');
 
   if(liveChart) liveChart.destroy();
   liveChart = new Chart(document.getElementById('scatterLive'), {
     type:'scatter',
     data:{ datasets:[
       { label:'City', data:circles.map(r=>({x:r.density,y:r.val,name:r.name})),
-        backgroundColor:rust, borderColor:ink, borderWidth:1, pointRadius:5, pointHoverRadius:7 },
+        backgroundColor:'rgba(184,39,44,0.4)', borderColor:'rgba(20,21,26,0.5)', borderWidth:1, pointRadius:4, pointHoverRadius:6 },
       { label:'Consolidated city-county', data:diamonds.map(r=>({x:r.density,y:r.val,name:r.name})),
-        backgroundColor:slate, borderColor:ink, borderWidth:1, pointRadius:6, pointHoverRadius:8, pointStyle:'rectRot' },
+        backgroundColor:'rgba(15,118,110,0.55)', borderColor:'rgba(20,21,26,0.5)', borderWidth:1, pointRadius:5, pointHoverRadius:7, pointStyle:'rectRot' },
+      { label:'El Paso', data:epRow.map(r=>({x:r.density,y:r.val,name:r.name})),
+        backgroundColor:elpaso, borderColor:ink, borderWidth:2.5, pointRadius:9, pointHoverRadius:11, pointStyle:'star' },
       { label:'Fitted trend (log-log)', type:'line', data:linePts, borderColor:ink, borderWidth:1.5, borderDash:[5,3], pointRadius:0, fill:false }
     ]},
     plugins:[cornerLabels([
@@ -1085,7 +1157,7 @@ function updateLive(){
     options:{
       responsive:true,
       plugins:{
-        legend:{position:'bottom', labels:{boxWidth:12,padding:14}},
+        legend:{display:false},
         title:{display:true, text:'Selected Services vs. Density', color:ink, font:{family:"'Archivo Black', sans-serif", size:18}},
         tooltip:{callbacks:{label:(ctx)=> (ctx.raw.name||'') + ':  ' + ctx.raw.x.toLocaleString(undefined,{maximumFractionDigits:0}) + '/sqmi,  $' + ctx.raw.y.toLocaleString(undefined,{maximumFractionDigits:0})}}
       },
@@ -1141,8 +1213,9 @@ window.__charts['barElastic'] = chElastic;
   const chExp = new Chart(document.getElementById('scatterExp'), {
     type:'scatter',
     data:{datasets:[
-      {label:'City', data:rows.filter(r=>!r.consolidated).map(r=>({x:r.density,y:r.val,name:r.name})), backgroundColor:rust, borderColor:ink, borderWidth:1, pointRadius:5, pointHoverRadius:7},
-      {label:'Consolidated city-county', data:rows.filter(r=>r.consolidated).map(r=>({x:r.density,y:r.val,name:r.name})), backgroundColor:slate, borderColor:ink, borderWidth:1, pointRadius:6, pointHoverRadius:8, pointStyle:'rectRot'},
+      {label:'City', data:rows.filter(r=>!r.consolidated && r.name!=='El Paso').map(r=>({x:r.density,y:r.val,name:r.name})), backgroundColor:'rgba(184,39,44,0.45)', borderColor:'rgba(20,21,26,0.5)', borderWidth:1, pointRadius:4, pointHoverRadius:6},
+      {label:'Consolidated city-county', data:rows.filter(r=>r.consolidated).map(r=>({x:r.density,y:r.val,name:r.name})), backgroundColor:'rgba(15,118,110,0.55)', borderColor:'rgba(20,21,26,0.5)', borderWidth:1, pointRadius:5, pointHoverRadius:7, pointStyle:'rectRot'},
+      {label:'El Paso', data:rows.filter(r=>r.name==='El Paso').map(r=>({x:r.density,y:r.val,name:r.name})), backgroundColor:elpaso, borderColor:ink, borderWidth:2.5, pointRadius:9, pointHoverRadius:11, pointStyle:'star'},
       {label:'Fitted trend (excl. consolidated)', type:'line', data:linePts, borderColor:ink, borderWidth:1.5, borderDash:[5,3], pointRadius:0, fill:false}
     ]},
     plugins:[cornerLabels([
@@ -1152,7 +1225,7 @@ window.__charts['barElastic'] = chElastic;
     options:{
       responsive:true,
       plugins:{
-        legend:{position:'bottom', labels:{boxWidth:12,padding:14}},
+        legend:{display:false},
         title:{display:true, text:'Density vs. Total Direct Expenditure per Capita', color:ink, font:{family:"'Archivo Black', sans-serif", size:18}},
         tooltip:{callbacks:{label:(ctx)=> ctx.raw.name + ':  ' + ctx.raw.x.toLocaleString(undefined,{maximumFractionDigits:0}) + '/sqmi,  $' + ctx.raw.y.toLocaleString(undefined,{maximumFractionDigits:0})}}
       },
@@ -1188,8 +1261,8 @@ window.__charts['barElastic'] = chElastic;
   const chSF = new Chart(document.getElementById('scatterSF'), {
     type:'scatter',
     data:{datasets:[
-      {label:'City', data:nonEP.map(r=>({x:r.pct_sf,y:r.exp_pc,name:r.name})), backgroundColor:rust, borderColor:ink, borderWidth:1, pointRadius:5, pointHoverRadius:7},
-      {label:'El Paso', data:ep.map(r=>({x:r.pct_sf,y:r.exp_pc,name:r.name})), backgroundColor:'#14151A', borderColor:rust, borderWidth:2.5, pointRadius:8, pointHoverRadius:10, pointStyle:'rectRot'},
+      {label:'City', data:nonEP.map(r=>({x:r.pct_sf,y:r.exp_pc,name:r.name})), backgroundColor:'rgba(184,39,44,0.4)', borderColor:'rgba(20,21,26,0.5)', borderWidth:1, pointRadius:4, pointHoverRadius:6},
+      {label:'El Paso', data:ep.map(r=>({x:r.pct_sf,y:r.exp_pc,name:r.name})), backgroundColor:elpaso, borderColor:ink, borderWidth:2.5, pointRadius:9, pointHoverRadius:11, pointStyle:'star'},
       {label:'Fitted trend', type:'line', data:linePts, borderColor:ink, borderWidth:1.5, borderDash:[5,3], pointRadius:0, fill:false}
     ]},
     plugins:[cornerLabels([
@@ -1199,7 +1272,7 @@ window.__charts['barElastic'] = chElastic;
     options:{
       responsive:true,
       plugins:{
-        legend:{position:'bottom', labels:{boxWidth:12,padding:14}},
+        legend:{display:false},
         title:{display:true, text:'Single-Family Housing Share vs. Total Spending per Capita', color:ink, font:{family:"'Archivo Black', sans-serif", size:18}},
         tooltip:{callbacks:{label:(ctx)=> ctx.raw.name + ':  ' + ctx.raw.x.toFixed(1) + '% single-family,  $' + ctx.raw.y.toLocaleString(undefined,{maximumFractionDigits:0}) + '/capita'}}
       },
@@ -1217,15 +1290,18 @@ window.__charts['barElastic'] = chElastic;
   const rows = CITY_DATA.map(d=>({name:d.name, density:d.density, total:Object.values(d.svc).reduce((a,b)=>a+b,0), tax:d.tax_pc, consolidated:d.consolidated}));
   const maxTax = Math.max(...rows.map(r=>r.tax));
   const toPoint = r => ({x:r.density, y:r.total, r: 4 + 22*(r.tax/maxTax), name:r.name, tax:r.tax});
-  const ordinary = rows.filter(r=>!r.consolidated).map(toPoint);
+  const ordinary = rows.filter(r=>!r.consolidated && r.name!=='El Paso').map(toPoint);
   const consol = rows.filter(r=>r.consolidated).map(toPoint);
+  const epBubble = rows.filter(r=>r.name==='El Paso').map(toPoint);
   const chBubble = new Chart(document.getElementById('bubbleThree'), {
     type:'bubble',
     data:{datasets:[
       {label:'City (bubble size = property tax/capita)', data: ordinary,
-       backgroundColor: 'rgba(184,39,44,0.55)', borderColor: ink, borderWidth:1},
+       backgroundColor: 'rgba(184,39,44,0.35)', borderColor: 'rgba(20,21,26,0.4)', borderWidth:1},
       {label:'Consolidated city-county government', data: consol,
-       backgroundColor: 'rgba(15,118,110,0.55)', borderColor: ink, borderWidth:1}
+       backgroundColor: 'rgba(15,118,110,0.45)', borderColor: 'rgba(20,21,26,0.4)', borderWidth:1},
+      {label:'El Paso', data: epBubble,
+       backgroundColor: elpaso, borderColor: ink, borderWidth:2.5}
     ]},
     plugins:[cornerLabels([
       {x:'left', y:'top', text:['Bubble size =','tax collected per capita']},
@@ -1234,7 +1310,7 @@ window.__charts['barElastic'] = chElastic;
     options:{
       responsive:true,
       plugins:{
-        legend:{position:'bottom', labels:{boxWidth:12,padding:14}},
+        legend:{display:false},
         title:{display:true, text:'Density × Service Spending × Property Tax, All Three At Once', color:ink, font:{family:"'Archivo Black', sans-serif", size:18}},
         tooltip:{callbacks:{label:(ctx)=> ctx.raw.name + ': density ' + ctx.raw.x.toLocaleString(undefined,{maximumFractionDigits:0}) + '/sqmi, spending $' + ctx.raw.y.toLocaleString(undefined,{maximumFractionDigits:0}) + '/capita, tax $' + ctx.raw.tax.toLocaleString(undefined,{maximumFractionDigits:0}) + '/capita'}}
       },
@@ -1290,7 +1366,7 @@ window.__charts['barElastic'] = chElastic;
       ctx.fillRect(lx-6, ly-4, widest+12, lines.length*lineH+6);
       ctx.strokeRect(lx-6, ly-4, widest+12, lines.length*lineH+6);
       ctx.fillStyle = rust; ctx.textAlign='left'; ctx.textBaseline='top';
-      lines.forEach((line,i)=>{ ctx.fillStyle = i===0? rust : ink; ctx.fillText(line, lx, ly+i*lineH); });
+      lines.forEach((line,i)=>{ ctx.fillStyle = i===0? '#8A5A00' : ink; ctx.fillText(line, lx, ly+i*lineH); });
       ctx.restore();
     }
   };
@@ -1306,7 +1382,7 @@ window.__charts['barElastic'] = chElastic;
       {
         label:'El Paso',
         data: rows.filter(d=>d.is_el_paso).map(d=>({x:d.home_value, y:d.eff_rate, r: 4 + 16*(d.density/27469), name:d.name, density:d.density})),
-        backgroundColor: 'rgba(184,39,44,0.95)', borderColor: ink, borderWidth:2.5
+        backgroundColor: elpaso, borderColor: ink, borderWidth:2.5
       },
       {label:'Fitted trend', type:'line', data:linePts, borderColor:ink, borderWidth:1.5, borderDash:[5,3], pointRadius:0, fill:false}
     ]},
@@ -1320,7 +1396,7 @@ window.__charts['barElastic'] = chElastic;
     options:{
       responsive:true,
       plugins:{
-        legend:{position:'bottom', labels:{boxWidth:12,padding:14}},
+        legend:{display:false},
         title:{display:true, text:'Cheaper Homes, Higher Effective Tax Rates', color:ink, font:{family:"'Archivo Black', sans-serif", size:18}},
         tooltip:{callbacks:{label:(ctx)=> ctx.raw.name ? (ctx.raw.name + ': home value $' + ctx.raw.x.toLocaleString(undefined,{maximumFractionDigits:0}) + ', effective rate ' + ctx.raw.y.toFixed(2) + '%, density ' + ctx.raw.density.toLocaleString(undefined,{maximumFractionDigits:0}) + '/sqmi') : ''}}
       },
@@ -1388,9 +1464,9 @@ window.__charts['barElastic'] = chElastic;
   const chSimExp = new Chart(document.getElementById('simSpending'), {
     type:'scatter',
     data:{datasets:[
-      {label:'Other cities', data:bgSpending, backgroundColor:'rgba(20,21,26,0.35)', borderColor:ink, borderWidth:1, pointRadius:4},
+      {label:'Other cities', data:bgSpending, backgroundColor:'rgba(20,21,26,0.22)', borderColor:'rgba(20,21,26,0.3)', borderWidth:1, pointRadius:3.5},
       {label:'Fitted trend (all 147 cities)', type:'line', data:spendingTrend, borderColor:ink, borderWidth:1.5, borderDash:[5,3], pointRadius:0, fill:false},
-      {label:'El Paso (simulated)', data:[{x:EP_MF_ACTUAL, y:EP_EXP_ACTUAL, name:'El Paso'}], backgroundColor:rust, borderColor:'#14151A', borderWidth:2.5, pointRadius:9, pointHoverRadius:11, pointStyle:'rectRot'}
+      {label:'El Paso (simulated)', data:[{x:EP_MF_ACTUAL, y:EP_EXP_ACTUAL, name:'El Paso'}], backgroundColor:elpaso, borderColor:ink, borderWidth:2.5, pointRadius:10, pointHoverRadius:12, pointStyle:'star'}
     ]},
     plugins:[cornerLabels([
       {x:'left', y:'top', text:['▲ ABOVE LINE:','more service than','housing mix predicts']},
@@ -1399,7 +1475,7 @@ window.__charts['barElastic'] = chElastic;
     options:{
       responsive:true,
       plugins:{
-        legend:{position:'bottom', labels:{boxWidth:12,padding:14}},
+        legend:{display:false},
         title:{display:true, text:'Multifamily Share vs. Spending per Capita', color:ink, font:{family:"'Archivo Black', sans-serif", size:18}},
         tooltip:{callbacks:{label:(ctx)=> (ctx.raw.name||'') + ': ' + ctx.raw.x.toFixed(1) + '% multifamily, $' + ctx.raw.y.toLocaleString(undefined,{maximumFractionDigits:0}) + '/capita'}}
       },
@@ -1414,9 +1490,9 @@ window.__charts['barElastic'] = chElastic;
   const chSimRate = new Chart(document.getElementById('simTaxRate'), {
     type:'scatter',
     data:{datasets:[
-      {label:'Other cities', data:bgRate, backgroundColor:'rgba(20,21,26,0.35)', borderColor:ink, borderWidth:1, pointRadius:4},
+      {label:'Other cities', data:bgRate, backgroundColor:'rgba(20,21,26,0.22)', borderColor:'rgba(20,21,26,0.3)', borderWidth:1, pointRadius:3.5},
       {label:'Reference: typical-income city', type:'line', data:rateTrend, borderColor:ink, borderWidth:1.5, borderDash:[5,3], pointRadius:0, fill:false},
-      {label:'El Paso (simulated)', data:[{x:EP_MF_ACTUAL, y:epH.eff_rate, name:'El Paso'}], backgroundColor:rust, borderColor:'#14151A', borderWidth:2.5, pointRadius:9, pointHoverRadius:11, pointStyle:'rectRot'}
+      {label:'El Paso (simulated)', data:[{x:EP_MF_ACTUAL, y:epH.eff_rate, name:'El Paso'}], backgroundColor:elpaso, borderColor:ink, borderWidth:2.5, pointRadius:10, pointHoverRadius:12, pointStyle:'star'}
     ]},
     plugins:[cornerLabels([
       {x:'left', y:'top', text:['▲ ABOVE LINE:','higher rate than','typical for this mix']},
@@ -1425,7 +1501,7 @@ window.__charts['barElastic'] = chElastic;
     options:{
       responsive:true,
       plugins:{
-        legend:{position:'bottom', labels:{boxWidth:12,padding:14}},
+        legend:{display:false},
         title:{display:true, text:'Multifamily Share vs. Effective Tax Rate', color:ink, font:{family:"'Archivo Black', sans-serif", size:18}},
         tooltip:{callbacks:{label:(ctx)=> (ctx.raw.name||'') + ': ' + ctx.raw.x.toFixed(1) + '% multifamily, ' + ctx.raw.y.toFixed(2) + '% effective rate'}}
       },
